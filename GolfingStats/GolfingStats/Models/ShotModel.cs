@@ -45,53 +45,52 @@ namespace GolfingStats.Models
         /// The shot number that the player played
         /// </summary>
         [MaxLength(2)]
-        public int ShotNumber { get; set; }
+        public int ShotNumber { get; set; } = 4;
 
         /// <summary>
         /// Distance from where player is now to the hole
         /// </summary>
         [MaxLength(3)]
-        public int DistanceToHole { get; set; }
+        public int DistanceToHole { get; set; } = 150;
 
         /// <summary>
         /// Distance player hit the ball
         /// </summary>
         [MaxLength(3)]
-        public int ShotDistance { get; set; }
+        public int ShotDistance { get; set; } = 150;
 
         /// <summary>
         /// Is the shot on the fairway/green
         /// </summary>
-        public bool InPlay { get; set; }
+        public bool InPlay { get; set; } = true;
 
         /// <summary>
         /// Where did the ball end. Center/Left/Right
         /// </summary>
         [MaxLength(5)]
-        public string BallLocation { get; set; }
+        public string BallLocation { get; set; } = "Center";
 
         /// <summary>
         /// Was the shot played a bunker shot
         /// </summary>
-        public bool BunkerShot { get; set; }
+        public bool BunkerShot { get; set; } = false;
 
         /// <summary>
         /// Driver, 3/5/7 Wood, 3/5 Hybrid, 2/3/4/5/6/7/8/9 Iron, PW, 52/56/58/60 Wedge, Putter
         /// </summary>
         [MaxLength(8)]
-        public string Culb { get; set; }
+        public string Culb { get; set; } = "7 Iron";
 
         /// <summary>
         /// Cut, Draw, Fade, Hook, Slice
         /// </summary>
         [MaxLength(5)]
-        public string ShotShape { get; set; }
+        public string ShotShape { get; set; } = "Cut";
 
         /// <summary>
         /// Full, 3/4, Punch, Chip
         /// </summary>
         [MaxLength(5)]
-        public string ShotType { get; set; }
-
+        public string ShotType { get; set; } = "Full";
     }
 }

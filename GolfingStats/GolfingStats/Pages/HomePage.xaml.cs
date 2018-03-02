@@ -22,7 +22,7 @@ namespace GolfingStats
 
         public async void NavNewRound()
         {
-            await Navigation.PushAsync(new Pages.NewRoundPage(), true);
+            await Navigation.PushAsync(new Pages.RoundDetailsPage(), true);
         }
 
         //public async void OnNewButtonClicked(object sender, EventArgs args)

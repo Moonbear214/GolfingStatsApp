@@ -11,7 +11,8 @@
 namespace GolfingStats {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Dev\\Beta\\GolfingStats\\GolfingStats\\GolfingStats\\Pages\\HomePage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Dev\\Beta\\GolfingStats\\GolfingStatsApp\\GolfingStats\\GolfingStats\\Pages\\HomePage" +
+        ".xaml")]
     public partial class HomePage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
