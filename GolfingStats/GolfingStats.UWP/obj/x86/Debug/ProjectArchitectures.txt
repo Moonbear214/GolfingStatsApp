@@ -1,0 +1,1 @@
+C:\Dev\Beta\GolfingStats\GolfingStats\GolfingStats.UWP\GolfingStats.UWP.csproj;x86
