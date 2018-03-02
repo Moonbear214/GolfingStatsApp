@@ -28,5 +28,10 @@ namespace GolfingStats.Pages
             var asdf = this.ItemsSource;
             
         }
+
+        public void AddShot()
+        {
+            Navigation.PushModalAsync(new ShotDetailsPage(), true);
+        }
 	}
 }

@@ -3,10 +3,107 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.Pages.ShotDetailsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="ShotNumber" />
+                <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="4" SelectedItem="{Binding ShotNumber}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:Int16}">
+                            <x:Int16>1</x:Int16>
+                            <x:Int16>2</x:Int16>
+                            <x:Int16>3</x:Int16>
+                            <x:Int16>4</x:Int16>
+                            <x:Int16>5</x:Int16>
+                            <x:Int16>6</x:Int16>
+                            <x:Int16>7</x:Int16>
+                            <x:Int16>8</x:Int16>
+                            <x:Int16>9</x:Int16>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole" />
+                <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Text="{Binding DistanceToHole}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Shot played distance" />
+                <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Text="{Binding ShotDistance}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Ball in play" />
+                <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding InPlay}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Ball location" />
+                <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Center" SelectedItem="{Binding BallLocation}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Left</x:String>
+                            <x:String>Right</x:String>
+                            <x:String>Center</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Bunker shot" />
+                <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding BunkerShot}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Club used" />
+                <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="7 Iron" SelectedItem="{Binding Club}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Driver</x:String>
+                            <x:String>3 Wood</x:String>
+                            <x:String>5 Wood</x:String>
+                            <x:String>2 Iron</x:String>
+                            <x:String>3 Iron</x:String>
+                            <x:String>4 Iron</x:String>
+                            <x:String>5 Iron</x:String>
+                            <x:String>6 Iron</x:String>
+                            <x:String>7 Iron</x:String>
+                            <x:String>8 Iron</x:String>
+                            <x:String>9 Iron</x:String>
+                            <x:String>52 Wedge</x:String>
+                            <x:String>56 Wedge</x:String>
+                            <x:String>58 Wedge</x:String>
+                            <x:String>60 Wedge</x:String>
+                            <x:String>Putter</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Shot Shape" />
+                <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Cut" SelectedItem="{Binding ShotShape}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Cut</x:String>
+                            <x:String>Draw</x:String>
+                            <x:String>Fade</x:String>
+                            <x:String>Hook</x:String>
+                            <x:String>Slice</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Shot type" />
+                <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Full" SelectedItem="{Binding ShotType}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Full</x:String>
+                            <x:String>3/4</x:String>
+                            <x:String>Punch</x:String>
+                            <x:String>Chip</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <Button HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="80" Text="Save" BackgroundColor="Blue" TextColor="White" Clicked="Save" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/GolfingStats/v15/Server/sqlite3
+/GolfingStats/GolfingStats.Android/obj
+/GolfingStats/GolfingStats.Android/bin

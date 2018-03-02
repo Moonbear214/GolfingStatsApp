@@ -22,3 +22,4 @@ C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats\obj\Debug\net
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats\obj\Debug\netstandard2.0\GolfingStats.pdb
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats\obj\Debug\netstandard2.0\GolfingStats.Pages.RoundDetailsPage.xaml.g.cs
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats\obj\Debug\netstandard2.0\GolfingStats.Pages.ShotDetailsPage.xaml.g.cs
+C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats\obj\Debug\netstandard2.0\GolfingStats.csprojResolveAssemblyReference.cache
