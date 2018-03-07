@@ -6,32 +6,44 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 using GolfingStats.Models;
+using GolfingStats.Factories;
 
 namespace GolfingStats.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RoundDetailsPage : CarouselPage
+	public partial class RoundDetailsPage : ContentPage
     {
-		public RoundDetailsPage ()
+		public RoundDetailsPage (RoundModel round)
 		{
-            //------------------------------------------------------------------------
+            //if (round.Id == 0)
+            //{
+            //    RoundModel roundModel = DataFactory.CreateNewRound();
+            //}
+
+            //========================================================
 			InitializeComponent ();
 
-            Title = "Hole";
+            Title = round.GolfCourse;
 
-            ItemsSource = HoleModel.EmptyRound;
+            this.BindingContext = round;
         }
 
-        public void Save()
+        public RoundDetailsPage()
         {
-            var asdf = this.ItemsSource;
-            
+            InitializeComponent();
+
+            Title = "New Round";
+
+            this.BindingContext = new RoundModel();
         }
 
-        public void AddShot()
+        public async void StartNewRound()
         {
-            Navigation.PushModalAsync(new ShotDetailsPage(), true);
+            RoundModel round = (RoundModel)this.BindingContext;
+
+            await Navigation.PushAsync(new Pages.HolesDetailsPage(round));
         }
-	}
+    }
 }

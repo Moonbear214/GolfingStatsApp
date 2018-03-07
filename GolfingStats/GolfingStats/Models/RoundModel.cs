@@ -15,23 +15,29 @@ namespace GolfingStats.Models
         /// Name of the golf course the round was played on
         /// </summary>
         [MaxLength(40)]
-        public string GolfCourse { get; set; }
+        public string GolfCourse { get; set; } = null;
 
         /// <summary>
         /// Date game was played on
         /// </summary>
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Today;
+
+        /// <summary>
+        /// Par round for the golf course
+        /// </summary>
+        [MaxLength(2)]
+        public int RoundTotal { get; set; } = 0;
 
         /// <summary>
         /// Total shots played in the round
         /// </summary>
         [MaxLength(3)]
-        public int RoundTotal { get; set; }
+        public int ShotsTotal { get; set; } = 0;
 
         /// <summary>
-        /// Player handicap when round was played
+        /// Player handicap when round was played (-11 = Value has not been assigned yet)
         /// </summary>
         [MaxLength(2)]
-        public int Handicap { get; set; }
+        public float Handicap { get; set; } = -11;
     }
 }

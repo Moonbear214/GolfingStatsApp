@@ -11,13 +11,13 @@
 namespace GolfingStats.Pages {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Dev\\Beta\\GolfingStats\\GolfingStatsApp\\GolfingStats\\GolfingStats\\Pages\\RoundDet" +
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Dev\\Beta\\GolfingStats\\GolfingStatsApp\\GolfingStats\\GolfingStats\\Pages\\HolesDet" +
         "ailsPage.xaml")]
-    public partial class RoundDetailsPage : global::Xamarin.Forms.ContentPage {
+    public partial class HolesDetailsPage : global::Xamarin.Forms.CarouselPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(RoundDetailsPage));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(HolesDetailsPage));
         }
     }
 }

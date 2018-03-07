@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+
 using GolfingStats.Models;
 using SQLite;
 
@@ -17,28 +18,79 @@ namespace GolfingStats
         public GolfstatsRepository(string dbPath)
         {
             conn = new SQLiteAsyncConnection(dbPath);
-            conn.CreateTableAsync<RoundModel>().Wait();
+
+            CreateAllTables();
         }
 
-        public async Task AddNewRound(RoundModel newRound)
+        private async void CreateAllTables()
         {
-            int result = 0;
+            await conn.CreateTableAsync<RoundModel>();
+            await conn.CreateTableAsync<HoleModel>();
+            await conn.CreateTableAsync<ShotModel>();
+        }
+
+        //Methods for adding to local storage data for all classes (rounds, holes, shots)
+        //========================================================================================================================================================================
+        public async Task<int> AddNewRound(RoundModel round)
+        {
             try
             {
-                //basic validation to ensure a name was entered
-                //if (string.IsNullOrEmpty(name))
-                //    throw new Exception("Valid name required");
-
-                result = await conn.InsertAsync((RoundModel)newRound);
-
-                StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, newRound.GolfCourse);
+                await conn.InsertAsync(round);
+                return round.Id;
             }
             catch (Exception ex)
             {
-                StatusMessage = string.Format("Failed to add {0}. Error: {1}", newRound.GolfCourse, ex.Message);
+                StatusMessage = string.Format("Abort! ..at add new round (Golfstats Repository).. {0}", ex.Source);
+                throw new Exception(ex.Message);
             }
         }
 
+        public async Task<HoleModel> AddOneHole(HoleModel hole)
+        {
+            try
+            {
+                await conn.InsertAsync(hole);
+                return hole;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Abort! ..at add new round (Golfstats Repository).. {0}", ex.Source);
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<HoleModel>> AddRoundHoles(IEnumerable<HoleModel> holes)
+        {
+            try
+            {
+                await conn.InsertAllAsync(holes);
+                return holes;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Abort! ..at add new round (Golfstats Repository).. {0}", ex.Source);
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public async Task<ShotModel> AddNewShot(ShotModel shot)
+        {
+            try
+            {
+                await conn.InsertAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Abort! ..at add new round (Golfstats Repository).. {0}", ex.Source);
+                throw new Exception(ex.Message);
+            }
+        }
+        //========================================================================================================================================================================
+
+        //Methods for returning all local storage data for given class (round, holes, shots)
+        //========================================================================================================================================================================
         public async Task<List<RoundModel>> GetAllRounds()
         {
             try
@@ -48,9 +100,47 @@ namespace GolfingStats
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(ex.Message);
             }
-
-            return new List<RoundModel>();
         }
+
+
+        public async Task<List<HoleModel>> GetAllHoles()
+        {
+            try
+            {
+                return await conn.Table<HoleModel>().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<ShotModel>> GetAllShots()
+        {
+            try
+            {
+                return await conn.Table<ShotModel>().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(ex.Message);
+            }
+        }
+        //========================================================================================================================================================================
+
+
+        //Methods for returning all local storage data for given class (round, holes, shots)
+        //========================================================================================================================================================================
+        public async void ClearLocalStorage()
+        {
+            await conn.ExecuteAsync("DELETE FROM Rounds");
+            await conn.ExecuteAsync("DELETE FROM Holes");
+            await conn.ExecuteAsync("DELETE FROM Shots");
+        }
+        //========================================================================================================================================================================
     }
 }

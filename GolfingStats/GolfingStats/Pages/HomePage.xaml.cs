@@ -20,25 +20,69 @@ namespace GolfingStats
 			InitializeComponent ();
 		}
 
-        public async void NavNewRound()
+        public async void NavRoundPage()
         {
+            //TODO: Send the round played object to the next page
+            RoundModel roundPlayed = new RoundModel();
+
             await Navigation.PushAsync(new Pages.RoundDetailsPage(), true);
         }
 
-        //public async void OnNewButtonClicked(object sender, EventArgs args)
-        //{
-        //    statusMessage.Text = "";
 
-        //    await App.PersonRepo.AddNewPersonAsync(newPerson.Text);
-        //    statusMessage.Text = App.PersonRepo.StatusMessage;
-        //}
-
-        public async void OnGetButtonClicked(object sender, EventArgs args)
+        //========================================================================================================================================================================
+                 //!!!!MUST BE DELETED!!!!
+        //===============================================
+        //Clear local Storage
+        public void OnClearLocalStorageButtonClicked()
         {
-            statusMessage.Text = "";
-
-            List<RoundModel> Rounds = await App.GolfstatsRepo.GetAllRounds();
-            RoundList.ItemsSource = Rounds;
+            App.dataFactory.ClearLocalStorage();
         }
+        //===============================================
+
+        //Creates a full round with all holes included
+        public void OnCreateFullRoundButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.CreateFullRoundDummy();
+        }
+
+        //Get dummy data for all Models
+        public async void OnGetRoundsButtonClicked(object sender, EventArgs args)
+        {
+            List<RoundModel> data = await App.dataFactory.GetAllRounds();
+
+            DisplayList.ItemsSource = data;
+        }
+
+        public async void OnGetHolesButtonClicked(object sender, EventArgs args)
+        {
+            List<HoleModel> data = await App.dataFactory.GetAllHoles();
+
+            DisplayList.ItemsSource = data;
+        }
+
+        public async void OnGetShotsButtonClicked(object sender, EventArgs args)
+        {
+            List<ShotModel> data = await App.dataFactory.GetAllShots();
+
+            DisplayList.ItemsSource = data;
+        }
+
+
+        //Add One dummy data for all Models
+        public void OnAddRoundsButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.AddDummyRound();
+        }
+
+        public void OnAddHolesButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.AddDummyHole();
+        }
+
+        public void OnAddShotsButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.AddDummyShot();
+        }
+        //========================================================================================================================================================================
     }
 }

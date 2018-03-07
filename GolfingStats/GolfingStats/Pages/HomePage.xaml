@@ -3,42 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.HomePage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Round" Clicked="NavNewRound" />
+        <ToolbarItem Text="New Round" Clicked="NavRoundPage" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="Default">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <Button HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="Clear All Data"
+                    Clicked="OnClearLocalStorageButtonClicked" />
+                <Button HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Text="Create Full Round"
+                    Clicked="OnCreateFullRoundButtonClicked" />
+            </StackLayout>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <Button Text="Get All Rounds"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetRoundsButtonClicked" />
+                <Button Text="Get All Holes"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetHolesButtonClicked" />
+                <Button Text="Get All Shots"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetShotsButtonClicked" />
+            </StackLayout>
 
-            <Label x:Name="statusMessage"
-           Grid.Row="2" />
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <Button Text="Add Round"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnAddRoundsButtonClicked" />
+                <Button Text="Add Hole"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnAddHolesButtonClicked" />
+                <Button Text="Add Shot"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnAddShotsButtonClicked" />
+            </StackLayout>
 
-            <Button Text="Get All Rounds"
-            Grid.Row="3"
-            Clicked="OnGetButtonClicked" />
-
-            <ListView x:Name="RoundList"
-              Grid.Row="4">
+            <ListView x:Name="DisplayList" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="30">
                             <StackLayout Padding="5">
-                                <Label Text="{Binding GolfCourse}" />
+                                <Label Text="{Binding Id}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
