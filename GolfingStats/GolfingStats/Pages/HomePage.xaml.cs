@@ -62,9 +62,30 @@ namespace GolfingStats
             DisplayList.ItemsSource = data;
         }
 
-        public async void OnGetShotsButtonClicked(object sender, EventArgs args)
+        public async void OnGetDriveButtonClicked(object sender, EventArgs args)
         {
-            List<ShotModel> data = await App.dataFactory.GetAllShots();
+            List<DriveModel> data = await App.dataFactory.GetAllShotsDrive();
+
+            DisplayList.ItemsSource = data;
+        }
+
+        public async void OnGetFairwayButtonClicked(object sender, EventArgs args)
+        {
+            List<FairwayModel> data = await App.dataFactory.GetAllShotsFairway();
+
+            DisplayList.ItemsSource = data;
+        }
+
+        public async void OnGetChipButtonClicked(object sender, EventArgs args)
+        {
+            List<ChipModel> data = await App.dataFactory.GetAllShotsChip();
+
+            DisplayList.ItemsSource = data;
+        }
+
+        public async void OnGetPuttButtonClicked(object sender, EventArgs args)
+        {
+            List<PuttModel> data = await App.dataFactory.GetAllShotsPutt();
 
             DisplayList.ItemsSource = data;
         }
@@ -81,9 +102,24 @@ namespace GolfingStats
             App.dataFactory.AddDummyHole();
         }
 
-        public void OnAddShotsButtonClicked(object sender, EventArgs args)
+        public void OnAddDriveButtonClicked(object sender, EventArgs args)
         {
-            App.dataFactory.AddDummyShot();
+            App.dataFactory.AddDummyShotDrive();
+        }
+
+        public void OnAddFairwayButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.AddDummyShotFairway();
+        }
+
+        public void OnAddChipButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.AddDummyShotChip();
+        }
+
+        public void OnAddPuttButtonClicked(object sender, EventArgs args)
+        {
+            App.dataFactory.AddDummyShotPutt();
         }
         //========================================================================================================================================================================
     }

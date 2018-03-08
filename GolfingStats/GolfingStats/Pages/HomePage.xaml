@@ -28,10 +28,25 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Clicked="OnGetHolesButtonClicked" />
-                <Button Text="Get All Shots"
+                <Button Text="Get All Drives"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
-                        Clicked="OnGetShotsButtonClicked" />
+                        Clicked="OnGetDriveButtonClicked" />
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <Button Text="Get All Fairway"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetFairwayButtonClicked" />
+                <Button Text="Get All Chip"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetChipButtonClicked" />
+                <Button Text="Get All Putt"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetPuttButtonClicked" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
@@ -43,12 +58,27 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Clicked="OnAddHolesButtonClicked" />
-                <Button Text="Add Shot"
+                <Button Text="Add Drive"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
-                        Clicked="OnAddShotsButtonClicked" />
+                        Clicked="OnAddDriveButtonClicked" />
             </StackLayout>
 
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <Button Text="Add Fairway"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnAddFairwayButtonClicked" />
+                <Button Text="Add Chip"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnAddChipButtonClicked" />
+                <Button Text="Add Putt"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnAddPuttButtonClicked" />
+            </StackLayout>
+            
             <ListView x:Name="DisplayList" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>

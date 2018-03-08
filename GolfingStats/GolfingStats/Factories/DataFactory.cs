@@ -51,7 +51,10 @@ namespace GolfingStats.Factories
         {
             AddDummyRound();
             AddDummyHole();
-            AddDummyShot();
+            AddDummyShotDrive();
+            AddDummyShotFairway();
+            AddDummyShotChip();
+            AddDummyShotPutt();
         }
 
         public async void AddDummyRound()
@@ -64,12 +67,29 @@ namespace GolfingStats.Factories
             await GolfstatsRepository.AddOneHole(DummData.OneHoleData());
         }
 
-        public async void AddDummyShot()
+        public async void AddDummyShotDrive()
         {
-            await GolfstatsRepository.AddNewShot(DummData.OneShot());
+            await GolfstatsRepository.AddNewShot(DummData.OneShotDrive());
+        }
+
+        public async void AddDummyShotFairway()
+        {
+            await GolfstatsRepository.AddNewShot(DummData.OneShotFairway());
+        }
+
+        public async void AddDummyShotChip()
+        {
+            await GolfstatsRepository.AddNewShot(DummData.OneShotChip());
+        }
+
+        public async void AddDummyShotPutt()
+        {
+            await GolfstatsRepository.AddNewShot(DummData.OneShotPutt());
         }
         //========================================================================================================================================================================
 
+
+        //========================================================================================================================================================================
         public async Task<List<HoleModel>> CreateFullRound(RoundModel round)
         {
             await GolfstatsRepository.AddNewRound(round);
@@ -85,6 +105,10 @@ namespace GolfingStats.Factories
             return new List<HoleModel>(EmptyRound);
         }
 
+        //========================================================================================================================================================================
+
+        //Retrieve data from local storage
+        //========================================================================================================================================================================
         public async Task<List<RoundModel>> GetAllRounds()
         {
             return await GolfstatsRepository.GetAllRounds();
@@ -95,9 +119,25 @@ namespace GolfingStats.Factories
             return await GolfstatsRepository.GetAllHoles();
         }
 
-        public async Task<List<ShotModel>> GetAllShots()
+        public async Task<List<DriveModel>> GetAllShotsDrive()
         {
-            return await GolfstatsRepository.GetAllShots();
+            return await GolfstatsRepository.GetAllShotsDrive();
         }
+
+        public async Task<List<FairwayModel>> GetAllShotsFairway()
+        {
+            return await GolfstatsRepository.GetAllShotsFairway();
+        }
+
+        public async Task<List<ChipModel>> GetAllShotsChip()
+        {
+            return await GolfstatsRepository.GetAllShotsChip();
+        }
+
+        public async Task<List<PuttModel>> GetAllShotsPutt()
+        {
+            return await GolfstatsRepository.GetAllShotsPutt();
+        }
+        //========================================================================================================================================================================
     }
 }
