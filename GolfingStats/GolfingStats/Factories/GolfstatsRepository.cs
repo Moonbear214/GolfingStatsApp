@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using GolfingStats.Models;
+using GolfingStats.Models.ShotModels;
 using SQLite;
 
 
@@ -27,6 +28,10 @@ namespace GolfingStats
             await conn.CreateTableAsync<RoundModel>();
             await conn.CreateTableAsync<HoleModel>();
             await conn.CreateTableAsync<ShotModel>();
+            await conn.CreateTableAsync<DriveModel>();
+            await conn.CreateTableAsync<FairwayModel>();
+            await conn.CreateTableAsync<ChipModel>();
+            await conn.CreateTableAsync<PuttModel>();
         }
 
         //Methods for adding to local storage data for all classes (rounds, holes, shots)
@@ -73,7 +78,7 @@ namespace GolfingStats
             }
         }
 
-
+        
         public async Task<ShotModel> AddNewShot(ShotModel shot)
         {
             try
@@ -117,7 +122,7 @@ namespace GolfingStats
                 throw new Exception(ex.Message);
             }
         }
-
+        
         public async Task<List<ShotModel>> GetAllShots()
         {
             try

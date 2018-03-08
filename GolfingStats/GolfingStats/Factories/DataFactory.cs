@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 using GolfingStats.Models;
+using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats.Factories
 {

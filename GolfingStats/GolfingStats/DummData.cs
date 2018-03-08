@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using GolfingStats.Models;
+using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats
 {
