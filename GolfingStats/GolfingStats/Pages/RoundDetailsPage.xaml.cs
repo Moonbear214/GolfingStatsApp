@@ -15,7 +15,16 @@ namespace GolfingStats.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RoundDetailsPage : ContentPage
     {
-		public RoundDetailsPage (RoundModel round)
+        public RoundDetailsPage()
+        {
+            InitializeComponent();
+
+            Title = "New Round";
+
+            this.BindingContext = new RoundModel();
+        }
+
+        public RoundDetailsPage (RoundModel round)
 		{
             //if (round.Id == 0)
             //{
@@ -28,15 +37,6 @@ namespace GolfingStats.Pages
             Title = round.GolfCourse;
 
             this.BindingContext = round;
-        }
-
-        public RoundDetailsPage()
-        {
-            InitializeComponent();
-
-            Title = "New Round";
-
-            this.BindingContext = new RoundModel();
         }
 
         public async void StartNewRound()

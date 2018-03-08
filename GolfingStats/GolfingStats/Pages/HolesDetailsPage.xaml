@@ -8,6 +8,7 @@
                 <ContentPage.ToolbarItems>
                     <ToolbarItem Text="{Binding HoleNumber}" Clicked="Save"/>
                 </ContentPage.ToolbarItems>
+                <ContentPage.Content>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                         <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Par" />
@@ -85,6 +86,7 @@
 
                     <Button HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeightRequest="80" Text="Add Shot" BackgroundColor="Transparent" TextColor="Blue" Clicked="AddShot" />
                 </StackLayout>
+                </ContentPage.Content>
             </ContentPage>
         </DataTemplate>
     </CarouselPage.ItemTemplate>

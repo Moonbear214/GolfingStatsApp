@@ -33,9 +33,7 @@ namespace GolfingStats.Pages
 
         public async void CreateNewRound(RoundModel round)
         {
-            List<HoleModel> holeList = await App.dataFactory.CreateFullRound(round);
-
-            this.BindingContext = holeList;
+            this.ItemsSource = await App.dataFactory.CreateFullRound(round);
         }
 
         public void Save()
