@@ -1,135 +1,372 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using SQLite;
+
+using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats.Models.ShotModels
 {
     [Table("FairwayShot")]
     public partial class FairwayModel : ShotModel
     {
+        ConvertShotsClass ConvertShotsClass = new ConvertShotsClass();
+
+        /// <summary>
+        /// Indecator of which shot model type is used by the shot:
+        /// 0 = Drive, 1 = Fairway, 2 = Chip, 3 = Putt
+        /// </summary>
+        public int ShotType { get; } = 1;
+
         //Before Swing (All info about the shot before the player has hit the ball)
         //============================================================================
 
         /// <summary>
-        /// Where is the player aiming to land on the green (Center, Left, Right)
+        /// Where is the player aiming to land on the green:
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        public string Aiming { get; set; } = null;
+        public Int16 _Aiming { get; set; } = 0;
+
+        [Ignore]
+        public String Aiming
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._Aiming);
+            }
+            set
+            {
+                this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// On what side of the green is the pin located (Left, Center, Right)
+        /// On what side of the green is the pin located:
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        [MaxLength(6)]
-        public string PinPositionHorz { get; set; } = "Center";
+        [MaxLength(1)]
+        public Int16 _PinPositionHorz { get; set; } = 0;
+
+        [Ignore]
+        public String PinPositionHorz
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._PinPositionHorz);
+            }
+            set
+            {
+                this._PinPositionHorz = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// How far in is the flag located (Back, Center, Front)
+        /// How far in is the flag located:
+        /// 1 = Center, 2 = Front, 3 = Back
         /// </summary>
-        [MaxLength(6)]
-        public string PinPositionVert { get; set; } = "Center";
+        [MaxLength(1)]
+        public Int16 _PinPositionVert { get; set; } = 0;
+
+        [Ignore]
+        public String PinPositionVert
+        {
+            get
+            {
+                return ConvertShotsClass.CenterFrontBackConvert(this._PinPositionVert);
+            }
+            set
+            {
+                this._PinPositionVert = ConvertShotsClass.CenterFrontBackConvert(value);
+            }
+        }
 
         /// <summary>
-        /// At what angle is the green when the player looks at the flag (Flat, Uphill, Downill)
+        /// At what angle is the green when the player looks at the flag:
+        /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
-        public string AngleOfGreen { get; set; } = null;
+        public Int16 _AngleOfGreen { get; set; } = 0;
+
+        [Ignore]
+        public String AngleOfGreen
+        {
+            get
+            {
+                return ConvertShotsClass.FlatDownhillUphillConvert(this._AngleOfGreen);
+            }
+            set
+            {
+                this._AngleOfGreen = ConvertShotsClass.FlatDownhillUphillConvert(value);
+            }
+        }
 
         /// <summary>
-        /// Where does the ball lie on the hole (Fairway, Ruff, Bunker)
+        /// Where does the ball lie on the hole:
+        /// 1 = Fairway, 2 = Ruff, 3 = Bunker
         /// </summary>
-        [MaxLength(7)]
-        public string BallLie { get; set; } = "Fairway";
+        [MaxLength(1)]
+        public Int16 _BallLie { get; set; } = 0;
+
+        [Ignore]
+        public String BallLie
+        {
+            get
+            {
+                return ConvertShotsClass.FairwayRuffBunkerConvert(this._BallLie);
+            }
+            set
+            {
+                this._BallLie = ConvertShotsClass.FairwayRuffBunkerConvert(value);
+            }
+        }
 
         /// <summary>
-        /// On what side of the Fairway/Ruff is the ball (Center, Left, Right)
+        /// On what side of the Fairway/Ruff is the ball:
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        [MaxLength(6)]
-        public string BallPositionSide { get; set; } = "Center";
-            
-        /// <summary>
-        /// At what angle is the ball postitioned (Uphill, Downhill, Flat)
-        /// </summary>
-        [MaxLength(8)]
-        public string BallAngle { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _BallPositionSide { get; set; } = 0;
+
+        [Ignore]
+        public String BallPositionSide
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._BallPositionSide);
+            }
+            set
+            {
+                this._BallPositionSide = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// Where is the ball positioned in relation to the players feet (Sqaure, Above, Below)
+        /// At what angle is the ball postitioned:
+        /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
-        [MaxLength(5)]
-        public string BallToFeet { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _BallAngle { get; set; } = 0;
+
+        [Ignore]
+        public String BallAngle
+        {
+            get
+            {
+                return ConvertShotsClass.FlatDownhillUphillConvert(this._BallAngle);
+            }
+            set
+            {
+                this._BallAngle = ConvertShotsClass.FlatDownhillUphillConvert(value);
+            }
+        }
 
         /// <summary>
-        /// Froce of the wind (None, Light, Mild, Strong)
+        /// Where is the ball positioned in relation to the players feet (Sqaure, Above, Below):
+        /// 1 = Sqaure, 2 = Below, 3 = Above
         /// </summary>
-        [MaxLength(6)]
-        public string WindForce { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _BallToFeet { get; set; } = 0;
+
+        [Ignore]
+        public String BallToFeet
+        {
+            get
+            {
+                return ConvertShotsClass.SqaureBelowAboveConvert(this._BallToFeet);
+            }
+            set
+            {
+                this._BallToFeet = ConvertShotsClass.SqaureBelowAboveConvert(value);
+            }
+        }
 
         /// <summary>
-        /// Direction that the wind is blowing (Left, Right, Towards, Away)
+        /// Froce of the wind:
+        /// 1 = None, 2 = Light, 3 = Medium, 4 = Strong
         /// </summary>
-        [MaxLength(7)]
-        public string WindDirection { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _WindForce { get; set; } = 0;
+
+        [Ignore]
+        public String WindForce
+        {
+            get
+            {
+                return ConvertShotsClass.NoneLightMediumStrongConvert(this._WindForce);
+            }
+            set
+            {
+                this._WindForce = ConvertShotsClass.NoneLightMediumStrongConvert(value);
+            }
+        }
+
+
+        /// <summary>
+        /// Direction that the wind is blowing (Left, Right, Towards, Away):
+        /// 1 = Left, 2 = Right, 3 = Towards, 4 = Away
+        /// </summary>
+        [MaxLength(1)]
+        public Int16 _WindDirection { get; set; } = 0;
+
+        [Ignore]
+        public String WindDirection
+        {
+            get
+            {
+                return ConvertShotsClass.LeftRightTowardsAwayConvert(this._WindDirection);
+            }
+            set
+            {
+                this._WindDirection = ConvertShotsClass.LeftRightTowardsAwayConvert(value);
+            }
+        }
         //============================================================================
 
         //After Shot (All info about the shot that the player just hit)
         //============================================================================
 
         /// <summary>
+        /// Is the ball in the hole
+        /// </summary>
+        public bool InHole { get; set; } = false;
+
+        /// <summary>
         /// How far did the player hit the shot
         /// </summary>
         [MaxLength(3)]
         public int DistanceHit { get; set;} = 0;
-    
-        /// <summary>
-        /// What type of swing did the player use when hitting the shot (Full, 3/4, Punch, KnockDown) 
-        /// </summary>
-        [MaxLength(9)]
-        public string SwingType { get; set;} = null;
 
         /// <summary>
-        /// What type of ball flight id the ball have (Cut, Fade, Draw, Hook, Slice)
+        /// What type of swing did the player use when hitting the shot:
+        /// 1 = Full, 2 = 3/4, 3 = Punch, 4 = KnockDown
         /// </summary>
-        [MaxLength(5)]
-        public string BallFlight { get; set;} = null;
-    
+        [MaxLength(1)]
+        public Int16 _SwingType { get; set;} = 0;
+
+        [Ignore]
+        public String SwingType
+        {
+            get
+            {
+                return ConvertShotsClass.Full34PunchKnockDownConvert(this._SwingType);
+            }
+            set
+            {
+                this._SwingType = ConvertShotsClass.Full34PunchKnockDownConvert(value);
+            }
+        }
+
+        /// <summary>
+        /// What type of ball flight id the ball have:
+        /// 1 = Draw, 2 = Cut, 3 = Hook, 4 = Fade, 5 = Slice
+        /// </summary>
+        [MaxLength(1)]
+        public Int16 _BallFlight { get; set;} = 0;
+
+        [Ignore]
+        public String BallFlight
+        {
+            get
+            {
+                return ConvertShotsClass.DrawCutHookFadeSliceConvert(this._BallFlight);
+            }
+            set
+            {
+                this._BallFlight = ConvertShotsClass.DrawCutHookFadeSliceConvert(value);
+            }
+        }
+
         /// <summary>
         /// Is the ball on the green
         /// </summary>
         public bool OnGreen { get; set;} = true;
-    
+
         //Player did end on the green
         //==========================
         /// <summary>
-        /// On which side of the green did the ball end (Center, Left, Right)
+        /// On which side of the green did the ball end:
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        [MaxLength(6)]
-        public string PosOnGreenHorz { get; set;} = null;
-    
+        [MaxLength(1)]
+        public Int16 _PosOnGreenHorz { get; set;} = 0;
+
+        [Ignore]
+        public String PosOnGreenHorz
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._PosOnGreenHorz);
+            }
+            set
+            {
+                this._PosOnGreenHorz = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
+
         /// <summary>
-        /// How far into the green did the ball end (Front, Center, Back)
+        /// How far into the green did the ball end:
+        /// 1 = Center, 2 = Front, 3 = Back
         /// </summary>
-        [MaxLength(6)]
-        public string PosOnGreenVer { get; set;} = null;
+        [MaxLength(0)]
+        public Int16 _PosOnGreenVer { get; set;} = 0;
+
+        [Ignore]
+        public String PosOnGreenVer
+        {
+            get
+            {
+                return ConvertShotsClass.CenterFrontBackConvert(this._PosOnGreenVer);
+            }
+            set
+            {
+                this._PosOnGreenVer = ConvertShotsClass.CenterFrontBackConvert(value);
+            }
+        }
         //==========================
 
         //Player missed the green
         //==========================
         /// <summary>
-        /// On what side did the player miss the green (Center, Left, Right)
+        /// On what side did the player miss the green:
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        [MaxLength(6)]
-        public string PosToGreenHorz { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _PosToGreenHorz { get; set; } = 0;
+
+        [Ignore]
+        public String PosToGreenHorz
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._PosToGreenHorz);
+            }
+            set
+            {
+                this._PosToGreenHorz = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// How far into the green did the ball end (Center, Over, Short) 
+        /// How far into the green did the ball end:
+        /// 1 = Center, 2 = Short, 3 = Past
         /// </summary>
-        [MaxLength(6)]
-        public string PosToGreenVer { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _PosToGreenVer { get; set; } = 0;
+
+        [Ignore]
+        public String PosToGreenVer
+        {
+            get
+            {
+                return ConvertShotsClass.CenterShortPastConvert(this._PosToGreenVer);
+            }
+            set
+            {
+                this._PosToGreenVer = ConvertShotsClass.CenterShortPastConvert(value);
+            }
+        }
+
         //==========================
-
-        /// <summary>
-        /// Is the ball in the hole
-        /// </summary>
-        public bool InHole { get; set; } = false;
 
         //============================================================================
     }

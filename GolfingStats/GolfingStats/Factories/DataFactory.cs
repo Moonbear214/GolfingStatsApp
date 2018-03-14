@@ -107,6 +107,46 @@ namespace GolfingStats.Factories
 
         //========================================================================================================================================================================
 
+        // Methods for updating round saved in local storage
+        //========================================================================================================================================================================
+
+        public async Task<RoundModel> UpdateRound(RoundModel round)
+        {
+            return await GolfstatsRepository.UpdateRound(round);
+        }
+
+        public async Task<HoleModel> UpdateHoles(HoleModel hole)
+        {
+            return await GolfstatsRepository.UpdateHoles(hole);
+        }
+
+        public async Task<IEnumerable<HoleModel>> UpdateHoles(IEnumerable<HoleModel> hole)
+        {
+            return await GolfstatsRepository.UpdateHoles(hole);
+        }
+
+        public async Task<DriveModel> UpdateShot(DriveModel shot)
+        {
+            return await GolfstatsRepository.UpdateShot(shot);
+        }
+
+        public async Task<FairwayModel> UpdateShot(FairwayModel shot)
+        {
+            return await GolfstatsRepository.UpdateShot(shot);
+        }
+
+        public async Task<ChipModel> UpdateShot(ChipModel shot)
+        {
+            return await GolfstatsRepository.UpdateShot(shot);
+        }
+
+        public async Task<PuttModel> UpdateShot(PuttModel shot)
+        {
+            return await GolfstatsRepository.UpdateShot(shot);
+        }
+        //========================================================================================================================================================================
+
+
         //Retrieve data from local storage
         //========================================================================================================================================================================
         public async Task<List<RoundModel>> GetAllRounds()
@@ -137,6 +177,45 @@ namespace GolfingStats.Factories
         public async Task<List<PuttModel>> GetAllShotsPutt()
         {
             return await GolfstatsRepository.GetAllShotsPutt();
+        }
+
+        public async Task<List<ShotModel>> GetAllShots()
+        {
+            AllShotsModel allShots = await GolfstatsRepository.GetAllShots();
+
+            return CreateShotModelList(allShots);
+        }
+        //========================================================================================================================================================================
+
+
+        //========================================================================================================================================================================
+
+            //Creates a ShotModel List from the AllShotsModel object that it was given
+        public List<ShotModel> CreateShotModelList(AllShotsModel allShots)
+        {
+            List<ShotModel> shotModel = new List<ShotModel>();
+
+            for (int i = 0; i < allShots.DriveASModel.Count; i++)
+            {
+                shotModel.Add(allShots.DriveASModel[i]);
+            }
+
+            for (int i = 0; i < allShots.FairwayASModel.Count; i++)
+            {
+                shotModel.Add(allShots.FairwayASModel[i]);
+            }
+
+            for (int i = 0; i < allShots.ChipASModel.Count; i++)
+            {
+                shotModel.Add(allShots.ChipASModel[i]);
+            }
+
+            for (int i = 0; i < allShots.PuttASModel.Count; i++)
+            {
+                shotModel.Add(allShots.PuttASModel[i]);
+            }
+
+            return shotModel;
         }
         //========================================================================================================================================================================
     }

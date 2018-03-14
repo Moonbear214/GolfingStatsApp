@@ -67,6 +67,7 @@ C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\D
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Runtime.InteropServices.dll
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Runtime.Extensions.dll
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Reflection.Extensions.dll
+C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Reflection.Primitives.dll
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Linq.Expressions.dll
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Threading.Tasks.dll
 C:\Dev\Beta\GolfingStats\GolfingStatsApp\GolfingStats\GolfingStats.Android\obj\Debug\android\assets\System.Globalization.dll

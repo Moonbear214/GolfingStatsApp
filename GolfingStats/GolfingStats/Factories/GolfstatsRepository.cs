@@ -157,6 +157,131 @@ namespace GolfingStats
 
         //========================================================================================================================================================================
 
+        
+        //Methods for updating local storage data for all classes (rounds, holes, shots)
+        //========================================================================================================================================================================
+
+        //Rounds
+        //==========================================================
+        public async Task<RoundModel> UpdateRound(RoundModel round)
+        {
+            try
+            {
+                await conn.UpdateAsync(round);
+                return round;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //==========================================================
+
+        //Holes
+        //==========================================================
+        public async Task<HoleModel> UpdateHoles(HoleModel hole)
+        {
+            try
+            {
+                await conn.UpdateAsync(hole);
+                return hole;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+
+        public async Task<IEnumerable<HoleModel>> UpdateHoles(IEnumerable<HoleModel> holes)
+        {
+            try
+            {
+                await conn.UpdateAllAsync(holes);
+                return holes;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //==========================================================
+
+        //Shots
+        //==========================================================
+
+            //Drive
+        //================================
+        public async Task<DriveModel> UpdateShot(DriveModel shot)
+        {
+            try
+            {
+                await conn.UpdateAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+            //Fairway
+        //================================
+        public async Task<FairwayModel> UpdateShot(FairwayModel shot)
+        {
+            try
+            {
+                await conn.UpdateAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+            //Chip
+        //================================
+        public async Task<ChipModel> UpdateShot(ChipModel shot)
+        {
+            try
+            {
+                await conn.UpdateAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+            //Putt
+        //================================
+        public async Task<PuttModel> UpdateShot(PuttModel shot)
+        {
+            try
+            {
+                await conn.UpdateAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+        //========================================================================================================================================================================
+
         //Methods for returning all local storage data for given class (round, holes, shots)
         //========================================================================================================================================================================
 
@@ -194,14 +319,26 @@ namespace GolfingStats
 
         //Shots
         //==========================================================
-
-        //TODO: Create a method that returns a list of all shots
+        
             //All Shots
         //================================
-        //public async Task<List<>> AllShots()
-        //{
-        //    return null;
-        //}
+        public async Task<AllShotsModel> GetAllShots()
+        {
+            try {
+                AllShotsModel allShots = new AllShotsModel();
+                allShots.DriveASModel = await conn.Table<DriveModel>().ToListAsync();
+                allShots.FairwayASModel = await conn.Table<FairwayModel>().ToListAsync();
+                allShots.ChipASModel = await conn.Table<ChipModel>().ToListAsync();
+                allShots.PuttASModel = await conn.Table<PuttModel>().ToListAsync();
+
+                return allShots;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
         //================================
 
             //Drive

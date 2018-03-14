@@ -5,7 +5,7 @@ using SQLite;
 
 namespace GolfingStats.Models
 {
-    public partial class ShotModel
+    public class ShotModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; private set; }
@@ -37,6 +37,12 @@ namespace GolfingStats.Models
         /// </summary>
         [MaxLength(8)]
         public string Club { get; set; } = null;
+
+        /// <summary>
+        /// Indecator of which shot model type is used by the shot:
+        /// 0 = Drive, 1 = Fairway, 2 = Chip, 3 = Putt
+        /// </summary>
+        // public int ShotType { get; set; } = 0;
 
         //TODO: Add drop shot variable for waterhazards, Out-of-Bounds ect.
     }

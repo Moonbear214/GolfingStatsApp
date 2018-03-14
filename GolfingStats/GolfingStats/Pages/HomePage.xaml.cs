@@ -30,6 +30,39 @@ namespace GolfingStats
             await Navigation.PushAsync(new Pages.RoundDetailsPage(), true);
         }
 
+        public async void DisplayListItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if(e.SelectedItem is DriveModel)
+            {
+                DriveModel shot = (DriveModel)e.SelectedItem;
+                shot.HoleId += 11;
+
+                await App.dataFactory.UpdateShot(shot);
+            }
+            else if (e.SelectedItem is FairwayModel)
+            {
+                FairwayModel shot = (FairwayModel)e.SelectedItem;
+                shot.HoleId += 11;
+
+                await App.dataFactory.UpdateShot(shot);
+            }
+            else if(e.SelectedItem is ChipModel)
+            {
+                ChipModel shot = (ChipModel)e.SelectedItem;
+                shot.HoleId += 11;
+
+                await App.dataFactory.UpdateShot(shot);
+            }
+            else if(e.SelectedItem is PuttModel)
+            {
+                PuttModel shot = (PuttModel)e.SelectedItem;
+                shot.HoleId += 11;
+
+                await App.dataFactory.UpdateShot(shot);
+            }
+
+        }
+
 
         //========================================================================================================================================================================
                  //!!!!MUST BE DELETED!!!!
@@ -41,6 +74,7 @@ namespace GolfingStats
         }
         //===============================================
 
+
         //Creates a full round with all holes included
         public void OnCreateFullRoundButtonClicked(object sender, EventArgs args)
         {
@@ -50,44 +84,37 @@ namespace GolfingStats
         //Get dummy data for all Models
         public async void OnGetRoundsButtonClicked(object sender, EventArgs args)
         {
-            List<RoundModel> data = await App.dataFactory.GetAllRounds();
-
-            DisplayList.ItemsSource = data;
+            DisplayList.ItemsSource = await App.dataFactory.GetAllRounds();
         }
 
         public async void OnGetHolesButtonClicked(object sender, EventArgs args)
         {
-            List<HoleModel> data = await App.dataFactory.GetAllHoles();
-
-            DisplayList.ItemsSource = data;
+            DisplayList.ItemsSource = await App.dataFactory.GetAllHoles();
         }
 
         public async void OnGetDriveButtonClicked(object sender, EventArgs args)
         {
-            List<DriveModel> data = await App.dataFactory.GetAllShotsDrive();
-
-            DisplayList.ItemsSource = data;
+            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsDrive();
         }
 
         public async void OnGetFairwayButtonClicked(object sender, EventArgs args)
         {
-            List<FairwayModel> data = await App.dataFactory.GetAllShotsFairway();
-
-            DisplayList.ItemsSource = data;
+            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsFairway();
         }
 
         public async void OnGetChipButtonClicked(object sender, EventArgs args)
         {
-            List<ChipModel> data = await App.dataFactory.GetAllShotsChip();
-
-            DisplayList.ItemsSource = data;
+            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsChip();
         }
 
         public async void OnGetPuttButtonClicked(object sender, EventArgs args)
         {
-            List<PuttModel> data = await App.dataFactory.GetAllShotsPutt();
-
-            DisplayList.ItemsSource = data;
+            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsPutt();
+        }
+        
+        public async void OnGetAllShotsButtonClicked(object sender, EventArgs args)
+        {
+            DisplayList.ItemsSource = await App.dataFactory.GetAllShots();
         }
 
 

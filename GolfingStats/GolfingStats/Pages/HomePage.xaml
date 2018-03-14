@@ -35,18 +35,22 @@
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-                <Button Text="Get All Fairway"
+                <Button Text="Get All F"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Clicked="OnGetFairwayButtonClicked" />
-                <Button Text="Get All Chip"
+                <Button Text="Get All C"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Clicked="OnGetChipButtonClicked" />
-                <Button Text="Get All Putt"
+                <Button Text="Get All P"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Clicked="OnGetPuttButtonClicked" />
+                <Button Text="Get All S"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Clicked="OnGetAllShotsButtonClicked" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
@@ -78,15 +82,11 @@
                         HorizontalOptions="Center"
                         Clicked="OnAddPuttButtonClicked" />
             </StackLayout>
-            
-            <ListView x:Name="DisplayList" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <ListView x:Name="DisplayList" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemSelected="DisplayListItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="30">
-                            <StackLayout Padding="5">
-                                <Label Text="{Binding Id}" />
-                            </StackLayout>
-                        </ViewCell>
+                        <TextCell Text="{Binding Id}" Detail="{Binding Aiming}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -1,36 +1,106 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using SQLite;
+
+using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats.Models.ShotModels
 {
     [Table("PuttShot")]
     public partial class PuttModel : ShotModel
     {
+        ConvertShotsClass ConvertShotsClass = new ConvertShotsClass();
+
+        /// <summary>
+        /// Indecator of which shot model type is used by the shot:
+        /// 0 = Drive, 1 = Fairway, 2 = Chip, 3 = Putt
+        /// </summary>
+        public int ShotType { get; } = 3;
+
         //Before Swing (All info about the shot before the player has hit the ball)
         //============================================================================
 
         /// <summary>
-        /// Where is the player aiming to putt in relation to the flag (Straight, Left, Right)
+        /// Where is the player aiming to putt in relation to the flag: 
+        /// 1 = Straight, 2 = Left, 3 = Right
         /// </summary>
-        public string Aiming { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _Aiming { get; set; } = 0;
+
+        [Ignore]
+        public String Aiming
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._Aiming);
+            }
+            set
+            {
+                this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// How far is the player in the given direction (Inside, Edge, Cup, 2/3/4 Cups, HalfMeter, 3/4 Meter, Meter)
+        /// How far is the player in the given direction: 
+        /// 1 = Inside, 2 = Edge, 3 = Ball, 4 = 2Cups, 5 = 3Cups, 6 = 4Cups, 7 = 1/2Meter, 8 = 3/4Meter, 9 = Meter
         /// </summary>
-        public string AimingDistance { get; set; } = null;
+        [MaxLength(2)]
+        public Int16 _AimingDistance { get; set; } = 0;
+
+        [Ignore]
+        public String AimingDistance
+        {
+            get
+            {
+                return ConvertShotsClass.PuttingAimingDistance(this._AimingDistance);
+            }
+            set
+            {
+                this._AimingDistance = ConvertShotsClass.PuttingAimingDistance(value);
+            }
+        }
 
         /// <summary>
-        /// To what side does the green break in relation to the player (Straight, Left, Right)
+        /// To what side will the green break in relation to the player: 
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        [MaxLength(7)]
-        public string GreenBreak { get; set; } = "Straight";
+        [MaxLength(1)]
+        public Int16 _GreenBreak { get; set; } = 0;
+
+        [Ignore]
+        public String GreenBreak
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._GreenBreak);
+            }
+            set
+            {
+                this._GreenBreak = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// At what angle is the green when the player looks at the flag (Flat, Uphill, Downill)
+        /// At what angle is the green when the player looks at the flag:
+        /// 1 = Flat, 2 = Uphill, 3 = Downhill
         /// </summary>
-        public string AngleOfGreen { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _AngleOfGreen { get; set; } = 0;
+
+        [Ignore]
+        public String AngleOfGreen
+        {
+            get
+            {
+                return ConvertShotsClass.FlatDownhillUphillConvert(this._AngleOfGreen);
+            }
+            set
+            {
+                this._AngleOfGreen = ConvertShotsClass.FlatDownhillUphillConvert(value);
+            }
+        }
 
         //============================================================================
 
@@ -45,16 +115,44 @@ namespace GolfingStats.Models.ShotModels
         //Player missed the Hole
         //==========================
         /// <summary>
-        /// On what side did the player miss the Hole (Center, Left, Right)
+        /// On which side did the player miss the Hole:
+        /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        [MaxLength(6)]
-        public string PosToHoleHorz { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _PosToHoleHorz { get; set; } = 0;
+
+        [Ignore]
+        public String PosToHoleHorz
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._PosToHoleHorz);
+            }
+            set
+            {
+                this._PosToHoleHorz = ConvertShotsClass.CenterLeftRightConvert(value);
+            }
+        }
 
         /// <summary>
-        /// How far from the Hole did the ball end (Center, Over, Short) 
+        /// Is the ball Center to the hole, Past or Short:
+        /// 1 = Center, 2 = Short, 3 = Past
         /// </summary>
-        [MaxLength(6)]
-        public string PosToHoleVer { get; set; } = null;
+        [MaxLength(1)]
+        public Int16 _PosToHoleVer { get; set; } = 0;
+
+        [Ignore]
+        public String PosToHoleVer
+        {
+            get
+            {
+                return ConvertShotsClass.CenterShortPastConvert(this._PosToHoleVer);
+            }
+            set
+            {
+                this._PosToHoleVer = ConvertShotsClass.CenterShortPastConvert(value);
+            }
+        }
 
         /// <summary>
         /// How far is the ball still from the hole
@@ -64,9 +162,23 @@ namespace GolfingStats.Models.ShotModels
         //==========================
 
         /// <summary>
-        /// How far did the player pull back the putter (Minnimal, Medium, Far)
+        /// How hard did the player putt the ball compared to the distance the player had:
+        /// 1 = Soft, 2 = Medium, 3 = Hard, 4 = Very Hard
         /// </summary>
-        public string PullBackLength { get; set; } = "Minnimal";
+        public Int16 _PullBackStrength { get; set; } = 0;
+
+        [Ignore]
+        public String PullBackStrength
+        {
+            get
+            {
+                return ConvertShotsClass.SoftMediumHardVeryConvert(this._PullBackStrength);
+            }
+            set
+            {
+                this._PullBackStrength = ConvertShotsClass.SoftMediumHardVeryConvert(value);
+            }
+        }
         //============================================================================
 
     }

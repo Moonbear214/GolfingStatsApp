@@ -8,12 +8,12 @@ namespace GolfingStats.Models
 {
     public class AllShotsModel
     {
-        public DriveModel driveModel { get; set; } = null;
+        public List<DriveModel> DriveASModel { get; set; } = null;
 
-        public FairwayModel fairwayModel { get; set; } = null;
+        public List<FairwayModel> FairwayASModel { get; set; } = null;
 
-        public ChipModel chipModel { get; set; } = null;
+        public List<ChipModel> ChipASModel { get; set; } = null;
 
-        public PuttModel puttModel { get; set; } = null;
+        public List<PuttModel> PuttASModel { get; set; } = null;
     }
 }
