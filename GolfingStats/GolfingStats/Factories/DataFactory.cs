@@ -12,22 +12,14 @@ namespace GolfingStats.Factories
     {
         private GolfstatsRepository GolfstatsRepository { get; set; }
 
+        //======================================
+        //For use only to add dummy data to storage to work with
         private DummData DummData = new DummData();
+        //======================================
 
         public DataFactory(string dbPath)
         {
             GolfstatsRepository = new GolfstatsRepository(dbPath);
-
-
-            //Add dummy data
-            //==================================================
-            //AddAllDummyData();
-            //AddAllDummyData();
-            //AddAllDummyData();
-            //AddAllDummyData();
-            //AddAllDummyData();
-            //AddAllDummyData();
-            //==================================================
         }
 
         //Dummy data
@@ -42,19 +34,24 @@ namespace GolfingStats.Factories
         //Creates a full round with all holes included
         public async void CreateFullRoundDummy()
         {
-            List<HoleModel> NewRound = await CreateFullRound(new RoundModel());
+            List<HoleModel> NewRound = await CreateNewFullRound(new RoundModel(), (List<HoleModel>)HoleModel.EmptyRound);
         }
-
 
         //All methods for adding dummy data to local storage
         public void AddAllDummyData()
         {
+            AddDummyCourse();
             AddDummyRound();
             AddDummyHole();
             AddDummyShotDrive();
             AddDummyShotFairway();
             AddDummyShotChip();
             AddDummyShotPutt();
+        }
+
+        public async void AddDummyCourse()
+        {
+            await GolfstatsRepository.AddNewCourse(DummData.OneCourse());
         }
 
         public async void AddDummyRound()
@@ -64,7 +61,7 @@ namespace GolfingStats.Factories
 
         public async void AddDummyHole()
         {
-            await GolfstatsRepository.AddOneHole(DummData.OneHoleData());
+            await GolfstatsRepository.AddNewHoleOne(DummData.OneHoleData());
         }
 
         public async void AddDummyShotDrive()
@@ -89,35 +86,112 @@ namespace GolfingStats.Factories
         //========================================================================================================================================================================
 
 
+        //Methods that is connected to local storage (GolfstatsRepository)
         //========================================================================================================================================================================
-        public async Task<List<HoleModel>> CreateFullRound(RoundModel round)
+            
+            //Create methods that adds the data to local storage
+        //==================================================================================
+
+        /// <summary>
+        /// Saves a course to local storage that will be used for the different rounds being played
+        /// (Will be updated after the user updates the holes that are played on the course)
+        /// </summary>
+        /// <param name="courseName"></param>
+        /// <returns></returns>
+        public async Task<CourseModel> CreateNewCourse(string courseName)
+        {
+            CourseModel courseModel = new CourseModel()
+            {
+                Name = courseName,
+                Holes = new List<HoleModel>(HoleModel.EmptyRound)
+            };
+
+            courseModel.SetHoleIds = await CreateHoleList(courseModel.Holes);
+
+            return await GolfstatsRepository.AddNewCourse(courseModel); ;
+        }
+
+        /// <summary>
+        /// Saves a round and 18 holes with the roundId applied to them to local storage
+        /// that will be updated as the player continues playing the round
+        /// </summary>
+        /// <param name="round"></param>
+        /// <param name="holes"></param>
+        /// <returns></returns>
+        public async Task<List<HoleModel>> CreateNewFullRound(RoundModel round, List<HoleModel> holes)
         {
             await GolfstatsRepository.AddNewRound(round);
 
-            IList<HoleModel> EmptyRound = HoleModel.EmptyRound;
+            List<HoleModel> EmptyRound = holes;
             for (int i = 0; i < EmptyRound.Count; i++)
             {
                 EmptyRound[i].RoundId = round.Id;
             }
 
-            await GolfstatsRepository.AddRoundHoles(EmptyRound);
+            await CreateHoleList(EmptyRound);
 
             return new List<HoleModel>(EmptyRound);
         }
 
-        //========================================================================================================================================================================
+        /// <summary>
+        /// Saves a list of holes to local storage
+        /// </summary>
+        /// <param name="holes"></param>
+        /// <returns></returns>
+        public async Task<List<HoleModel>> CreateHoleList(List<HoleModel> holes)
+        {
+            return new List<HoleModel>(await GolfstatsRepository.AddNewHoleList(holes));
+        }
+        
+        public async Task<DriveModel> CreateShotDrive(DriveModel drive)
+        {
+            return await GolfstatsRepository.AddNewShot(drive);
+        }
 
-        // Methods for updating round saved in local storage
-        //========================================================================================================================================================================
+        public async Task<FairwayModel> CreateShotFairway(FairwayModel fairway)
+        {
+            return await GolfstatsRepository.AddNewShot(fairway);
+        }
+
+        public async Task<ChipModel> CreateShotChip(ChipModel chip)
+        {
+            return await GolfstatsRepository.AddNewShot(chip);
+        }
+
+        public async Task<PuttModel> CreateShotPutt(PuttModel putt)
+        {
+            return await GolfstatsRepository.AddNewShot(putt);
+        }
+
+        //==================================================================================
+
+
+        // Methods for updating tables in local storage
+        //==================================================================================
+        
+        public async Task<CourseModel> UpdateCourse(CourseModel course)
+        {
+            await UpdateHoles(course.Holes);
+
+            course.Par = 0;
+            foreach (HoleModel hole in course.Holes)
+            {
+                course.Par += hole.Par;
+            }
+
+            await GolfstatsRepository.UpdateCourse(course);
+
+            return course;
+        }
 
         public async Task<RoundModel> UpdateRound(RoundModel round)
         {
             return await GolfstatsRepository.UpdateRound(round);
         }
 
-        public async Task<HoleModel> UpdateHoles(HoleModel hole)
+        public async Task<HoleModel> UpdateHole(HoleModel hole)
         {
-            return await GolfstatsRepository.UpdateHoles(hole);
+            return await GolfstatsRepository.UpdateHole(hole);
         }
 
         public async Task<IEnumerable<HoleModel>> UpdateHoles(IEnumerable<HoleModel> hole)
@@ -144,11 +218,26 @@ namespace GolfingStats.Factories
         {
             return await GolfstatsRepository.UpdateShot(shot);
         }
-        //========================================================================================================================================================================
+        //==================================================================================
 
 
         //Retrieve data from local storage
-        //========================================================================================================================================================================
+        //==================================================================================
+        public async Task<List<CourseModel>> GetAllCourses()
+        {
+            //TODO: If there are dozens of courses this process will be very slow,
+            //change this to collect the holes for the course when the user has selected a course
+
+            List<CourseModel> AllCourses = await GolfstatsRepository.GetAllCourses();
+
+            foreach (CourseModel course in AllCourses)
+            {
+                course.Holes = await GetHolesList(course.GetHoleIds);
+            }
+
+            return AllCourses;
+        }
+
         public async Task<List<RoundModel>> GetAllRounds()
         {
             return await GolfstatsRepository.GetAllRounds();
@@ -157,6 +246,16 @@ namespace GolfingStats.Factories
         public async Task<List<HoleModel>> GetAllHoles()
         {
             return await GolfstatsRepository.GetAllHoles();
+        }
+
+        /// <summary>
+        /// Returns a list of "HoleModel" objects that corrsepond with the list of holeIds that it was given
+        /// </summary>
+        /// <param name="holeIds"></param>
+        /// <returns></returns>
+        public async Task<List<HoleModel>> GetHolesList(List<int> holeIds)
+        {
+            return await GolfstatsRepository.GetHolesList(holeIds);
         }
 
         public async Task<List<DriveModel>> GetAllShotsDrive()
@@ -183,15 +282,16 @@ namespace GolfingStats.Factories
         {
             AllShotsModel allShots = await GolfstatsRepository.GetAllShots();
 
-            return CreateShotModelList(allShots);
+            return AllShotsList(allShots);
         }
+        //==================================================================================
         //========================================================================================================================================================================
 
-
+        //Methods that used within the Datafactory
         //========================================================================================================================================================================
 
-            //Creates a ShotModel List from the AllShotsModel object that it was given
-        public List<ShotModel> CreateShotModelList(AllShotsModel allShots)
+        //Creates a ShotModel List from the AllShotsModel object that it was given
+        public List<ShotModel> AllShotsList(AllShotsModel allShots)
         {
             List<ShotModel> shotModel = new List<ShotModel>();
 

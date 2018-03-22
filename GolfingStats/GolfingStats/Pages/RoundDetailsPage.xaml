@@ -9,14 +9,17 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GolfCourse" />
-                <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GolfCourse}" />
+                <Picker x:Name="CoursePicker" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" HeightRequest="80" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
             </StackLayout>
+            
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Date Played" />
                 <DatePicker HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
             </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

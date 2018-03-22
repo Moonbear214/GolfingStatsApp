@@ -4,8 +4,6 @@ using System.Text;
 
 using SQLite;
 
-using GolfingStats.Models.ShotModels;
-
 namespace GolfingStats.Models.ShotModels
 {
     [Table("DriveShot")]
@@ -103,11 +101,11 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.Full34PunchKnockDownConvert(this._SwingType);
+                return ConvertShotsClass.Full34PunchKnockdownConvert(this._SwingType);
             }
             set
             {
-                this._SwingType = ConvertShotsClass.Full34PunchKnockDownConvert(value);
+                this._SwingType = ConvertShotsClass.Full34PunchKnockdownConvert(value);
             }
         }
 

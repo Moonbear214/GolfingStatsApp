@@ -15,7 +15,12 @@ namespace GolfingStats.Models
         /// Name of the golf course the round was played on
         /// </summary>
         [MaxLength(40)]
-        public string GolfCourse { get; set; } = null;
+        public string CourseName { get; set; } = null;
+
+        /// <summary>
+        /// Id of the course the round was played on
+        /// </summary>
+        public int CourseId { get; set; }
 
         /// <summary>
         /// Date game was played on

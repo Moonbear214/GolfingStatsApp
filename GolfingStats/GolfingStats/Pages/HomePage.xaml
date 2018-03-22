@@ -4,10 +4,13 @@
              x:Class="GolfingStats.HomePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New Round" Clicked="NavRoundPage" />
+        <ToolbarItem Text="Add Course" Clicked="NavAddCoursePage" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Entry x:Name="entCourseName" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Placeholder="Course Name" />
+
             <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                 <Button HorizontalOptions="Center"
                     VerticalOptions="Center"
@@ -19,7 +22,7 @@
                     Clicked="OnCreateFullRoundButtonClicked" />
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+            <!--<StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                 <Button Text="Get All Rounds"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
@@ -81,7 +84,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Clicked="OnAddPuttButtonClicked" />
-            </StackLayout>
+            </StackLayout>-->
 
             <ListView x:Name="DisplayList" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemSelected="DisplayListItemSelected">
                 <ListView.ItemTemplate>

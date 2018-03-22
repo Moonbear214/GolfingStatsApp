@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 
-namespace GolfingStats.Models
+namespace GolfingStats.Models.ShotModels
 {
-    public class ShotModel
+    public partial class ShotModel
     {
+        ConvertShotsClass ConvertShotsClass = new ConvertShotsClass();
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; private set; }
 
@@ -33,16 +35,23 @@ namespace GolfingStats.Models
         public int DistanceToHole { get; set; } = 0;
 
         /// <summary>
-        /// Driver, 3/5/7 Wood, 3/5 Hybrid, 2/3/4/5/6/7/8/9 Iron, PW, 52/56/58/60 Wedge, Putter
+        /// Driver, 3/5 Wood, 3/5 Hybrid, 2/3/4/5/6/7/8/9 Iron, PW, 52/56/60 Wedge, Putter
         /// </summary>
-        [MaxLength(8)]
-        public string Club { get; set; } = null;
+        [MaxLength(2)]
+        public Int16 _Club { get; set; } = 0;
 
-        /// <summary>
-        /// Indecator of which shot model type is used by the shot:
-        /// 0 = Drive, 1 = Fairway, 2 = Chip, 3 = Putt
-        /// </summary>
-        // public int ShotType { get; set; } = 0;
+        [Ignore]
+        public String Club
+        {
+            get
+            {
+                return ConvertShotsClass.ClubUsed(this._Club);
+            }
+            set
+            {
+                this._Club = ConvertShotsClass.ClubUsed(value);
+            }
+        }
 
         //TODO: Add drop shot variable for waterhazards, Out-of-Bounds ect.
     }

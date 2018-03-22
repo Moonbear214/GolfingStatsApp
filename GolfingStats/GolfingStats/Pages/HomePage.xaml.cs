@@ -12,27 +12,42 @@ using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HomePage : ContentPage
     {
-        public HomePage ()
-		{
+        public HomePage()
+        {
             this.Title = "All Rounds";
 
-			InitializeComponent ();
-		}
+            InitializeComponent();
+        }
 
         public async void NavRoundPage()
         {
             //TODO: Send the round played object to the next page
-            RoundModel roundPlayed = new RoundModel();
+            //RoundModel roundPlayed = new RoundModel();
 
             await Navigation.PushAsync(new Pages.RoundDetailsPage(), true);
         }
 
+        public async void NavAddCoursePage()
+        {
+            if (string.IsNullOrEmpty(entCourseName.Text))
+            {
+                await DisplayAlert("Ai...", "Dammit Neldan..", "Cancel");
+            }
+            else
+            {
+                CourseModel course = await App.dataFactory.CreateNewCourse(entCourseName.Text);
+
+                await Navigation.PushAsync(new Pages.AddHolesPage(course), true);
+            }
+        }
+
+
         public async void DisplayListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if(e.SelectedItem is DriveModel)
+            if (e.SelectedItem is DriveModel)
             {
                 DriveModel shot = (DriveModel)e.SelectedItem;
                 shot.HoleId += 11;
@@ -46,16 +61,15 @@ namespace GolfingStats
 
                 await App.dataFactory.UpdateShot(shot);
             }
-            else if(e.SelectedItem is ChipModel)
+            else if (e.SelectedItem is ChipModel)
             {
                 ChipModel shot = (ChipModel)e.SelectedItem;
                 shot.HoleId += 11;
 
                 await App.dataFactory.UpdateShot(shot);
             }
-            else if(e.SelectedItem is PuttModel)
+            else if (e.SelectedItem is PuttModel shot)
             {
-                PuttModel shot = (PuttModel)e.SelectedItem;
                 shot.HoleId += 11;
 
                 await App.dataFactory.UpdateShot(shot);
@@ -65,7 +79,7 @@ namespace GolfingStats
 
 
         //========================================================================================================================================================================
-                 //!!!!MUST BE DELETED!!!!
+        //!!!!MUST BE DELETED!!!!
         //===============================================
         //Clear local Storage
         public void OnClearLocalStorageButtonClicked()
@@ -111,7 +125,7 @@ namespace GolfingStats
         {
             DisplayList.ItemsSource = await App.dataFactory.GetAllShotsPutt();
         }
-        
+
         public async void OnGetAllShotsButtonClicked(object sender, EventArgs args)
         {
             DisplayList.ItemsSource = await App.dataFactory.GetAllShots();

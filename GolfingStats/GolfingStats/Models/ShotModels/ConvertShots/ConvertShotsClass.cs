@@ -180,10 +180,10 @@ namespace GolfingStats.Models.ShotModels
 
         //=========================================================================================================
         /// <summary>
-        /// Converts Full, 3/4, Punch and KnockDown values to string or integer depending on what is needed:
-        /// 1 = Full, 2 = 3/4, 3 = Punch, 4 = KnockDown
+        /// Converts Full, 3/4, Punch and Knockdown values to string or integer depending on what is needed:
+        /// 1 = Full, 2 = 3/4, 3 = Punch, 4 = Knockdown
         /// </summary>
-        public string Full34PunchKnockDownConvert(Int16 valueParam)
+        public string Full34PunchKnockdownConvert(Int16 valueParam)
         {
             String Value = null;
 
@@ -202,14 +202,14 @@ namespace GolfingStats.Models.ShotModels
                     Value = "Punch";
                     break;
                 case 4:
-                    Value = "KnockDown";
+                    Value = "Knockdown";
                     break;
             }
 
             return Value;
         }
 
-        public Int16 Full34PunchKnockDownConvert(String valueParam)
+        public Int16 Full34PunchKnockdownConvert(String valueParam)
         {
             Int16 Value = 0;
 
@@ -227,7 +227,7 @@ namespace GolfingStats.Models.ShotModels
                 case "Punch":
                     Value = 3;
                     break;
-                case "KnockDown":
+                case "Knockdown":
                     Value = 4;
                     break;
             }
@@ -356,7 +356,7 @@ namespace GolfingStats.Models.ShotModels
         //=========================================================================================================
         /// <summary>
         /// Converts Flat, Flat and Uphill values to string or integer depending on what is needed:
-        /// 1 = Flat, 2 = , 3 = Uphill
+        /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
         public string FlatDownhillUphillConvert(Int16 valueParam)
         {
@@ -407,10 +407,10 @@ namespace GolfingStats.Models.ShotModels
 
         //=========================================================================================================
         /// <summary>
-        /// Converts Fairway, Ruff and Bunker values to string or integer depending on what is needed:
-        /// 1 = Fairway, 2 = Ruff, 3 = Bunker
+        /// Converts Fairway, Ruff, Bunker and Hazard values to string or integer depending on what is needed:
+        /// 1 = Fairway, 2 = Ruff, 3 = Bunker, 4 = Hazard
         /// </summary>
-        public string FairwayRuffBunkerConvert(Int16 valueParam)
+        public string FairwayRuffBunkerHazardConvert(Int16 valueParam)
         {
             String Value = null;
 
@@ -428,12 +428,15 @@ namespace GolfingStats.Models.ShotModels
                 case 3:
                     Value = "Bunker";
                     break;
+                case 4:
+                    Value = "Hazard";
+                    break;
             }
 
             return Value;
         }
 
-        public Int16 FairwayRuffBunkerConvert(String valueParam)
+        public Int16 FairwayRuffBunkerHazardConvert(String valueParam)
         {
             Int16 Value = 0;
 
@@ -450,6 +453,9 @@ namespace GolfingStats.Models.ShotModels
                     break;
                 case "Bunker":
                     Value = 3;
+                    break;
+                case "Hazard":
+                    Value = 4;
                     break;
             }
 
@@ -674,7 +680,7 @@ namespace GolfingStats.Models.ShotModels
         //=========================================================================================================
         /// <summary>
         /// Converts Putting aiming distance values to string or integer depending on what is needed:
-        /// 1 = Inside, 2 = Edge, 3 = , 4 = Cup, 5 = 2Cups, 6 = 3Cups, 7 = 4Cups, 8 = 1/2Meter, 9 = 3/4Meter, 10 = Meter
+        /// 1 = Inside, 2 = Edge, 3 = , 4 = Cup, 5 = 2 Cups, 6 = 3 Cups, 7 = 4 Cups, 8 = 1/2 Meter, 9 = 3/4 Meter, 10 = Meter, 11 = More+
         /// </summary>
         public string PuttingAimingDistance(Int16 valueParam)
         {
@@ -714,6 +720,9 @@ namespace GolfingStats.Models.ShotModels
                     break;
                 case 10:
                     Value = "Meter";
+                    break;
+                case 11:
+                    Value = "+More";
                     break;
             }
 
@@ -758,6 +767,9 @@ namespace GolfingStats.Models.ShotModels
                     break;
                 case "Meter":
                     Value = 10;
+                    break;
+                case "+More":
+                    Value = 11;
                     break;
             }
 
@@ -816,6 +828,149 @@ namespace GolfingStats.Models.ShotModels
                     break;
                 case "Very Hard":
                     Value = 4;
+                    break;
+            }
+
+            return Value;
+        }
+        //=========================================================================================================
+
+        //=========================================================================================================
+        /// <summary>
+        /// Converts Putting aiming distance values to string or integer depending on what is needed:
+        /// 1 = Driver, 2 = 3 Wood, 3 = 5 Wood, 4 = 3 Hybrid, 5 = 5 Hybrid, 6 = 2 Iron, 7 = 3 Iron, 8 = 4 Iron, 9 = 5 Iron, 10 = 6 Iron,
+        /// 11 = 7 Iron, 12 = 8 Iron, 13 = 9 Iron, 14 = PW, 15 = Wedge 52, 16 = Wedge 56, 17 = Wedge 60,  18 = Putter
+        /// </summary>
+        public string ClubUsed(Int16 valueParam)
+        {
+            String Value = null;
+
+            switch (valueParam)
+            {
+                case 0:
+                    Value = null;
+                    break;
+                case 1:
+                    Value = "Driver";
+                    break;
+                case 2:
+                    Value = "3 Wood";
+                    break;
+                case 3:
+                    Value = "5 Wood";
+                    break;
+                case 4:
+                    Value = "3 Hybrid";
+                    break;
+                case 5:
+                    Value = "5 Hybrid";
+                    break;
+                case 6:
+                    Value = "2 Iron";
+                    break;
+                case 7:
+                    Value = "3 Iron";
+                    break;
+                case 8:
+                    Value = "4 Iron";
+                    break;
+                case 9:
+                    Value = "5 Iron";
+                    break;
+                case 10:
+                    Value = "6 Iron";
+                    break;
+                case 11:
+                    Value = "7 Iron";
+                    break;
+                case 12:
+                    Value = "8 Iron";
+                    break;
+                case 13:
+                    Value = "9 Iron";
+                    break;
+                case 14:
+                    Value = "PW";
+                    break;
+                case 15:
+                    Value = "Wedge 52";
+                    break;
+                case 16:
+                    Value = "Wedge 56";
+                    break;
+                case 17:
+                    Value = "Wedge 60";
+                    break;
+                case 18:
+                    Value = "Putter";
+                    break;
+            }
+
+            return Value;
+        }
+
+        public Int16 ClubUsed(String valueParam)
+        {
+            Int16 Value = 0;
+
+            switch (valueParam)
+            {
+                case null:
+                    Value = 0;
+                    break;
+                case "Driver":
+                    Value = 1;
+                    break;
+                case "3 Wood":
+                    Value = 2;
+                    break;
+                case "5 Wood":
+                    Value = 3;
+                    break;
+                case "3 Hybrid":
+                    Value = 4;
+                    break;
+                case "5 Hybrid":
+                    Value = 5;
+                    break;
+                case "2 Iron":
+                    Value = 6;
+                    break;
+                case "3 Iron":
+                    Value = 7;
+                    break;
+                case "4 Iron":
+                    Value = 8;
+                    break;
+                case "5 Iron":
+                    Value = 9;
+                    break;
+                case "6 Iron":
+                    Value = 10;
+                    break;
+                case "7 Iron":
+                    Value = 11;
+                    break;
+                case "8 Iron":
+                    Value = 12;
+                    break;
+                case "9 Iron":
+                    Value = 13;
+                    break;
+                case "PW":
+                    Value = 14;
+                    break;
+                case "Wedge 52":
+                    Value = 15;
+                    break;
+                case "Wedge 56":
+                    Value = 16;
+                    break;
+                case "Wedge 60":
+                    Value = 17;
+                    break;
+                case "Putter":
+                    Value = 18;
                     break;
             }
 

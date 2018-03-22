@@ -4,8 +4,6 @@ using System.Text;
 
 using SQLite;
 
-using GolfingStats.Models.ShotModels;
-
 namespace GolfingStats.Models.ShotModels
 {
     [Table("ChipShot")]
@@ -41,7 +39,6 @@ namespace GolfingStats.Models.ShotModels
                 this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
             }
         }
-
 
         /// <summary>
         /// Where on the green is the pin located in relation to the player:
@@ -134,11 +131,11 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.FairwayRuffBunkerConvert(this._BallLie);
+                return ConvertShotsClass.FairwayRuffBunkerHazardConvert(this._BallLie);
             }
             set
             {
-                this._BallLie = ConvertShotsClass.FairwayRuffBunkerConvert(value);
+                this._BallLie = ConvertShotsClass.FairwayRuffBunkerHazardConvert(value);
             }
         }
 
@@ -236,6 +233,34 @@ namespace GolfingStats.Models.ShotModels
         //Player missed the Hole
         //==========================
         /// <summary>
+        /// TODO: Add More chip shot types
+        /// What type of swing did the player use when hitting the shot:
+        /// 1 = Pitch, 2 = Run, 3 = Flop
+        /// </summary>
+        [MaxLength(1)]
+        public Int16 _SwingType { get; set; } = 0;
+
+        [Ignore]
+        public String SwingType
+        {
+            get
+            {
+                return ConvertShotsClass.PitchRunFlopConvert(this._SwingType);
+            }
+            set
+            {
+                this._SwingType = ConvertShotsClass.PitchRunFlopConvert(value);
+            }
+        }
+
+        /// <summary>
+        /// How far is the ball still from the hole
+        /// </summary>
+        [MaxLength(2)]
+        public int DistanceLeftToHole { get; set; } = 0;
+        //==========================
+
+        /// <summary>
         /// On what side did the player miss the Hole:
         /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
@@ -272,34 +297,6 @@ namespace GolfingStats.Models.ShotModels
             set
             {
                 this._PosToHoleVer = ConvertShotsClass.CenterShortPastConvert(value);
-            }
-        }
-
-        /// <summary>
-        /// How far is the ball still from the hole
-        /// </summary>
-        [MaxLength(2)]
-        public int DistanceLeftToHole { get; set; } = 0;
-        //==========================
-
-        /// <summary>
-        /// TODO: Add More chip shot types
-        /// What type of swing did the player use when hitting the shot:
-        /// 1 = Pitch, 2 = Run, 3 = Flop
-        /// </summary>
-        [MaxLength(1)]
-        public Int16 _SwingType { get; set; } = 0;
-
-        [Ignore]
-        public String SwingType
-        {
-            get
-            {
-                return ConvertShotsClass.PitchRunFlopConvert(this._SwingType);
-            }
-            set
-            {
-                this._SwingType = ConvertShotsClass.PitchRunFlopConvert(value);
             }
         }
 

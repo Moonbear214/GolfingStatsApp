@@ -25,6 +25,7 @@ namespace GolfingStats
 
         private async void CreateAllTables()
         {
+            await conn.CreateTableAsync<CourseModel>();
             await conn.CreateTableAsync<RoundModel>();
             await conn.CreateTableAsync<HoleModel>();
             await conn.CreateTableAsync<DriveModel>();
@@ -33,8 +34,25 @@ namespace GolfingStats
             await conn.CreateTableAsync<PuttModel>();
         }
 
-        //Methods for adding to local storage data for all classes (rounds, holes, shots)
+        //Methods for adding to local storage data for all classes (courses, rounds, holes, shots)
         //========================================================================================================================================================================
+
+        //Courses
+        //==========================================================
+        public async Task<CourseModel> AddNewCourse(CourseModel course)
+        {
+            try
+            {
+                await conn.InsertAsync(course);
+                return course;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //==========================================================
 
         //Rounds
         //==========================================================
@@ -55,7 +73,7 @@ namespace GolfingStats
 
         //Holes
         //==========================================================
-        public async Task<HoleModel> AddOneHole(HoleModel hole)
+        public async Task<HoleModel> AddNewHoleOne(HoleModel hole)
         {
             try
             {
@@ -69,7 +87,7 @@ namespace GolfingStats
             }
         }
 
-        public async Task<IEnumerable<HoleModel>> AddRoundHoles(IEnumerable<HoleModel> holes)
+        public async Task<IEnumerable<HoleModel>> AddNewHoleList(IEnumerable<HoleModel> holes)
         {
             try
             {
@@ -157,9 +175,26 @@ namespace GolfingStats
 
         //========================================================================================================================================================================
 
-        
-        //Methods for updating local storage data for all classes (rounds, holes, shots)
+
+        //Methods for updating local storage data for all classes (courses, rounds, holes, shots)
         //========================================================================================================================================================================
+
+        //Course
+        //==========================================================
+        public async Task<CourseModel> UpdateCourse(CourseModel course)
+        {
+            try
+            {
+                await conn.UpdateAsync(course);
+                return course;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //==========================================================
 
         //Rounds
         //==========================================================
@@ -180,7 +215,7 @@ namespace GolfingStats
 
         //Holes
         //==========================================================
-        public async Task<HoleModel> UpdateHoles(HoleModel hole)
+        public async Task<HoleModel> UpdateHole(HoleModel hole)
         {
             try
             {
@@ -282,8 +317,24 @@ namespace GolfingStats
 
         //========================================================================================================================================================================
 
-        //Methods for returning all local storage data for given class (round, holes, shots)
+        //Methods for returning all local storage data for given class (courses, rounds, holes, shots)
         //========================================================================================================================================================================
+
+        //Course
+        //==========================================================
+        public async Task<List<CourseModel>> GetAllCourses()
+        {
+            try
+            {
+                return await conn.Table<CourseModel>().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //==========================================================
 
         //Round
         //==========================================================
@@ -315,21 +366,49 @@ namespace GolfingStats
                 throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
             }
         }
+
+
+        /// <summary>
+        /// Returns a list of "HoleModel" objects that corrsepond with the list of holeIds that it was given
+        /// </summary>
+        /// <param name="holeIds"></param>
+        /// <returns></returns>
+        public async Task<List<HoleModel>> GetHolesList(List<int> holeIds)
+        {
+            try
+            {
+                List<HoleModel> tempList = new List<HoleModel>();
+
+                foreach (int holeId in holeIds)
+                {
+                    tempList.Add(await conn.Table<HoleModel>().Where(t => t.Id == holeId).FirstOrDefaultAsync());
+                }
+
+                return tempList;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
         //==========================================================
 
         //Shots
         //==========================================================
-        
-            //All Shots
+
+        //All Shots
         //================================
         public async Task<AllShotsModel> GetAllShots()
         {
             try {
-                AllShotsModel allShots = new AllShotsModel();
-                allShots.DriveASModel = await conn.Table<DriveModel>().ToListAsync();
-                allShots.FairwayASModel = await conn.Table<FairwayModel>().ToListAsync();
-                allShots.ChipASModel = await conn.Table<ChipModel>().ToListAsync();
-                allShots.PuttASModel = await conn.Table<PuttModel>().ToListAsync();
+                AllShotsModel allShots = new AllShotsModel
+                {
+                    DriveASModel = await conn.Table<DriveModel>().ToListAsync(),
+                    FairwayASModel = await conn.Table<FairwayModel>().ToListAsync(),
+                    ChipASModel = await conn.Table<ChipModel>().ToListAsync(),
+                    PuttASModel = await conn.Table<PuttModel>().ToListAsync()
+                };
 
                 return allShots;
             }
@@ -412,6 +491,7 @@ namespace GolfingStats
         //========================================================================================================================================================================
         public async void ClearLocalStorage()
         {
+            await conn.ExecuteAsync("DELETE FROM Courses");
             await conn.ExecuteAsync("DELETE FROM Rounds");
             await conn.ExecuteAsync("DELETE FROM Holes");
             await conn.ExecuteAsync("DELETE FROM DriveShot");

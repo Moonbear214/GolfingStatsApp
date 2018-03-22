@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using GolfingStats.Models;
+using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats.Pages
 {

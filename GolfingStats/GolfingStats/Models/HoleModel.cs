@@ -11,8 +11,9 @@ namespace GolfingStats.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; private set; }
-
+        
         [Indexed]
+        /// <summary>
         /// <summary>
         /// Id of the round of golf this hole was played on
         /// </summary>
@@ -40,7 +41,7 @@ namespace GolfingStats.Models
         /// Score on the hole
         /// </summary>
         [MaxLength(2)]
-        public int Score { get; set; } = 0;
+        public int ShotsPlayed { get; set; } = 0;
 
         /// <summary>
         /// Distance of the hole (meter)
@@ -48,23 +49,25 @@ namespace GolfingStats.Models
         [MaxLength(3)]
         public int HoleDistance { get; set; } = 0;
 
+        /// <summary>
+        /// Fairway hit in Regulation
+        /// </summary>
+        public bool FIR { get; set; } = false;
+
+        /// <summary>
+        /// Green in regulation
+        /// </summary>
+        public bool GIR { get; set; } = true;
+
+        //TODO: Add a lot of extra information to let the player discribe the hole when creating it
+
         //TODO: Change from, bool to value (String)
         /// <summary>
         /// Does the hole bend a direction. Left/Right/None
         /// </summary>
         //[MaxLength(5)]
         //public string Dogleg { get; set; }
-        public bool Dogleg { get; set; } = false;
-
-        /// <summary>
-        /// Fairway hit in Regulation
-        /// </summary>
-        public bool FIR { get; set; } = true;
-
-        /// <summary>
-        /// Green in regulation
-        /// </summary>
-        public bool GIR { get; set; } = true;
+        //public bool Dogleg { get; set; } = false;
 
         public static IList<HoleModel> EmptyRound;
 

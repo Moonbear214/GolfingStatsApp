@@ -4,8 +4,6 @@ using System.Text;
 
 using SQLite;
 
-using GolfingStats.Models.ShotModels;
-
 namespace GolfingStats.Models.ShotModels
 {
     [Table("FairwayShot")]
@@ -102,7 +100,7 @@ namespace GolfingStats.Models.ShotModels
 
         /// <summary>
         /// Where does the ball lie on the hole:
-        /// 1 = Fairway, 2 = Ruff, 3 = Bunker
+        /// 1 = Fairway, 2 = Ruff, 3 = Bunker, 4 = Hazard
         /// </summary>
         [MaxLength(1)]
         public Int16 _BallLie { get; set; } = 0;
@@ -112,11 +110,11 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.FairwayRuffBunkerConvert(this._BallLie);
+                return ConvertShotsClass.FairwayRuffBunkerHazardConvert(this._BallLie);
             }
             set
             {
-                this._BallLie = ConvertShotsClass.FairwayRuffBunkerConvert(value);
+                this._BallLie = ConvertShotsClass.FairwayRuffBunkerHazardConvert(value);
             }
         }
 
@@ -248,11 +246,11 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.Full34PunchKnockDownConvert(this._SwingType);
+                return ConvertShotsClass.Full34PunchKnockdownConvert(this._SwingType);
             }
             set
             {
-                this._SwingType = ConvertShotsClass.Full34PunchKnockDownConvert(value);
+                this._SwingType = ConvertShotsClass.Full34PunchKnockdownConvert(value);
             }
         }
 

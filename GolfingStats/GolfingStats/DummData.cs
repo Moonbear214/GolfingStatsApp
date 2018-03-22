@@ -9,7 +9,16 @@ namespace GolfingStats
 {
     public class DummData
     {
-            //Round
+        //Round
+        //=================================================================================================
+        //Returns single round data
+        public CourseModel OneCourse()
+        {
+            return new CourseModel() { Name = "Dummy Course" };
+        }
+        //=================================================================================================
+
+        //Round
         //=================================================================================================
         //Returns single round data
         public RoundModel OneRound()
@@ -24,7 +33,7 @@ namespace GolfingStats
 
             while (fiveRounds.Count < 5)
             {
-                fiveRounds.Add(new RoundModel() { GolfCourse = string.Format("Round {0}", fiveRounds.Count) });
+                fiveRounds.Add(new RoundModel() { CourseName = string.Format("Round {0}", fiveRounds.Count) });
             }
 
             return fiveRounds;

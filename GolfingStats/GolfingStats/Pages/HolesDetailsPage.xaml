@@ -5,87 +5,68 @@
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
+                
                 <ContentPage.ToolbarItems>
-                    <ToolbarItem Text="{Binding HoleNumber}" Clicked="Save"/>
+                    <ToolbarItem Text="Save" Clicked="Save"/>
                 </ContentPage.ToolbarItems>
+                
                 <ContentPage.Content>
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Par" />
-                        <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Par" SelectedItem="{Binding Par}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:Int16}">
-                                    <x:Int16>3</x:Int16>
-                                    <x:Int16>4</x:Int16>
-                                    <x:Int16>5</x:Int16>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke" />
-                        <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Stroke" SelectedItem="{Binding Stroke}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:Int16}">
-                                    <x:Int16>1</x:Int16>
-                                    <x:Int16>2</x:Int16>
-                                    <x:Int16>3</x:Int16>
-                                    <x:Int16>4</x:Int16>
-                                    <x:Int16>5</x:Int16>
-                                    <x:Int16>6</x:Int16>
-                                    <x:Int16>7</x:Int16>
-                                    <x:Int16>8</x:Int16>
-                                    <x:Int16>9</x:Int16>
-                                    <x:Int16>10</x:Int16>
-                                    <x:Int16>11</x:Int16>
-                                    <x:Int16>12</x:Int16>
-                                    <x:Int16>13</x:Int16>
-                                    <x:Int16>14</x:Int16>
-                                    <x:Int16>15</x:Int16>
-                                    <x:Int16>16</x:Int16>
-                                    <x:Int16>17</x:Int16>
-                                    <x:Int16>18</x:Int16>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Score" />
-                        <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Score" SelectedItem="{Binding Score}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:Int16}">
-                                    <x:Int16>1</x:Int16>
-                                    <x:Int16>2</x:Int16>
-                                    <x:Int16>3</x:Int16>
-                                    <x:Int16>4</x:Int16>
-                                    <x:Int16>5</x:Int16>
-                                    <x:Int16>6</x:Int16>
-                                    <x:Int16>7</x:Int16>
-                                    <x:Int16>8</x:Int16>
-                                    <x:Int16>9</x:Int16>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Hole Length" />
-                        <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Text="{Binding HoleDistance}" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Dogleg" />
-                        <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding Dogleg}" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
-                        <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding FIR}" />
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GIR" />
-                        <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding GIR}" />
-                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        
+                        <!--HoleNumber-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole number:" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleNumber}" />
+                        </StackLayout>
+                        
+                        <!--Par-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Par:" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Par}" />
+                        </StackLayout>
 
-                    <Button HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeightRequest="80" Text="Add Shot" BackgroundColor="Transparent" TextColor="Blue" Clicked="AddShot" />
-                </StackLayout>
+                        <!--Stroke-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke:" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Stroke}" />
+                        </StackLayout>
+                        
+                        <!--HoleDistance-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole distance:" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleDistance}" />
+                        </StackLayout>
+
+                        <!--ShotsPlayed-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
+                        </StackLayout>
+
+                        <!--FIR-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="FIR" />
+                            <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding FIR}" />
+                        </StackLayout>
+
+                        <!--GIR-->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="GIR" />
+                            <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding GIR}" />
+                        </StackLayout>
+
+                        <!--Add shot-->
+                        <Picker x:Name="ShotPicker" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" HeightRequest="80" Title="Add Shot" SelectedIndexChanged="AddShot">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Drive</x:String>
+                                    <x:String>Fairway Shot</x:String>
+                                    <x:String>Chip Shot</x:String>
+                                    <x:String>Putt</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
                 </ContentPage.Content>
             </ContentPage>
         </DataTemplate>
