@@ -3,7 +3,10 @@
 ################################################################################
 
 /.vs/GolfingStats/v15/Server/sqlite3
-/GolfingStats/GolfingStats.Android/bin/
-/GolfingStats/GolfingStats.Android/obj/
-/GolfingStats/GolfingStats.UWP/bin/
-/GolfingStats/GolfingStats.UWP/obj/
+GolfingStats/GolfingStats/obj/
+GolfingStats/GolfingStats.Android/obj/
+GolfingStats/GolfingStats.Android/bin/
+GolfingStats/GolfingStats.UWP/obj/
+GolfingStats/GolfingStats.UWP/bin/
+GolfingStats/GolfingStats.iOS/bin/
+GolfingStats/GolfingStats.iOS/bin/
