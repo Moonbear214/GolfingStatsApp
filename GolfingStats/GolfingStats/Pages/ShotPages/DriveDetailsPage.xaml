@@ -209,7 +209,7 @@
             </ScrollView>
 
             <!--Sav3 Button-->
-            <Button HorizontalOptions="CenterAndExpand" VerticalOptions="End" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save Shot" Clicked="SaveShot" />
+            <Button HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save Shot" Clicked="SaveShot" />
 
         </StackLayout>
     </ContentPage.Content>

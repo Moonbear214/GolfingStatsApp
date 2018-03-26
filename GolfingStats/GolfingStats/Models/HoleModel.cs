@@ -69,6 +69,16 @@ namespace GolfingStats.Models
         //public string Dogleg { get; set; }
         //public bool Dogleg { get; set; } = false;
 
+        //====================Test===============================
+        [Ignore]
+        public IList<ShotModels.ShotModel> ShotsPlayedList { get; set; } = new ObservableCollection<ShotModels.ShotModel>();
+        //====================Test===============================
+
+
+        /// <summary>
+        /// A variable that holds 18 holes inside that has no values assigned to them yet other than default.
+        /// For use when creating a new round or any scenario that needs a list of 18 empty holes models
+        /// </summary>
         public static IList<HoleModel> EmptyRound;
 
         static HoleModel()

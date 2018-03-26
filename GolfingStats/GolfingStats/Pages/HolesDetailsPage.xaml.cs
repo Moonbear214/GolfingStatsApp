@@ -8,18 +8,21 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using GolfingStats.Models;
+using GolfingStats.Models.ShotModels;
 using GolfingStats.Pages.ShotPages;
 
 namespace GolfingStats.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HolesDetailsPage : CarouselPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class HolesDetailsPage : CarouselPage
     {
-		public HolesDetailsPage (RoundModel round, CourseModel course)
+        AllShotsModel allShots = new AllShotsModel();
+
+        public HolesDetailsPage(RoundModel round, CourseModel course)
         {
-            InitializeComponent ();
-            
-            Title = "Hole";
+            InitializeComponent();
+
+            Title = course.Name;
 
             if (round.Id == 0)
             {
@@ -30,7 +33,7 @@ namespace GolfingStats.Pages
 
             }
         }
-        
+
         public void Save()
         {
 
@@ -38,6 +41,24 @@ namespace GolfingStats.Pages
 
         public async void CreateNewRound(RoundModel round, List<HoleModel> holes)
         {
+            //===================================================
+            //IList<ShotModel> qwer = new List<ShotModel>();
+
+            //ShotModel asdf = new ShotModel() { Club = "Driver" };
+            //ShotModel asdf1 = new ShotModel() { Club = "Driver1" };
+            //ShotModel asdf2 = new ShotModel() { Club = "Driver2" };
+            //ShotModel asdf3 = new ShotModel() { Club = "Driver3" };
+            //ShotModel asdf4 = new ShotModel() { Club = "Driver4" };
+
+            //qwer.Add(asdf);
+            //qwer.Add(asdf1);
+            //qwer.Add(asdf2);
+            //qwer.Add(asdf3);
+            //qwer.Add(asdf4);
+
+            //holes[0].ShotsPlayedList = qwer;
+            //===================================================
+
             this.ItemsSource = await App.dataFactory.CreateNewFullRound(round, holes);
         }
 
@@ -65,20 +86,33 @@ namespace GolfingStats.Pages
 
                 Navigation.PushModalAsync(driveDetailsPage);
 
-
-            } else if (picker.SelectedIndex == 1 || (picker.SelectedIndex == 0 && par == 3))
+            }
+            else if (picker.SelectedIndex == 1 || (picker.SelectedIndex == 0 && par == 3))
             {
-                Navigation.PushModalAsync(new FairwayDetailsPage(roundId, holeId, shotNum));
+                FairwayDetailsPage fairwayDetailsPage = new FairwayDetailsPage(roundId, holeId, shotNum);
 
-            } else if (picker.SelectedIndex == 2)
-            {
-                Navigation.PushModalAsync(new ChipDetailsPage(roundId, holeId, shotNum));
+                fairwayDetailsPage.ShotSaved += ShotSaved;
 
-            } else if (picker.SelectedIndex == 3)
+                Navigation.PushModalAsync(fairwayDetailsPage);
+
+            }
+            else if (picker.SelectedIndex == 2)
             {
+                ChipDetailsPage chipDetailsPage = new ChipDetailsPage(roundId, holeId, shotNum);
+
+                chipDetailsPage.ShotSaved += ShotSaved;
+
+                Navigation.PushModalAsync(chipDetailsPage);
+
+            }
+            else if (picker.SelectedIndex == 3)
+            {
+                PuttDetailsPage puttDetailsPage = new PuttDetailsPage(roundId, holeId, shotNum);
+
+                puttDetailsPage.ShotSaved += ShotSaved;
+
                 Navigation.PushModalAsync(new PuttDetailsPage(roundId, holeId, shotNum));
             }
-
         }
 
 
@@ -86,7 +120,48 @@ namespace GolfingStats.Pages
         {
             await Navigation.PopModalAsync(true);
 
-            var asdf = "Fuck Yeah!";
+            //============Test==============================
+            List<ShotModel> displayShots = new List<ShotModel>();
+
+            if (sender.GetType() == typeof(DriveModel))
+            {
+                var ShotPlayed = (DriveModel)sender;
+                //allShots.DriveASModel.Add(ShotPlayed);
+            }
+            else if (sender.GetType() == typeof(FairwayModel))
+            {
+                var ShotPlayed = (FairwayModel)sender;
+                //allShots.FairwayASModel.Add(ShotPlayed);
+            }
+            else if (sender.GetType() == typeof(ChipModel))
+            {
+                var ShotPlayed = (ChipModel)sender;
+                //allShots.ChipASModel.Add(ShotPlayed);
+            }
+            else if (sender.GetType() == typeof(PuttModel))
+            {
+                var ShotPlayed = (PuttModel)sender;
+                //allShots.PuttASModel.Add(ShotPlayed);
+            }
+
+
+            HoleModel HolePage = (HoleModel)this.SelectedItem;
+
+            HolePage.ShotsPlayedList.Add((ShotModel)sender);
+            HolePage.ShotsPlayedList.Add((ShotModel)sender);
+            HolePage.ShotsPlayedList.Add((ShotModel)sender);
+            HolePage.ShotsPlayedList.Add((ShotModel)sender);
+
+            ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
+            lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList;
+
+            this.SelectedItem = HolePage;
+            //============Test==============================
+        }
+
+        void OnShotTapped(object sender, EventArgs args)
+        {
+
         }
     }
 }

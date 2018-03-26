@@ -5,20 +5,20 @@
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
-                
+
                 <ContentPage.ToolbarItems>
                     <ToolbarItem Text="Save" Clicked="Save"/>
                 </ContentPage.ToolbarItems>
-                
+
                 <ContentPage.Content>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        
+
                         <!--HoleNumber-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole number:" />
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleNumber}" />
                         </StackLayout>
-                        
+
                         <!--Par-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Par:" />
@@ -30,7 +30,7 @@
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke:" />
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Stroke}" />
                         </StackLayout>
-                        
+
                         <!--HoleDistance-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole distance:" />
@@ -55,8 +55,21 @@
                             <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding GIR}" />
                         </StackLayout>
 
+                        <!--Shots played ListView-->
+                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                                  ItemsSource="{Binding ShotsPlayedList}"
+                                ItemTapped="OnShotTapped">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Text="{Binding Club}" TextColor="ForestGreen"
+                                              Detail="{Binding DistanceToHole}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
                         <!--Add shot-->
-                        <Picker x:Name="ShotPicker" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" HeightRequest="80" Title="Add Shot" SelectedIndexChanged="AddShot">
+                        <Picker x:Name="ShotPicker" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="80"
+                                BackgroundColor="SkyBlue" TextColor="White" Title="Add Shot" SelectedIndexChanged="AddShot">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Drive</x:String>
@@ -66,6 +79,7 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
+
                     </StackLayout>
                 </ContentPage.Content>
             </ContentPage>
