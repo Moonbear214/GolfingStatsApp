@@ -182,5 +182,10 @@ namespace GolfingStats.Models.ShotModels
 
         //============================================================================
 
+        public PuttModel()
+        {
+            this.Club = "Putter";
+        }
+
     }
 }

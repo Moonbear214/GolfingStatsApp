@@ -62,7 +62,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextCell Text="{Binding Club}" TextColor="ForestGreen"
-                                              Detail="{Binding DistanceToHole}" />
+                                              Detail="{Binding DistanceToHole, StringFormat='Distance to hole: {0}'}" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>

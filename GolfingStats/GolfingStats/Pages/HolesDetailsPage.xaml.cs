@@ -111,7 +111,7 @@ namespace GolfingStats.Pages
 
                 puttDetailsPage.ShotSaved += ShotSaved;
 
-                Navigation.PushModalAsync(new PuttDetailsPage(roundId, holeId, shotNum));
+                Navigation.PushModalAsync(puttDetailsPage);
             }
         }
 
@@ -148,9 +148,9 @@ namespace GolfingStats.Pages
             HoleModel HolePage = (HoleModel)this.SelectedItem;
 
             HolePage.ShotsPlayedList.Add((ShotModel)sender);
-            HolePage.ShotsPlayedList.Add((ShotModel)sender);
-            HolePage.ShotsPlayedList.Add((ShotModel)sender);
-            HolePage.ShotsPlayedList.Add((ShotModel)sender);
+            //HolePage.ShotsPlayedList.Add((ShotModel)sender);
+            //HolePage.ShotsPlayedList.Add((ShotModel)sender);
+            //HolePage.ShotsPlayedList.Add((ShotModel)sender);
 
             ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
             lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList;

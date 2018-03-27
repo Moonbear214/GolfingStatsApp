@@ -31,7 +31,7 @@ namespace GolfingStats.Pages.ShotPages
 
         public async void SaveShot()
         {
-            await App.dataFactory.CreateShotFairway(this.BindingContext as FairwayModel);
+            await App.dataFactory.CreateShotChip(this.BindingContext as ChipModel);
 
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }

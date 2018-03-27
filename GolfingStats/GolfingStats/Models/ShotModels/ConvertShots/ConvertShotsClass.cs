@@ -839,7 +839,7 @@ namespace GolfingStats.Models.ShotModels
         /// <summary>
         /// Converts Putting aiming distance values to string or integer depending on what is needed:
         /// 1 = Driver, 2 = 3 Wood, 3 = 5 Wood, 4 = 3 Hybrid, 5 = 5 Hybrid, 6 = 2 Iron, 7 = 3 Iron, 8 = 4 Iron, 9 = 5 Iron, 10 = 6 Iron,
-        /// 11 = 7 Iron, 12 = 8 Iron, 13 = 9 Iron, 14 = PW, 15 = Wedge 52, 16 = Wedge 56, 17 = Wedge 60,  18 = Putter
+        /// 11 = 7 Iron, 12 = 8 Iron, 13 = 9 Iron, 14 = PW, 15 = 52 Wedge, 16 = 56 Wedge, 17 = 60 Wedge,  18 = Putter
         /// </summary>
         public string ClubUsed(Int16 valueParam)
         {
@@ -893,13 +893,13 @@ namespace GolfingStats.Models.ShotModels
                     Value = "PW";
                     break;
                 case 15:
-                    Value = "Wedge 52";
+                    Value = "52 Wedge";
                     break;
                 case 16:
-                    Value = "Wedge 56";
+                    Value = "56 Wedge";
                     break;
                 case 17:
-                    Value = "Wedge 60";
+                    Value = "60 Wedge";
                     break;
                 case 18:
                     Value = "Putter";
@@ -960,13 +960,13 @@ namespace GolfingStats.Models.ShotModels
                 case "PW":
                     Value = 14;
                     break;
-                case "Wedge 52":
+                case "52 Wedge":
                     Value = 15;
                     break;
-                case "Wedge 56":
+                case "56 Wedge":
                     Value = 16;
                     break;
-                case "Wedge 60":
+                case "60 Wedge":
                     Value = 17;
                     break;
                 case "Putter":
