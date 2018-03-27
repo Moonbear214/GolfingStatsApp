@@ -22,6 +22,9 @@ namespace GolfingStats.Pages
             InitializeComponent();
 
             Title = "New Round";
+            tlbGoToHole.Text = "Start Round";
+            tlbGoToHole.Clicked += StartNewRound;
+            stkCourseDisplay.IsVisible = false;
 
             UpdateCoursePicker();
 
@@ -33,23 +36,30 @@ namespace GolfingStats.Pages
 			InitializeComponent ();
 
             Title = round.CourseName;
+            tlbGoToHole.Text = "View Round";
+            tlbGoToHole.Clicked += ViewRound;
+            stkCoursePick.IsVisible = false;
 
             this.BindingContext = round;
         }
 
 
-        public async void StartNewRound()
+        async void StartNewRound(object sender, EventArgs args)
         {
             RoundModel round = (RoundModel)this.BindingContext;
-
+            round.CourseName = selectedCourse.Name;
             await Navigation.PushAsync(new Pages.HolesDetailsPage(round, selectedCourse));
         }
 
+        async void ViewRound(object sender, EventArgs args)
+        {
+            RoundModel round = (RoundModel)this.BindingContext;
+            await Navigation.PushAsync(new Pages.HolesDetailsPage(round));
+        }
 
-        private async void UpdateCoursePicker()
+        async void UpdateCoursePicker()
         {
             CoursePicker.ItemsSource = await App.dataFactory.GetAllCourses();
-
             CoursePicker.ItemDisplayBinding = new Binding("Name");
         }
 

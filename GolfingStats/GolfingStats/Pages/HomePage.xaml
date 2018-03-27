@@ -9,9 +9,20 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Entry x:Name="entCourseName" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Placeholder="Course Name" />
+            <Entry x:Name="entCourseName" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Placeholder="Course Name" />
 
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+            <!--Rounds played ListView-->
+            <ListView x:Name="lwRoundsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
+                    ItemTapped="OnRoundTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding CourseName}" TextColor="ForestGreen"
+                                 Detail="{Binding Date, StringFormat='Date played: {0:dd/MM/yyyy}'}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                 <Button HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Text="Clear All Data"
@@ -22,7 +33,7 @@
                     Clicked="OnCreateFullRoundButtonClicked" />
             </StackLayout>
 
-            <!--<StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                 <Button Text="Get All Rounds"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
@@ -55,7 +66,7 @@
                         HorizontalOptions="Center"
                         Clicked="OnGetAllShotsButtonClicked" />
             </StackLayout>
-
+            
             <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                 <Button Text="Add Round"
                         VerticalOptions="Center"
@@ -86,13 +97,6 @@
                         Clicked="OnAddPuttButtonClicked" />
             </StackLayout>-->
 
-            <ListView x:Name="DisplayList" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemSelected="DisplayListItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Id}" Detail="{Binding Aiming}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -24,14 +24,16 @@ namespace GolfingStats.Pages.ShotPages
 			InitializeComponent ();
 		}
 
-        public ChipDetailsPage (ChipModel chipShotModel)
+        public ChipDetailsPage (ChipModel chipModel)
         {
+            this.BindingContext = chipModel;
+
             InitializeComponent();
         }
 
         public async void SaveShot()
         {
-            await App.dataFactory.CreateShotChip(this.BindingContext as ChipModel);
+            await App.dataFactory.CreateShot(this.BindingContext as ChipModel);
 
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }

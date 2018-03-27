@@ -28,19 +28,21 @@ namespace GolfingStats.Pages.ShotPages
 
         public PuttDetailsPage (PuttModel puttModel)
         {
+            this.BindingContext = puttModel;
+
             InitializeComponent();
         }
 
         public async void SaveShot()
         {
-            await App.dataFactory.CreateShotPutt(this.BindingContext as PuttModel);
+            await App.dataFactory.CreateShot(this.BindingContext as PuttModel);
 
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }
 
-        private void toggledInHole(Switch @switch, EventArgs args)
+        private void ToggledInHole(Switch sender, EventArgs args)
         {
-            ShowPuttMissedObjects (@switch.IsToggled);
+            ShowPuttMissedObjects (sender.IsToggled);
         }
 
         private void ShowPuttMissedObjects(bool hide)

@@ -144,7 +144,7 @@
 
                         <!--InHole-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Is the ball in the hole" />
-                        <Switch Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding InHole}" Toggled="toggledInHole" />
+                        <Switch Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding InHole}" Toggled="ToggledInHole" />
                     </Grid>
 
                     

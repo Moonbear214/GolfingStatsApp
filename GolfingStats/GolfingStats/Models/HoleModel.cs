@@ -70,8 +70,8 @@ namespace GolfingStats.Models
         //public bool Dogleg { get; set; } = false;
 
         //====================Test===============================
-        [Ignore]
-        public IList<ShotModels.ShotModel> ShotsPlayedList { get; set; } = new ObservableCollection<ShotModels.ShotModel>();
+        //[Ignore]
+        public IList<ShotModels.ShotModel> ShotsPlayedList = new ObservableCollection<ShotModels.ShotModel>();
         //====================Test===============================
 
 

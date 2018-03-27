@@ -20,9 +20,23 @@ namespace GolfingStats
             this.Title = "All Rounds";
 
             InitializeComponent();
+
+            GetDisplayAllRounds();
+
+            this.Appearing += HomePage_Appearing;
         }
 
-        public async void NavRoundPage()
+        private void HomePage_Appearing(object sender, EventArgs e)
+        {
+            GetDisplayAllRounds();
+        }
+
+        async void GetDisplayAllRounds()
+        {
+            lwRoundsPlayed.ItemsSource = await App.dataFactory.GetAllRounds();
+        }
+
+        async void NavRoundPage()
         {
             //TODO: Send the round played object to the next page
             //RoundModel roundPlayed = new RoundModel();
@@ -30,7 +44,7 @@ namespace GolfingStats
             await Navigation.PushAsync(new Pages.RoundDetailsPage(), true);
         }
 
-        public async void NavAddCoursePage()
+        async void NavAddCoursePage()
         {
             if (string.IsNullOrEmpty(entCourseName.Text))
             {
@@ -44,124 +58,129 @@ namespace GolfingStats
             }
         }
 
-
-        public async void DisplayListItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void OnRoundTapped(ListView sender, EventArgs args)
         {
-            if (e.SelectedItem is DriveModel)
-            {
-                DriveModel shot = (DriveModel)e.SelectedItem;
-                shot.HoleId += 11;
-
-                await App.dataFactory.UpdateShot(shot);
-            }
-            else if (e.SelectedItem is FairwayModel)
-            {
-                FairwayModel shot = (FairwayModel)e.SelectedItem;
-                shot.HoleId += 11;
-
-                await App.dataFactory.UpdateShot(shot);
-            }
-            else if (e.SelectedItem is ChipModel)
-            {
-                ChipModel shot = (ChipModel)e.SelectedItem;
-                shot.HoleId += 11;
-
-                await App.dataFactory.UpdateShot(shot);
-            }
-            else if (e.SelectedItem is PuttModel shot)
-            {
-                shot.HoleId += 11;
-
-                await App.dataFactory.UpdateShot(shot);
-            }
-
+            await Navigation.PushAsync(new Pages.RoundDetailsPage((RoundModel)sender.SelectedItem), true);
         }
 
-
         //========================================================================================================================================================================
+
+        //public async void DisplayListItemSelected(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    if (e.SelectedItem is DriveModel)
+        //    {
+        //        DriveModel shot = (DriveModel)e.SelectedItem;
+        //        shot.HoleId += 11;
+
+        //        await App.dataFactory.UpdateShot(shot);
+        //    }
+        //    else if (e.SelectedItem is FairwayModel)
+        //    {
+        //        FairwayModel shot = (FairwayModel)e.SelectedItem;
+        //        shot.HoleId += 11;
+
+        //        await App.dataFactory.UpdateShot(shot);
+        //    }
+        //    else if (e.SelectedItem is ChipModel)
+        //    {
+        //        ChipModel shot = (ChipModel)e.SelectedItem;
+        //        shot.HoleId += 11;
+
+        //        await App.dataFactory.UpdateShot(shot);
+        //    }
+        //    else if (e.SelectedItem is PuttModel shot)
+        //    {
+        //        shot.HoleId += 11;
+
+        //        await App.dataFactory.UpdateShot(shot);
+        //    }
+
+        //}
+
+
         //!!!!MUST BE DELETED!!!!
         //===============================================
         //Clear local Storage
-        public void OnClearLocalStorageButtonClicked()
-        {
-            App.dataFactory.ClearLocalStorage();
-        }
-        //===============================================
+        //public void OnClearLocalStorageButtonClicked()
+        //{
+        //    App.dataFactory.ClearLocalStorage();
+        //}
+        ////===============================================
 
 
-        //Creates a full round with all holes included
-        public void OnCreateFullRoundButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.CreateFullRoundDummy();
-        }
+        ////Creates a full round with all holes included
+        //public void OnCreateFullRoundButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.CreateFullRoundDummy();
+        //}
 
-        //Get dummy data for all Models
-        public async void OnGetRoundsButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllRounds();
-        }
+        ////Get dummy data for all Models
+        //public async void OnGetRoundsButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllRounds();
+        //}
 
-        public async void OnGetHolesButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllHoles();
-        }
+        //public async void OnGetHolesButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllHoles();
+        //}
 
-        public async void OnGetDriveButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsDrive();
-        }
+        //public async void OnGetDriveButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllShotsDrive();
+        //}
 
-        public async void OnGetFairwayButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsFairway();
-        }
+        //public async void OnGetFairwayButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllShotsFairway();
+        //}
 
-        public async void OnGetChipButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsChip();
-        }
+        //public async void OnGetChipButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllShotsChip();
+        //}
 
-        public async void OnGetPuttButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllShotsPutt();
-        }
+        //public async void OnGetPuttButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllShotsPutt();
+        //}
 
-        public async void OnGetAllShotsButtonClicked(object sender, EventArgs args)
-        {
-            DisplayList.ItemsSource = await App.dataFactory.GetAllShots();
-        }
+        //public async void OnGetAllShotsButtonClicked(object sender, EventArgs args)
+        //{
+        //    DisplayList.ItemsSource = await App.dataFactory.GetAllShots();
+        //}
 
 
-        //Add One dummy data for all Models
-        public void OnAddRoundsButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.AddDummyRound();
-        }
+        ////Add One dummy data for all Models
+        //public void OnAddRoundsButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.AddDummyRound();
+        //}
 
-        public void OnAddHolesButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.AddDummyHole();
-        }
+        //public void OnAddHolesButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.AddDummyHole();
+        //}
 
-        public void OnAddDriveButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.AddDummyShotDrive();
-        }
+        //public void OnAddDriveButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.AddDummyShotDrive();
+        //}
 
-        public void OnAddFairwayButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.AddDummyShotFairway();
-        }
+        //public void OnAddFairwayButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.AddDummyShotFairway();
+        //}
 
-        public void OnAddChipButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.AddDummyShotChip();
-        }
+        //public void OnAddChipButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.AddDummyShotChip();
+        //}
 
-        public void OnAddPuttButtonClicked(object sender, EventArgs args)
-        {
-            App.dataFactory.AddDummyShotPutt();
-        }
+        //public void OnAddPuttButtonClicked(object sender, EventArgs args)
+        //{
+        //    App.dataFactory.AddDummyShotPutt();
+        //}
         //========================================================================================================================================================================
     }
 }

@@ -33,7 +33,7 @@ namespace GolfingStats.Pages.ShotPages
 
         public async void SaveShot()
         {
-            await App.dataFactory.CreateShotDrive(this.BindingContext as DriveModel);
+            await App.dataFactory.CreateShot(this.BindingContext as DriveModel);
 
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }

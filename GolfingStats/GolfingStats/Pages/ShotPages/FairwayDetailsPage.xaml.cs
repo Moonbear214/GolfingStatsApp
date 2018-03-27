@@ -26,12 +26,14 @@ namespace GolfingStats.Pages.ShotPages
 
         public FairwayDetailsPage (FairwayModel fairwayModel)
         {
+            this.BindingContext = fairwayModel;
+
             InitializeComponent();
         }
 
         public async void SaveShot()
         {
-            await App.dataFactory.CreateShotFairway(this.BindingContext as FairwayModel);
+            await App.dataFactory.CreateShot(this.BindingContext as FairwayModel);
 
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }

@@ -40,7 +40,7 @@
                         <!--ShotsPlayed-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
+                            <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed, Mode=TwoWay}" />
                         </StackLayout>
 
                         <!--FIR-->
@@ -56,8 +56,7 @@
                         </StackLayout>
 
                         <!--Shots played ListView-->
-                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                                  ItemsSource="{Binding ShotsPlayedList}"
+                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
                                 ItemTapped="OnShotTapped">
                             <ListView.ItemTemplate>
                                 <DataTemplate>

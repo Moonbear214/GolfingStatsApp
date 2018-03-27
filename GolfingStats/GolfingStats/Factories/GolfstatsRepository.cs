@@ -373,7 +373,7 @@ namespace GolfingStats
         /// </summary>
         /// <param name="holeIds"></param>
         /// <returns></returns>
-        public async Task<List<HoleModel>> GetHolesList(List<int> holeIds)
+        public async Task<List<HoleModel>> GetHolesFromList(List<int> holeIds)
         {
             try
             {
@@ -392,10 +392,53 @@ namespace GolfingStats
                 throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
             }
         }
+
+
+        /// <summary>
+        /// Returns a list of "HoleModel" objects that corrsepond with the list of holeIds that it was given
+        /// </summary>
+        /// <param name="holeIds"></param>
+        /// <returns></returns>
+        public async Task<List<HoleModel>> GetHolesFromRoundId(int roundId)
+        {
+            try
+            {
+                return await conn.Table<HoleModel>().Where(t => t.RoundId == roundId).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
         //==========================================================
 
         //Shots
         //==========================================================
+
+        //All Shots
+        //================================
+        public async Task<AllShotsModel> GetShotsFromHoleId(int holeId)
+        {
+            try
+            {
+                AllShotsModel allShots = new AllShotsModel
+                {
+                    DriveASModel = await conn.Table<DriveModel>().Where(t => t.HoleId == holeId).ToListAsync(),
+                    FairwayASModel = await conn.Table<FairwayModel>().Where(t => t.HoleId == holeId).ToListAsync(),
+                    ChipASModel = await conn.Table<ChipModel>().Where(t => t.HoleId == holeId).ToListAsync(),
+                    PuttASModel = await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync()
+                };
+
+                return allShots;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
 
         //All Shots
         //================================

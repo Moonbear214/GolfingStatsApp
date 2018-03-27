@@ -143,24 +143,40 @@ namespace GolfingStats.Factories
             return new List<HoleModel>(await GolfstatsRepository.AddNewHoleList(holes));
         }
         
-        public async Task<DriveModel> CreateShotDrive(DriveModel drive)
+        public async Task<DriveModel> CreateShot(DriveModel drive)
         {
-            return await GolfstatsRepository.AddNewShot(drive);
+            //If the shot already has an ID, update the shot in local storage
+            if (drive.Id != 0)
+                return await UpdateShot(drive);
+            else
+                return await GolfstatsRepository.AddNewShot(drive);
         }
 
-        public async Task<FairwayModel> CreateShotFairway(FairwayModel fairway)
+        public async Task<FairwayModel> CreateShot(FairwayModel fairway)
         {
-            return await GolfstatsRepository.AddNewShot(fairway);
+            //If the shot already has an ID, update the shot in local storage
+            if (fairway.Id != 0)
+                return await UpdateShot(fairway);
+            else
+                return await GolfstatsRepository.AddNewShot(fairway);
         }
 
-        public async Task<ChipModel> CreateShotChip(ChipModel chip)
+        public async Task<ChipModel> CreateShot(ChipModel chip)
         {
-            return await GolfstatsRepository.AddNewShot(chip);
+            //If the shot already has an ID, update the shot in local storage
+            if (chip.Id != 0)
+                return await UpdateShot(chip);
+            else
+                return await GolfstatsRepository.AddNewShot(chip);
         }
 
-        public async Task<PuttModel> CreateShotPutt(PuttModel putt)
+        public async Task<PuttModel> CreateShot(PuttModel putt)
         {
-            return await GolfstatsRepository.AddNewShot(putt);
+            //If the shot already has an ID, update the shot in local storage
+            if (putt.Id != 0)
+                return await UpdateShot(putt);
+            else
+                return await GolfstatsRepository.AddNewShot(putt);
         }
 
         //==================================================================================
@@ -232,7 +248,7 @@ namespace GolfingStats.Factories
 
             foreach (CourseModel course in AllCourses)
             {
-                course.Holes = await GetHolesList(course.GetHoleIds);
+                course.Holes = await GetHolesFromList(course.GetHoleIds);
             }
 
             return AllCourses;
@@ -253,9 +269,37 @@ namespace GolfingStats.Factories
         /// </summary>
         /// <param name="holeIds"></param>
         /// <returns></returns>
-        public async Task<List<HoleModel>> GetHolesList(List<int> holeIds)
+        public async Task<List<HoleModel>> GetHolesFromList(List<int> holeIds)
         {
-            return await GolfstatsRepository.GetHolesList(holeIds);
+            return await GolfstatsRepository.GetHolesFromList(holeIds); 
+        }
+
+        /// <summary>
+        /// Returns a list of "HoleModel" objects that has all been played on the roundId that was given
+        /// </summary>
+        /// <param name="roundId"></param>
+        /// <returns></returns>
+        public async Task<List<HoleModel>> GetHolesFromRoundId(int roundId)
+        {
+            return await GolfstatsRepository.GetHolesFromRoundId(roundId);
+        }
+
+
+        /// <summary>
+        /// Returns a list of "ShotModel" objects that has all been played on the holeId that was given
+        /// </summary>
+        /// <param name="holeId"></param>
+        /// <returns></returns>
+        public async Task<List<ShotModel>> GetShotsFromHoleId(int holeId)
+        {
+            AllShotsModel allShots = await GolfstatsRepository.GetShotsFromHoleId(holeId);
+            return AllShotsList(allShots);
+        }
+
+        public async Task<List<ShotModel>> GetAllShots()
+        {
+            AllShotsModel allShots = await GolfstatsRepository.GetAllShots();
+            return AllShotsList(allShots);
         }
 
         public async Task<List<DriveModel>> GetAllShotsDrive()
@@ -276,13 +320,6 @@ namespace GolfingStats.Factories
         public async Task<List<PuttModel>> GetAllShotsPutt()
         {
             return await GolfstatsRepository.GetAllShotsPutt();
-        }
-
-        public async Task<List<ShotModel>> GetAllShots()
-        {
-            AllShotsModel allShots = await GolfstatsRepository.GetAllShots();
-
-            return AllShotsList(allShots);
         }
         //==================================================================================
         //========================================================================================================================================================================
