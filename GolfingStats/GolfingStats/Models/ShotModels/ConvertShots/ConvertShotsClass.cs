@@ -64,6 +64,58 @@ namespace GolfingStats.Models.ShotModels
 
         //=========================================================================================================
         /// <summary>
+        /// Converts Straight, Left and Right values to string or integer depending on what is needed:
+        /// 1 = Center, 2 = Left, 3 = Right
+        /// </summary>
+        public string StraightLeftRightConvert(Int16 valueParam)
+        {
+            String Value = null;
+
+            switch (valueParam)
+            {
+                case 0:
+                    Value = null;
+                    break;
+                case 1:
+                    Value = "Straight";
+                    break;
+                case 2:
+                    Value = "Left";
+                    break;
+                case 3:
+                    Value = "Right";
+                    break;
+            }
+
+            return Value;
+        }
+
+        public Int16 StraightLeftRightConvert(String valueParam)
+        {
+            Int16 Value = 0;
+
+            switch (valueParam)
+            {
+                case null:
+                    Value = 0;
+                    break;
+                case "Straight":
+                    Value = 1;
+                    break;
+                case "Left":
+                    Value = 2;
+                    break;
+                case "Right":
+                    Value = 3;
+                    break;
+            }
+
+            return Value;
+        }
+        //=========================================================================================================
+
+        //=========================================================================================================
+        /// <summary>
         /// Converts None, Light, Medium and Strong values to string or integer depending on what is needed:
         /// 1 = None, 2 = Light, 3 = Medium, 4 = Strong
         /// </summary>
@@ -355,7 +407,7 @@ namespace GolfingStats.Models.ShotModels
 
         //=========================================================================================================
         /// <summary>
-        /// Converts Flat, Flat and Uphill values to string or integer depending on what is needed:
+        /// Converts Flat, Downhill and Uphill values to string or integer depending on what is needed:
         /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
         public string FlatDownhillUphillConvert(Int16 valueParam)
@@ -397,6 +449,58 @@ namespace GolfingStats.Models.ShotModels
                     Value = 2;
                     break;
                 case "Uphill":
+                    Value = 3;
+                    break;
+            }
+
+            return Value;
+        }
+        //=========================================================================================================
+
+        //=========================================================================================================
+        /// <summary>
+        /// Converts Flat, Left and right values to string or integer depending on what is needed:
+        /// 1 = Flat, 2 = Left, 3 = Right
+        /// </summary>
+        public string FlatLeftRightConvert(Int16 valueParam)
+        {
+            String Value = null;
+
+            switch (valueParam)
+            {
+                case 0:
+                    Value = null;
+                    break;
+                case 1:
+                    Value = "Flat";
+                    break;
+                case 2:
+                    Value = "Left";
+                    break;
+                case 3:
+                    Value = "Right";
+                    break;
+            }
+
+            return Value;
+        }
+
+        public Int16 FlatLeftRightConvert(String valueParam)
+        {
+            Int16 Value = 0;
+
+            switch (valueParam)
+            {
+                case null:
+                    Value = 0;
+                    break;
+                case "Flat":
+                    Value = 1;
+                    break;
+                case "Left":
+                    Value = 2;
+                    break;
+                case "Right":
                     Value = 3;
                     break;
             }

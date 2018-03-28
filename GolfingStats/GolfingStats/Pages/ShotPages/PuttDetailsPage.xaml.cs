@@ -22,8 +22,7 @@ namespace GolfingStats.Pages.ShotPages
             this.BindingContext = puttModel;
 
 			InitializeComponent ();
-
-            ShowPuttMissedObjects(false);
+            PageSetup();
 		}
 
         public PuttDetailsPage (PuttModel puttModel)
@@ -31,6 +30,38 @@ namespace GolfingStats.Pages.ShotPages
             this.BindingContext = puttModel;
 
             InitializeComponent();
+            PageSetup();
+        }
+
+        /// <summary>
+        /// Setup the visual elements of the page (Hide objects that aren't necessary, setup click events ect.)
+        /// </summary>
+        void PageSetup()
+        {
+            //In/Missed Hole
+            //===========================================================
+            if (swcInHole.IsToggled)
+                grdHoleMissed.IsVisible = false;
+            else
+                grdHoleMissed.IsVisible = true;
+
+            swcInHole.Toggled += SwcInHole_Toggled;
+            //===========================================================
+        }
+
+        private void SwcInHole_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (((Switch)sender).IsToggled)
+            {
+                grdHoleMissed.IsVisible = false;
+                entDistanceLeft.Text = "0";
+                pckPosToHoleHorz.SelectedIndex = -1;
+                pckPosToHoleVer.SelectedIndex = -1;
+            }
+            else
+            {
+                grdHoleMissed.IsVisible = true;
+            }
         }
 
         public async void SaveShot()
@@ -39,15 +70,6 @@ namespace GolfingStats.Pages.ShotPages
 
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }
-
-        private void ToggledInHole(Switch sender, EventArgs args)
-        {
-            ShowPuttMissedObjects (sender.IsToggled);
-        }
-
-        private void ShowPuttMissedObjects(bool hide)
-        {
-            this.HoleMissedControls.IsVisible = hide;
-        }
+        
     }
 }

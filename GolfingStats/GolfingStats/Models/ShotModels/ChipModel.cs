@@ -25,7 +25,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
-        public Int16 _Aiming { get; set; } = 0;
+        public Int16 _Aiming { get; set; } = 1;
 
         [Ignore]
         public String Aiming
@@ -45,7 +45,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
-        public Int16 _PinPositionHorz { get; set; } = 0;
+        public Int16 _PinPositionHorz { get; set; } = 1;
 
         [Ignore]
         public String PinPositionHorz
@@ -65,7 +65,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Center, 2 = Front, 3 = Back
         /// </summary>
         [MaxLength(1)]
-        public Int16 _PinPositionVert { get; set; } = 0;
+        public Int16 _PinPositionVert { get; set; } = 1;
 
         [Ignore]
         public String PinPositionVert
@@ -82,21 +82,21 @@ namespace GolfingStats.Models.ShotModels
 
         /// <summary>
         /// To what side does the green break in relation to the player:
-        /// 1 = Center, 2 = Left, 3 = Right
+        /// 1 = Flat, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
-        public Int16 _GreenBreak { get; set; } = 0;
+        public Int16 _GreenBreak { get; set; } = 1;
 
         [Ignore]
         public String GreenBreak
         {
             get
             {
-                return ConvertShotsClass.CenterLeftRightConvert(this._GreenBreak);
+                return ConvertShotsClass.StraightLeftRightConvert(this._GreenBreak);
             }
             set
             {
-                this._GreenBreak = ConvertShotsClass.CenterLeftRightConvert(value);
+                this._GreenBreak = ConvertShotsClass.StraightLeftRightConvert(value);
             }
         }
 
@@ -104,7 +104,7 @@ namespace GolfingStats.Models.ShotModels
         /// At what angle is the green when the player looks at the flag:
         /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
-        public Int16 _AngleOfGreen { get; set; } = 0;
+        public Int16 _AngleOfGreen { get; set; } = 1;
 
         [Ignore]
         public String AngleOfGreen
@@ -124,7 +124,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Fairway, 2 = Ruff, 3 = Bunker
         /// </summary>
         [MaxLength(1)]
-        public Int16 _BallLie { get; set; } = 0;
+        public Int16 _BallLie { get; set; } = 1;
 
         [Ignore]
         public String BallLie
@@ -181,11 +181,11 @@ namespace GolfingStats.Models.ShotModels
         }
 
         /// <summary>
-        /// At what angle is the ball postitioned:
+        /// At what angle is the ball:
         /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
         [MaxLength(1)]
-        public Int16 _BallAngle { get; set; } = 0;
+        public Int16 _BallAngle { get; set; } = 1;
 
         [Ignore]
         public String BallAngle
@@ -205,7 +205,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Sqaure, 2 = Below, 3 = Above
         /// </summary>
         [MaxLength(1)]
-        public Int16 _BallToFeet { get; set; } = 0;
+        public Int16 _BallToFeet { get; set; } = 1;
 
         [Ignore]
         public String BallToFeet
@@ -228,17 +228,59 @@ namespace GolfingStats.Models.ShotModels
         /// <summary>
         /// Is the ball in the hole
         /// </summary>
-        public bool InHole { get; set; } = false;
+        public bool _InHole { get; set; } = false;
 
-        //Player missed the Hole
-        //==========================
+        [Ignore]
+        public bool InHole
+        {
+            get
+            {
+                return _InHole;
+            }
+            set
+            {
+                if (value)
+                {
+                    DistanceLeftToHole = 0;
+                    PosToHoleVer = null;
+                    PosToHoleHorz = null;
+                }
+
+                _InHole = value;
+            }
+        }
+
+        /// <summary>
+        /// Is the ball on the green
+        /// </summary>
+        //TODO: Add to chip Page
+        public bool _OnGreen { get; set; } = true;
+
+        [Ignore]
+        public bool OnGreen
+        {
+            get
+            {
+                return _OnGreen;
+            }
+            set
+            {
+                if (!value)
+                {
+                    PosToHoleVer = null;
+                    PosToHoleHorz = null;
+                }
+                _OnGreen = value;
+            }
+        }
+
         /// <summary>
         /// TODO: Add More chip shot types
         /// What type of swing did the player use when hitting the shot:
         /// 1 = Pitch, 2 = Run, 3 = Flop
         /// </summary>
         [MaxLength(1)]
-        public Int16 _SwingType { get; set; } = 0;
+        public Int16 _SwingType { get; set; } = 1;
 
         [Ignore]
         public String SwingType
@@ -254,11 +296,33 @@ namespace GolfingStats.Models.ShotModels
         }
 
         /// <summary>
+        /// How much spin was on the ball when it landed:
+        /// 1 = None, 2 = Little, 3 = Medium, 4 = Much
+        /// </summary>
+        [MaxLength(1)]
+        public Int16 _SpinAmount { get; set; } = 1;
+
+        [Ignore]
+        public String SpinAmount
+        {
+            get
+            {
+                return ConvertShotsClass.NoneLittleMediumMuchConvert(this._SpinAmount);
+            }
+            set
+            {
+                this._SpinAmount = ConvertShotsClass.NoneLittleMediumMuchConvert(value);
+            }
+        }
+
+        //Player is on green
+        //Player missed the Hole
+        //==========================
+        /// <summary>
         /// How far is the ball still from the hole
         /// </summary>
         [MaxLength(2)]
         public int DistanceLeftToHole { get; set; } = 0;
-        //==========================
 
         /// <summary>
         /// On what side did the player miss the Hole:
@@ -299,26 +363,7 @@ namespace GolfingStats.Models.ShotModels
                 this._PosToHoleVer = ConvertShotsClass.CenterShortPastConvert(value);
             }
         }
-
-        /// <summary>
-        /// How much spin was on the ball when it landed:
-        /// 1 = None, 2 = Little, 3 = Medium, 4 = Much
-        /// </summary>
-        [MaxLength(1)]
-        public Int16 _SpinAmount { get; set; } = 0;
-
-        [Ignore]
-        public String SpinAmount
-        {
-            get
-            {
-                return ConvertShotsClass.NoneLittleMediumMuchConvert(this._SpinAmount);
-            }
-            set
-            {
-                this._SpinAmount = ConvertShotsClass.NoneLittleMediumMuchConvert(value);
-            }
-        }
+        //==========================
 
         //============================================================================
 

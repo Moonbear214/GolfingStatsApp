@@ -71,7 +71,8 @@ namespace GolfingStats.Pages
             HoleModel HolePage = (HoleModel)this.SelectedItem;
             //List<ShotModel> shotReturned = await App.dataFactory.GetShotsFromHoleId(HolePage.Id);
 
-            if (HolePage.ShotsPlayedList.Count != 0)
+            //Add Bool to check if check has been done already and not check again if true
+            if (HolePage.ShotsPlayedList.Count == 0)
             {
                 //Shots played list
                 ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
@@ -123,6 +124,8 @@ namespace GolfingStats.Pages
                 puttDetailsPage.ShotSaved += ShotSaved;
                 Navigation.PushModalAsync(puttDetailsPage);
             }
+
+            picker.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -193,6 +196,7 @@ namespace GolfingStats.Pages
                 Navigation.PushModalAsync(puttDetailsPage);
             }
 
+            sender.SelectedItem = null;
         }
     }
 }

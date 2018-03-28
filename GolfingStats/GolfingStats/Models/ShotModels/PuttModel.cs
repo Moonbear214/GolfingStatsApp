@@ -25,7 +25,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Straight, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
-        public Int16 _Aiming { get; set; } = 0;
+        public Int16 _Aiming { get; set; } = 1;
 
         [Ignore]
         public String Aiming
@@ -36,6 +36,10 @@ namespace GolfingStats.Models.ShotModels
             }
             set
             {
+                if(value == "Straight")
+                {
+                    AimingDistance = null;
+                }
                 this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
             }
         }
@@ -66,7 +70,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
         [MaxLength(1)]
-        public Int16 _AngleOfGreen { get; set; } = 0;
+        public Int16 _AngleOfGreen { get; set; } = 1;
 
         [Ignore]
         public String AngleOfGreen
@@ -89,23 +93,36 @@ namespace GolfingStats.Models.ShotModels
         /// <summary>
         /// Is the ball in the hole
         /// </summary>
-        public bool InHole { get; set; } = false;
+        public bool _InHole { get; set; } = false;
+
+        [Ignore]
+        public bool InHole
+        {
+            get
+            {
+                return _InHole;
+            }
+            set
+            {
+                if (!value)
+                {
+                    DistanceLeftToHole = 0;
+                    PosToHoleVer = null;
+                    PosToHoleHorz = null;
+                }
+
+                _InHole = value;
+            }
+        }
 
         //Player missed the Hole
-        //==========================
-
-        /// <summary>
-        /// How far is the ball still from the hole
-        /// </summary>
-        [MaxLength(2)]
-        public int DistanceLeftToHole { get; set; } = 0;
         //==========================
 
         /// <summary>
         /// How hard did the player putt the ball compared to the distance the player had:
         /// 1 = Soft, 2 = Medium, 3 = Hard, 4 = Very Hard
         /// </summary>
-        public Int16 _PullBackStrength { get; set; } = 0;
+        public Int16 _PullBackStrength { get; set; } = 2;
 
         [Ignore]
         public String PullBackStrength
@@ -121,8 +138,8 @@ namespace GolfingStats.Models.ShotModels
         }
 
         /// <summary>
-        /// To what side will the green break in relation to the player: 
-        /// 1 = Center, 2 = Left, 3 = Right
+        /// To what side did the green break in relation to the player: 
+        /// 1 = Straight, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
         public Int16 _GreenBreak { get; set; } = 0;
@@ -132,13 +149,20 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.CenterLeftRightConvert(this._GreenBreak);
+                return ConvertShotsClass.StraightLeftRightConvert(this._GreenBreak);
             }
             set
             {
-                this._GreenBreak = ConvertShotsClass.CenterLeftRightConvert(value);
+                this._GreenBreak = ConvertShotsClass.StraightLeftRightConvert(value);
             }
         }
+
+        /// <summary>
+        /// How far is the ball still from the hole
+        /// </summary>
+        [MaxLength(2)]
+        public int DistanceLeftToHole { get; set; } = 0;
+        //==========================
 
         /// <summary>
         /// On which side did the player miss the Hole:

@@ -24,7 +24,7 @@ namespace GolfingStats.Models.ShotModels
         /// Where is the player aiming to land on the fairway:
         /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
-        public Int16 _Aiming { get; set; } = 0;
+        public Int16 _Aiming { get; set; } = 1;
 
         [Ignore]
         public String Aiming
@@ -40,11 +40,11 @@ namespace GolfingStats.Models.ShotModels
         }
 
         /// <summary>
-        /// Froce of the wind:
+        /// Force of the wind:
         /// 1 = None, 2 = Light, 3 = Medium, 4 = Strong
         /// </summary>
         [MaxLength(1)]
-        public Int16 _WindForce { get; set; } = 0;
+        public Int16 _WindForce { get; set; } = 1;
 
         [Ignore]
         public String WindForce
@@ -55,6 +55,10 @@ namespace GolfingStats.Models.ShotModels
             }
             set
             {
+                if(value == "None")
+                {
+                    WindDirection = null;
+                }
                 this._WindForce = ConvertShotsClass.NoneLightMediumStrongConvert(value);
             }
         }
@@ -94,7 +98,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Full, 2 = 3/4, 3 = Punch, 4 = KnockDown
         /// </summary>
         [MaxLength(1)]
-        public Int16 _SwingType { get; set; } = 0;
+        public Int16 _SwingType { get; set; } = 1;
 
         [Ignore]
         public String SwingType
@@ -108,13 +112,13 @@ namespace GolfingStats.Models.ShotModels
                 this._SwingType = ConvertShotsClass.Full34PunchKnockdownConvert(value);
             }
         }
-
+        
         /// <summary>
-        /// What type of ball flight id the ball have:
+        /// What type of ball flight did the ball have:
         /// 1 = Draw, 2 = Cut, 3 = Hook, 4 = Fade, 5 = Slice
         /// </summary>
         [MaxLength(1)]
-        public Int16 _BallFlight { get; set; } = 0;
+        public Int16 _BallFlight { get; set; } = 1;
 
         [Ignore]
         public String BallFlight
@@ -130,9 +134,30 @@ namespace GolfingStats.Models.ShotModels
         }
 
         /// <summary>
-        /// Is the ball on the faiwary
+        /// Is the ball on the fairway
         /// </summary>
-        public bool OnFairway { get; set; } = true;
+        public bool _OnFairway { get; set; } = true;
+
+        [Ignore]
+        public bool OnFairway
+        {
+            get
+            {
+                return _OnFairway;
+            }
+            set
+            {
+                if(value)
+                {
+                    PosToFairwayHorz = null;
+                }
+                else
+                {
+                    PosToFairwayHorz = null;
+                }
+                _OnFairway = value;
+            }
+        }
 
         //Player did end on the Fairway
         //==========================
@@ -141,7 +166,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Center, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
-        public Int16 _PosOnFairwayHorz { get; set; } = 0;
+        public Int16 _PosOnFairwayHorz { get; set; } = 1;
 
         [Ignore]
         public String PosOnFairwayHorz
@@ -182,5 +207,10 @@ namespace GolfingStats.Models.ShotModels
 
         //==========================
         //============================================================================
+
+        public DriveModel()
+        {
+            this.Club = "Driver";
+        }
     }
 }

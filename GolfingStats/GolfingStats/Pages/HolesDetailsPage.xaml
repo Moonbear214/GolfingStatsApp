@@ -67,7 +67,7 @@
                         </ListView>
 
                         <!--Add shot-->
-                        <Picker x:Name="ShotPicker" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="80"
+                        <Picker x:Name="pckShotPicker" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="80"
                                 BackgroundColor="SkyBlue" TextColor="White" Title="Add Shot" SelectedIndexChanged="AddShot">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
