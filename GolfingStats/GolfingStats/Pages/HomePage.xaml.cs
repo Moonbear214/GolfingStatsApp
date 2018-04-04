@@ -26,6 +26,9 @@ namespace GolfingStats
             this.Appearing += HomePage_Appearing;
         }
 
+        /// <summary>
+        /// Gets and displays all the rounds that are saved in local storage as soon as the page will appear
+        /// </summary>
         private void HomePage_Appearing(object sender, EventArgs e)
         {
             GetDisplayAllRounds();
@@ -34,78 +37,50 @@ namespace GolfingStats
         async void GetDisplayAllRounds()
         {
             lwRoundsPlayed.ItemsSource = await App.dataFactory.GetAllRounds();
+            if (((List<RoundModel>)lwRoundsPlayed.ItemsSource).Count == 0)
+                lblEmptyList.IsVisible = true;
+            else
+                lblEmptyList.IsVisible = false;
         }
 
-        async void NavRoundPage()
+        /// <summary>
+        /// Navigate to the round page to create a new round
+        /// </summary>
+        async void NavNewRoundPage()
         {
-            //TODO: Send the round played object to the next page
-            //RoundModel roundPlayed = new RoundModel();
-
             await Navigation.PushAsync(new Pages.RoundDetailsPage(), true);
         }
 
-        async void NavAddCoursePage()
+        /// <summary>
+        /// Navigate to all courses page
+        /// </summary>
+        async void NavCoursesPage()
         {
-            if (string.IsNullOrEmpty(entCourseName.Text))
-            {
-                await DisplayAlert("Ai...", "Dammit Neldan..", "Cancel");
-            }
-            else
-            {
-                CourseModel course = await App.dataFactory.CreateNewCourse(entCourseName.Text);
-
-                await Navigation.PushAsync(new Pages.AddHolesPage(course), true);
-            }
+            await Navigation.PushAsync(new Pages.AllCoursesPage(), true);
         }
 
+        /// <summary>
+        /// Takes user to the round details page for the round that was tapped
+        /// </summary>
         async void OnRoundTapped(ListView sender, EventArgs args)
         {
             await Navigation.PushAsync(new Pages.RoundDetailsPage((RoundModel)sender.SelectedItem), true);
         }
 
         //========================================================================================================================================================================
-
-        //public async void DisplayListItemSelected(object sender, SelectedItemChangedEventArgs e)
-        //{
-        //    if (e.SelectedItem is DriveModel)
-        //    {
-        //        DriveModel shot = (DriveModel)e.SelectedItem;
-        //        shot.HoleId += 11;
-
-        //        await App.dataFactory.UpdateShot(shot);
-        //    }
-        //    else if (e.SelectedItem is FairwayModel)
-        //    {
-        //        FairwayModel shot = (FairwayModel)e.SelectedItem;
-        //        shot.HoleId += 11;
-
-        //        await App.dataFactory.UpdateShot(shot);
-        //    }
-        //    else if (e.SelectedItem is ChipModel)
-        //    {
-        //        ChipModel shot = (ChipModel)e.SelectedItem;
-        //        shot.HoleId += 11;
-
-        //        await App.dataFactory.UpdateShot(shot);
-        //    }
-        //    else if (e.SelectedItem is PuttModel shot)
-        //    {
-        //        shot.HoleId += 11;
-
-        //        await App.dataFactory.UpdateShot(shot);
-        //    }
-
-        //}
-
+        // Methods for testing and debugging
+        //========================================================================================================================================================================
 
         //!!!!MUST BE DELETED!!!!
+        //===============================================
         //===============================================
         //Clear local Storage
         //public void OnClearLocalStorageButtonClicked()
         //{
         //    App.dataFactory.ClearLocalStorage();
         //}
-        ////===============================================
+        //===============================================
+        //===============================================
 
 
         ////Creates a full round with all holes included

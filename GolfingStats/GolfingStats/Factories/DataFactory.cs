@@ -296,6 +296,13 @@ namespace GolfingStats.Factories
             return AllShotsList(allShots);
         }
 
+        public async Task<List<ShotModel>> GetShotsFromHoleIdList(List<int> holeIds)
+        {
+            AllShotsModel allShots = await GolfstatsRepository.GetShotsFromHoleIdList(holeIds);
+            return AllShotsList(allShots);
+        }
+
+
         public async Task<List<ShotModel>> GetAllShots()
         {
             AllShotsModel allShots = await GolfstatsRepository.GetAllShots();
@@ -322,6 +329,25 @@ namespace GolfingStats.Factories
             return await GolfstatsRepository.GetAllShotsPutt();
         }
         //==================================================================================
+        
+        //Delete data from local storage
+        //==================================================================================
+        public void DeleteRoundHolesShots(RoundModel round)
+        {
+            GolfstatsRepository.DeleteRoundHolesShots(round);
+        }
+
+        public void DeleteCourseAndHoles(CourseModel course)
+        {
+            GolfstatsRepository.DeleteCourseAndHoles(course);
+        }
+
+        public void DeleteShot(ShotModel shot)
+        {
+            GolfstatsRepository.DeleteShot(shot);
+        }
+        //==================================================================================
+
         //========================================================================================================================================================================
 
         //Methods that used within the Datafactory

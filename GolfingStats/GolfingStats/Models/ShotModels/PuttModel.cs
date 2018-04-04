@@ -156,12 +156,6 @@ namespace GolfingStats.Models.ShotModels
                 this._GreenBreak = ConvertShotsClass.StraightLeftRightConvert(value);
             }
         }
-
-        /// <summary>
-        /// How far is the ball still from the hole
-        /// </summary>
-        [MaxLength(2)]
-        public int DistanceLeftToHole { get; set; } = 0;
         //==========================
 
         /// <summary>

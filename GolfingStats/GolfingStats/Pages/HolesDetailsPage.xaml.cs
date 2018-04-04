@@ -53,7 +53,28 @@ namespace GolfingStats.Pages
         /// <param name="round"></param>
         async void ViewPreviousRound(RoundModel round)
         {
-            this.ItemsSource = await App.dataFactory.GetHolesFromRoundId(round.Id);
+            List<HoleModel> holes = await App.dataFactory.GetHolesFromRoundId(round.Id);
+
+            List<int> holeIds = new List<int>();
+            foreach (HoleModel hole in holes)
+            {
+                holeIds.Add(hole.Id);
+            }
+
+            List<ShotModel> ShotsPlayed = await App.dataFactory.GetShotsFromHoleIdList(holeIds);
+
+            foreach (HoleModel hole in holes)
+            {
+                foreach (ShotModel shot in ShotsPlayed)
+                {
+                    if (shot.HoleId == hole.Id)
+                    {
+                        hole.ShotsPlayedList.Add(shot);
+                    }
+                }
+            }
+
+            this.ItemsSource = holes;
         }
 
         /// <summary>
@@ -66,23 +87,38 @@ namespace GolfingStats.Pages
             await Navigation.PopToRootAsync();
         }
 
-        async void UpdateShotsListview(object sender, EventArgs e)
+        void UpdateShotsListview(object sender, EventArgs e)
         {
-            HoleModel HolePage = (HoleModel)this.SelectedItem;
+            //HoleModel HolePage = (HoleModel)this.SelectedItem;
             //List<ShotModel> shotReturned = await App.dataFactory.GetShotsFromHoleId(HolePage.Id);
 
-            //Add Bool to check if check has been done already and not check again if true
-            if (HolePage.ShotsPlayedList.Count == 0)
-            {
-                //Shots played list
-                ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
-                HolePage.ShotsPlayedList = await App.dataFactory.GetShotsFromHoleId(HolePage.Id);
-                lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList;
+            //Shots played list
+            ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
+            if (lwShotsPlayed.ItemsSource == null)
+                lwShotsPlayed.ItemsSource = ((HoleModel)this.SelectedItem).ShotsPlayedList;
 
-                //Shots played label
-                Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
-                lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
-            }
+            //Shots played label
+            Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
+            lblShotsPlayed.Text = ((HoleModel)this.SelectedItem).ShotsPlayed.ToString();
+
+            //Add Bool to check if check has been done already and not check again if true
+            //if (((HoleModel)this.SelectedItem).ShotsPlayedList.Count == 0)
+            //{
+            //List<int> holeIds = new List<int>();
+            //foreach (HoleModel hole in (List<HoleModel>)this.ItemsSource)
+            //{
+            //    holeIds.Add(hole.Id);
+            //}
+
+            //Shots played list
+            //ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
+            //HolePage.ShotsPlayedList = ((HoleModel)this.ItemsSource).ShotsPlayedList;
+            //lwShotsPlayed.ItemsSource = ((HoleModel)this.ItemsSource).ShotsPlayedList;
+
+            //    //Shots played label
+            //    Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
+            //    lblShotsPlayed.Text = ((HoleModel)this.ItemsSource).ShotsPlayed.ToString();
+            //}
         }
 
         /// <summary>
@@ -90,7 +126,7 @@ namespace GolfingStats.Pages
         /// The code will check which shot type was selected and navigate the user
         /// to the corresponding page to add that type of shot.
         /// </summary>
-        void AddShot(object sender, EventArgs args)
+        async void AddShot(object sender, EventArgs args)
         {
             Picker picker = (Picker)sender;
             HoleModel holeModel = (HoleModel)this.SelectedItem;
@@ -104,25 +140,25 @@ namespace GolfingStats.Pages
             {
                 DriveDetailsPage driveDetailsPage = new DriveDetailsPage(roundId, holeId, shotNum);
                 driveDetailsPage.ShotSaved += ShotSaved;
-                Navigation.PushModalAsync(driveDetailsPage);
+                await Navigation.PushModalAsync(driveDetailsPage);
             }
             else if (picker.SelectedIndex == 1 || (picker.SelectedIndex == 0 && par == 3))
             {
                 FairwayDetailsPage fairwayDetailsPage = new FairwayDetailsPage(roundId, holeId, shotNum);
                 fairwayDetailsPage.ShotSaved += ShotSaved;
-                Navigation.PushModalAsync(fairwayDetailsPage);
+                await Navigation.PushModalAsync(fairwayDetailsPage);
             }
             else if (picker.SelectedIndex == 2)
             {
                 ChipDetailsPage chipDetailsPage = new ChipDetailsPage(roundId, holeId, shotNum);
                 chipDetailsPage.ShotSaved += ShotSaved;
-                Navigation.PushModalAsync(chipDetailsPage);
+                await Navigation.PushModalAsync(chipDetailsPage);
             }
             else if (picker.SelectedIndex == 3)
             {
                 PuttDetailsPage puttDetailsPage = new PuttDetailsPage(roundId, holeId, shotNum);
                 puttDetailsPage.ShotSaved += ShotSaved;
-                Navigation.PushModalAsync(puttDetailsPage);
+                await Navigation.PushModalAsync(puttDetailsPage);
             }
 
             picker.SelectedIndex = -1;
@@ -133,8 +169,6 @@ namespace GolfingStats.Pages
         /// Details returned are updated on the holepage.
         /// (Only way to update listview to display all shots is by adding the itemsource from a different class)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         async void ShotSaved(object sender, EventArgs args)
         {
             await Navigation.PopModalAsync(true);
@@ -149,7 +183,10 @@ namespace GolfingStats.Pages
             {
                 if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id)
                 {
+                    //Shots played list
+                    ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
                     HolePage.ShotsPlayedList[i] = shotReturned;
+                    lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList;
                     NewShotCreated = false;
                 }
             }
@@ -169,30 +206,64 @@ namespace GolfingStats.Pages
             }
         }
 
+        /// <summary>
+        /// Closes the modal for adding a shot and returns the details of the shot added.
+        /// Deletes the shot from the listview.
+        /// (Only way to update listview to display all shots is by adding the itemsource from a different class)
+        /// </summary>
+        async void ShotDeleted(object sender, EventArgs args)
+        {
+            await Navigation.PopModalAsync(true);
+
+            HoleModel HolePage = (HoleModel)this.SelectedItem;
+            ShotModel shotReturned = (ShotModel)sender;
+
+            //Delete the shot from the listview
+            for (int i = 0; i < HolePage.ShotsPlayedList.Count; i++)
+            {
+                if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id)
+                {
+                    //Shots played list
+                    ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
+                    HolePage.ShotsPlayedList.RemoveAt(i);
+                    lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList;
+
+                    //Shots played label
+                    Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
+                    HolePage.ShotsPlayed = Int32.Parse(lblShotsPlayed.Text) - 1;
+                    lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
+                }
+            }
+        }
+
         void OnShotTapped(ListView sender, EventArgs args)
         {
             if (sender.SelectedItem.GetType() == typeof(DriveModel))
             {
                 DriveDetailsPage driveDetailsPage = new DriveDetailsPage((DriveModel)sender.SelectedItem);
                 driveDetailsPage.ShotSaved += ShotSaved;
+                driveDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(driveDetailsPage);
             }
             else if (sender.SelectedItem.GetType() == typeof(FairwayModel))
             {
                 FairwayDetailsPage fairwayDetailsPage = new FairwayDetailsPage((FairwayModel)sender.SelectedItem);
                 fairwayDetailsPage.ShotSaved += ShotSaved;
+                fairwayDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(fairwayDetailsPage);
             }
             else if (sender.SelectedItem.GetType() == typeof(ChipModel))
             {
                 ChipDetailsPage chipDetailsPage = new ChipDetailsPage((ChipModel)sender.SelectedItem);
                 chipDetailsPage.ShotSaved += ShotSaved;
+                chipDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(chipDetailsPage);
             }
             else if (sender.SelectedItem.GetType() == typeof(PuttModel))
             {
                 PuttDetailsPage puttDetailsPage = new PuttDetailsPage((PuttModel)sender.SelectedItem);
                 puttDetailsPage.ShotSaved += ShotSaved;
+                puttDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(puttDetailsPage);
             }
 

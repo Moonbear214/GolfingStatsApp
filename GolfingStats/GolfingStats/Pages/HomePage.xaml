@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.HomePage">
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Round" Clicked="NavRoundPage" />
-        <ToolbarItem Text="Add Course" Clicked="NavAddCoursePage" />
+        <ToolbarItem Text="Courses" Clicked="NavCoursesPage" />
+        <ToolbarItem Text="New Round" Clicked="NavNewRoundPage" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Entry x:Name="entCourseName" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Placeholder="Course Name" />
+            <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No rounds played yet." />
 
             <!--Rounds played ListView-->
             <ListView x:Name="lwRoundsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
@@ -22,6 +23,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <!--UI For testing and debugging-->
+            <!--========================================================================================================================-->
             <!--<StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                 <Button HorizontalOptions="Center"
                     VerticalOptions="Center"

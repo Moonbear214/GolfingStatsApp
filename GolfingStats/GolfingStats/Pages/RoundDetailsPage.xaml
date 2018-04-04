@@ -17,15 +17,15 @@
             </StackLayout>
 
             <!--CourseName-->
-            <StackLayout x:Name="stkCourseDisplay" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+            <!--<StackLayout x:Name="stkCourseDisplay" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Course Name" />
                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding CourseName}" />
-            </StackLayout>
+            </StackLayout>-->
             
             <!--Date-->
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Date Played" />
-                <DatePicker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
+                <DatePicker x:Name="dpDatePlayed" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
             </StackLayout>
             
         </StackLayout>

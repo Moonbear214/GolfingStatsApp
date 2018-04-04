@@ -83,18 +83,18 @@ namespace GolfingStats.Models.ShotModels
         /// At what angle is the green when the player looks at the flag:
         /// 1 = Flat, 2 = Downhill, 3 = Uphill
         /// </summary>
-        public Int16 _AngleOfGreen { get; set; } = 1;
+        public Int16 _BallToGreen { get; set; } = 1;
 
         [Ignore]
-        public String AngleOfGreen
+        public String BallToGreen
         {
             get
             {
-                return ConvertShotsClass.FlatDownhillUphillConvert(this._AngleOfGreen);
+                return ConvertShotsClass.FlatDownhillUphillConvert(this._BallToGreen);
             }
             set
             {
-                this._AngleOfGreen = ConvertShotsClass.FlatDownhillUphillConvert(value);
+                this._BallToGreen = ConvertShotsClass.FlatDownhillUphillConvert(value);
             }
         }
 

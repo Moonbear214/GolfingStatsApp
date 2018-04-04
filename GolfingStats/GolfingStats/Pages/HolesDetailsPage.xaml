@@ -40,7 +40,7 @@
                         <!--ShotsPlayed-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
-                            <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed, Mode=TwoWay}" />
+                            <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
                         </StackLayout>
 
                         <!--FIR-->
@@ -61,7 +61,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextCell Text="{Binding Club}" TextColor="ForestGreen"
-                                              Detail="{Binding DistanceToHole, StringFormat='Distance to hole: {0}'}" />
+                                              Detail="{Binding DistanceHit, StringFormat='Distance Hit: {0}'}" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
@@ -71,9 +71,9 @@
                                 BackgroundColor="SkyBlue" TextColor="White" Title="Add Shot" SelectedIndexChanged="AddShot">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
-                                    <x:String>Drive</x:String>
-                                    <x:String>Fairway Shot</x:String>
-                                    <x:String>Chip Shot</x:String>
+                                    <x:String>Tee shot</x:String>
+                                    <x:String>Approach</x:String>
+                                    <x:String>Chip</x:String>
                                     <x:String>Putt</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>

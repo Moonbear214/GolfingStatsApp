@@ -15,8 +15,9 @@ namespace GolfingStats.Pages.ShotPages
 	public partial class DriveDetailsPage : ContentPage
 	{
         public event EventHandler ShotSaved;
+        public event EventHandler ShotDeleted;
 
-		public DriveDetailsPage (int roundId, int holeId, int shotNum)
+        public DriveDetailsPage (int roundId, int holeId, int shotNum)
 		{
             DriveModel driveModel = new DriveModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum };
             this.BindingContext = driveModel;
@@ -30,6 +31,7 @@ namespace GolfingStats.Pages.ShotPages
             this.BindingContext = drive;
 
             InitializeComponent();
+            btnDeleteShot.IsVisible = true;
             PageSetup();
         }
 
@@ -57,6 +59,9 @@ namespace GolfingStats.Pages.ShotPages
             //===========================================================
         }
 
+        /// <summary>
+        /// Displays the direction of the wind picker if there is a wind that is blowing
+        /// </summary>
         private void PckWindForce_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (((Picker)sender).SelectedItem.ToString() != "None")
@@ -68,6 +73,9 @@ namespace GolfingStats.Pages.ShotPages
                 grdWindDirection.IsVisible = false;
         }
 
+        /// <summary>
+        /// Displays either on fairway values or off fairway values deppending on what the user chose
+        /// </summary>
         private void SwcOnFairway_Toggled(object sender, ToggledEventArgs e)
         {
             if (((Switch)sender).IsToggled)
@@ -84,13 +92,25 @@ namespace GolfingStats.Pages.ShotPages
             }
         }
 
-
+        /// <summary>
+        /// Saves the shot the user created and closes the modal
+        /// </summary>
         async void SaveShot()
         {
             await App.dataFactory.CreateShot(this.BindingContext as DriveModel);
-
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Deletes this shot (Only displayed if the shot has been created already (Id != 0))
+        /// </summary>
+        async void DeleteShot()
+        {
+            if (await DisplayAlert("Delete Tee Shot", "Are you sure you want to delete this shot?", "Delete", "Cancel"))
+            {
+                App.dataFactory.DeleteShot(this.BindingContext as ShotModel);
+                ShotDeleted?.Invoke(this.BindingContext, EventArgs.Empty);
+            }
+        }
     }
 }

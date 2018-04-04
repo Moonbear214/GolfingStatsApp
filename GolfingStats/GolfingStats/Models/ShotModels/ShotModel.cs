@@ -35,6 +35,12 @@ namespace GolfingStats.Models.ShotModels
         public int DistanceToHole { get; set; } = 0;
 
         /// <summary>
+        /// Distance left to the hole after the player hit their shot
+        /// </summary>
+        [MaxLength(3)]
+        public int DistanceLeftToHole { get; set; } = 0;
+
+        /// <summary>
         /// Driver, 3/5 Wood, 3/5 Hybrid, 2/3/4/5/6/7/8/9 Iron, PW, 52/56/60 Wedge, Putter
         /// </summary>
         [MaxLength(2)]

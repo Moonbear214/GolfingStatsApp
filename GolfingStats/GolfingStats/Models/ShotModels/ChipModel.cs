@@ -318,11 +318,6 @@ namespace GolfingStats.Models.ShotModels
         //Player is on green
         //Player missed the Hole
         //==========================
-        /// <summary>
-        /// How far is the ball still from the hole
-        /// </summary>
-        [MaxLength(2)]
-        public int DistanceLeftToHole { get; set; } = 0;
 
         /// <summary>
         /// On what side did the player miss the Hole:

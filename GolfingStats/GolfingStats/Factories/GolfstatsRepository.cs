@@ -105,7 +105,7 @@ namespace GolfingStats
         //Shots
         //==========================================================
 
-            //Drive
+        //Drive
         //================================
         public async Task<DriveModel> AddNewShot(DriveModel shot)
         {
@@ -122,7 +122,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Fairway
+        //Fairway
         //================================
         public async Task<FairwayModel> AddNewShot(FairwayModel shot)
         {
@@ -139,7 +139,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Chip
+        //Chip
         //================================
         public async Task<ChipModel> AddNewShot(ChipModel shot)
         {
@@ -156,7 +156,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Putt
+        //Putt
         //================================
         public async Task<PuttModel> AddNewShot(PuttModel shot)
         {
@@ -247,7 +247,7 @@ namespace GolfingStats
         //Shots
         //==========================================================
 
-            //Drive
+        //Drive
         //================================
         public async Task<DriveModel> UpdateShot(DriveModel shot)
         {
@@ -264,7 +264,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Fairway
+        //Fairway
         //================================
         public async Task<FairwayModel> UpdateShot(FairwayModel shot)
         {
@@ -281,7 +281,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Chip
+        //Chip
         //================================
         public async Task<ChipModel> UpdateShot(ChipModel shot)
         {
@@ -298,7 +298,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Putt
+        //Putt
         //================================
         public async Task<PuttModel> UpdateShot(PuttModel shot)
         {
@@ -416,7 +416,7 @@ namespace GolfingStats
         //Shots
         //==========================================================
 
-        //All Shots
+        //All Shots on hole
         //================================
         public async Task<AllShotsModel> GetShotsFromHoleId(int holeId)
         {
@@ -438,13 +438,39 @@ namespace GolfingStats
                 throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
             }
         }
+
+        //All Shots on hole list
+        //================================
+        public async Task<AllShotsModel> GetShotsFromHoleIdList(List<int> holeIds)
+        {
+            try
+            {
+                AllShotsModel allShots = new AllShotsModel();
+
+                foreach (int holeId in holeIds)
+                {
+                    allShots.DriveASModel.AddRange(await conn.Table<DriveModel>().Where(t => t.HoleId == holeId).ToListAsync());
+                    allShots.FairwayASModel.AddRange(await conn.Table<FairwayModel>().Where(t => t.HoleId == holeId).ToListAsync());
+                    allShots.ChipASModel.AddRange(await conn.Table<ChipModel>().Where(t => t.HoleId == holeId).ToListAsync());
+                    allShots.PuttASModel.AddRange(await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync());
+                }
+
+                return allShots;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
         //================================
 
         //All Shots
         //================================
         public async Task<AllShotsModel> GetAllShots()
         {
-            try {
+            try
+            {
                 AllShotsModel allShots = new AllShotsModel
                 {
                     DriveASModel = await conn.Table<DriveModel>().ToListAsync(),
@@ -463,7 +489,7 @@ namespace GolfingStats
         }
         //================================
 
-            //Drive
+        //Drive
         //================================
         public async Task<List<DriveModel>> GetAllShotsDrive()
         {
@@ -530,8 +556,109 @@ namespace GolfingStats
         //========================================================================================================================================================================
 
 
-        //Methods for returning all local storage data for given class (round, holes, shots)
+        //Methods for deleting from local storage
         //========================================================================================================================================================================
+        //Delete course and course holes
+        //================================
+        public async void DeleteCourseAndHoles(CourseModel course)
+        {
+            try
+            {
+                await conn.DeleteAsync(course);
+                DeleteHoles(course);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+        //Delete round, round holes and shots
+        //================================
+        public async void DeleteRoundHolesShots(RoundModel round)
+        {
+            try
+            {
+                await conn.DeleteAsync(round);
+                DeleteHoles(round.Id);
+                DeleteRoundShots(round.Id);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+        //Delete Holes
+        //================================
+        public async void DeleteHoles(int roundId)
+        {
+            try
+            {
+                await conn.ExecuteAsync(string.Format("DELETE FROM Holes WHERE RoundId = {0}", roundId));
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+        public async void DeleteHoles(CourseModel course)
+        {
+            try
+            {
+                foreach (int holeId in course.GetHoleIds)
+                {
+                    await conn.ExecuteAsync(string.Format("DELETE FROM Holes WHERE Id = {0}", holeId));
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+        //Delete shot
+        //================================
+        public async void DeleteShot(ShotModel shot)
+        {
+            try
+            {
+                await conn.DeleteAsync(shot);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+        public async void DeleteRoundShots(int roundId)
+        {
+            try
+            {
+                await conn.ExecuteAsync(string.Format("DELETE FROM DriveShot WHERE RoundId = {0}", roundId));
+                await conn.ExecuteAsync(string.Format("DELETE FROM FairwayShot WHERE RoundId = {0}", roundId));
+                await conn.ExecuteAsync(string.Format("DELETE FROM ChipShot WHERE RoundId = {0}", roundId));
+                await conn.ExecuteAsync(string.Format("DELETE FROM PuttShot WHERE RoundId = {0}", roundId));
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
+        //Method for deleting all data in local storage
+        //================================
         public async void ClearLocalStorage()
         {
             await conn.ExecuteAsync("DELETE FROM Courses");

@@ -31,7 +31,7 @@
                     </StackLayout>
                     <!--=============================================================-->
 
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details before shot is hit" />
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details before shot is hit:" />
 
                     <Grid>
 
@@ -39,8 +39,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <!--<RowDefinition Height="Auto" />-->
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -53,7 +52,7 @@
                         <!--=============================================================-->
                         <!--Aiming-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Aiming" />
-                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding Aiming}">
+                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" SelectedIndexChanged="AimingChanged" Title="Select Option" SelectedItem="{Binding Aiming}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Center</x:String>
@@ -64,30 +63,37 @@
                         </Picker>
 
 
-                        <!--AimingDistance-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="How far are you aiming in the given direcion" />
-                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AimingDistance}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Inside</x:String>
-                                    <x:String>Edge</x:String>
-                                    <x:String>Ball</x:String>
-                                    <x:String>Cups</x:String>
-                                    <x:String>2 Cups</x:String>
-                                    <x:String>3 Cups</x:String>
-                                    <x:String>4 Cups</x:String>
-                                    <x:String>1/2 Meter</x:String>
-                                    <x:String>3/4 Meter</x:String>
-                                    <x:String>Meter</x:String>
-                                    <x:String>+More</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+                        <Grid x:Name="grdAimingDistance" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--AimingDistance-->
+                            <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="How far are you aiming in the given direction" />
+                            <Picker Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AimingDistance}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Inside</x:String>
+                                        <x:String>Edge</x:String>
+                                        <x:String>Ball</x:String>
+                                        <x:String>Cups</x:String>
+                                        <x:String>2 Cups</x:String>
+                                        <x:String>3 Cups</x:String>
+                                        <x:String>4 Cups</x:String>
+                                        <x:String>1/2 Meter</x:String>
+                                        <x:String>3/4 Meter</x:String>
+                                        <x:String>Meter</x:String>
+                                        <x:String>+More</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
 
 
                         <!--AngleOfGreen-->
                         <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="At what angle is the green when looking at the flag" />
-                        <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AngleOfGreen}">
+                        <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AngleOfGreen}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Flat</x:String>
@@ -99,8 +105,8 @@
 
 
                         <!--GreenBreak-->
-                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="To what side does the green break" />
-                        <Picker Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding GreenBreak}">
+                        <!--<Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="To what side does the green break" />
+                        <Picker Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding GreenBreak}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Center</x:String>
@@ -108,20 +114,7 @@
                                     <x:String>Right</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
-                        </Picker>
-
-
-                        <!--AngleOfGreen-->
-                        <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Angle of the green" />
-                        <Picker Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AngleOfGreen}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Flat</x:String>
-                                    <x:String>Downhill</x:String>
-                                    <x:String>Uphill</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+                        </Picker>-->
 
                     </Grid>
                     <!--==================================================================================================================-->
@@ -129,7 +122,7 @@
 
                     <!--All info after the player has hit the shots-->
                     <!--==================================================================================================================-->
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details after shot is hit" />
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details after shot was hit:" />
 
                     <Grid>
 
@@ -144,10 +137,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        
+
                         <!--PullBackStrength-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="How hard did you putt the ball" />
-                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PullBackStrength}">
+                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PullBackStrength}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Soft</x:String>
@@ -158,10 +151,10 @@
                             </Picker.ItemsSource>
                         </Picker>
 
-                        
+
                         <!--GreenBreak-->
                         <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="To what side does the green break" />
-                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding GreenBreak}">
+                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding GreenBreak}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Straight</x:String>
@@ -174,11 +167,11 @@
 
                         <!--InHole-->
                         <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Is the ball in the hole" />
-                        <Switch x:Name="swcInHole" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding InHole}" Toggled="ToggledInHole" />
+                        <Switch x:Name="swcInHole" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding InHole}" />
 
                     </Grid>
 
-                    
+
                     <!--Player missed the hole-->
                     <Grid x:Name="grdHoleMissed">
 
@@ -196,25 +189,13 @@
 
                         <!--DistanceLeftToHole-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance left to hole" />
-                        <Entry x:Name="entDistanceLeft" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Text="{Binding DistanceLeftToHole}" />
+                        <Entry x:Name="entDistanceLeft" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Text="{Binding DistanceLeftToHole}" />
+
                         
-
-                        <!--PosToHoleHorz-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the hole (Horizontal)" />
-                        <Picker x:Name="pckPosToHoleHorz" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToHoleHorz}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Center</x:String>
-                                    <x:String>Left</x:String>
-                                    <x:String>Right</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-
-
+                            <!--TODO:Better wording for this (This is where the ball ended after the putt)-->
                         <!--PosToHoleVer-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the hole (Vertical)" />
-                        <Picker x:Name="pckPosToHoleVer" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToHoleVer}">
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the hole (Vertical)" />
+                        <Picker x:Name="pckPosToHoleVer" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToHoleVer}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Center</x:String>
@@ -223,17 +204,32 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        <!--=============================================================-->
 
+
+                        <!--PosToHoleHorz-->
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the hole (Horizontal)" />
+                        <Picker x:Name="pckPosToHoleHorz" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToHoleHorz}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Center</x:String>
+                                    <x:String>Left</x:String>
+                                    <x:String>Right</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
                     </Grid>
+
+                    <!--=============================================================-->
                     <!--==================================================================================================================-->
 
                 </StackLayout>
-
             </ScrollView>
 
-            <!--Sav3 Button-->
-            <Button HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save Shot" Clicked="SaveShot" />
+            <!--Sav3 & Del3te Button-->
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal">
+                <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" BorderColor="DarkRed" Text="Delete" Clicked="DeleteShot" />
+                <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save" Clicked="SaveShot" />
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

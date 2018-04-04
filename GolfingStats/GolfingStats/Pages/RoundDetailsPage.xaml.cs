@@ -17,6 +17,9 @@ namespace GolfingStats.Pages
     {
         private CourseModel selectedCourse;
 
+        /// <summary>
+        /// Enters when player is about to start new round
+        /// </summary>
         public RoundDetailsPage()
         {
             InitializeComponent();
@@ -24,47 +27,88 @@ namespace GolfingStats.Pages
             Title = "New Round";
             tlbGoToHole.Text = "Start Round";
             tlbGoToHole.Clicked += StartNewRound;
-            stkCourseDisplay.IsVisible = false;
+            dpDatePlayed.MaximumDate = DateTime.Now;
 
             UpdateCoursePicker();
 
             this.BindingContext = new RoundModel();
         }
 
+        /// <summary>
+        /// Enters when old round is passed to this page
+        /// </summary>
+        /// <param name="round"></param>
         public RoundDetailsPage (RoundModel round)
 		{
 			InitializeComponent ();
 
             Title = round.CourseName;
-            tlbGoToHole.Text = "View Round";
+            tlbGoToHole.Text = "View";
             tlbGoToHole.Clicked += ViewRound;
+            dpDatePlayed.MaximumDate = DateTime.Now;
             stkCoursePick.IsVisible = false;
+
+            ToolbarItem deleteToolbarItem = new ToolbarItem()
+            {
+                Text = "Delete"
+            };
+            deleteToolbarItem.Clicked += DeleteRound;
+            ToolbarItems.Add(deleteToolbarItem);
 
             this.BindingContext = round;
         }
 
-
-        async void StartNewRound(object sender, EventArgs args)
+        /// <summary>
+        /// New round is created and saved. Player is taken to page to add shots for each hole
+        /// </summary>
+        private async void StartNewRound(object sender, EventArgs args)
         {
-            RoundModel round = (RoundModel)this.BindingContext;
-            round.CourseName = selectedCourse.Name;
-            await Navigation.PushAsync(new Pages.HolesDetailsPage(round, selectedCourse));
+            if (selectedCourse == null)
+            {
+                await DisplayAlert("Course", "Please select the course you want to play first.", "Okay");
+            }
+            else
+            {
+                RoundModel round = (RoundModel)this.BindingContext;
+                round.CourseName = selectedCourse.Name;
+                await Navigation.PushAsync(new Pages.HolesDetailsPage(round, selectedCourse));
+            }
         }
 
-        async void ViewRound(object sender, EventArgs args)
+        /// <summary>
+        /// Player wants to view the holes and shots that was played on a previous round
+        /// </summary>
+        private async void ViewRound(object sender, EventArgs args)
         {
             RoundModel round = (RoundModel)this.BindingContext;
             await Navigation.PushAsync(new Pages.HolesDetailsPage(round));
         }
 
-        async void UpdateCoursePicker()
+        /// <summary>
+        /// Player wants to delete round that he has played
+        /// </summary>
+        private async void DeleteRound(object sender, EventArgs e)
+        {
+            if (await DisplayAlert(string.Format("Delete {0}", Title), "Are you sure you want to delete this round?", "Delete", "Cancel"))
+            {
+                App.dataFactory.DeleteRoundHolesShots((RoundModel)this.BindingContext);
+                await Navigation.PopToRootAsync();
+            }
+        }
+
+        /// <summary>
+        /// Loads all courses from local storage and displays them in the course picker
+        /// </summary>
+        private async void UpdateCoursePicker()
         {
             CoursePicker.ItemsSource = await App.dataFactory.GetAllCourses();
             CoursePicker.ItemDisplayBinding = new Binding("Name");
         }
 
-
-        void CourseSelected(Picker sender, EventArgs args)
+        /// <summary>
+        /// Player has tapped on a course to play
+        /// </summary>
+        private void CourseSelected(Picker sender, EventArgs args)
         {
             selectedCourse = (CourseModel)sender.SelectedItem;
         }

@@ -15,6 +15,7 @@ namespace GolfingStats.Pages.ShotPages
 	public partial class ChipDetailsPage : ContentPage
     {
         public event EventHandler ShotSaved;
+        public event EventHandler ShotDeleted;
 
         public ChipDetailsPage (int roundId, int holeId, int shotNum)
         {
@@ -30,6 +31,7 @@ namespace GolfingStats.Pages.ShotPages
             this.BindingContext = chipModel;
 
             InitializeComponent();
+            btnDeleteShot.IsVisible = true;
             PageSetup();
         }
 
@@ -48,7 +50,10 @@ namespace GolfingStats.Pages.ShotPages
             swcInHole.Toggled += SwcInHole_Toggled;
             //===========================================================
         }
-        
+
+        /// <summary>
+        /// Hides after shot values no neccesary if ball is in hte hole
+        /// </summary>
         private void SwcInHole_Toggled(object sender, ToggledEventArgs e)
         {
             if (((Switch)sender).IsToggled)
@@ -64,11 +69,25 @@ namespace GolfingStats.Pages.ShotPages
             }
         }
 
-        public async void SaveShot()
+        /// <summary>
+        /// Saves the shot the user created and closes the modal
+        /// </summary>
+        async void SaveShot()
         {
             await App.dataFactory.CreateShot(this.BindingContext as ChipModel);
-
             ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Deletes this shot (Only displayed if the shot has been created already (Id != 0))
+        /// </summary>
+        async void DeleteShot()
+        {
+            if (await DisplayAlert("Delete Chip", "Are you sure you want to delete this shot?", "Delete", "Cancel"))
+            {
+                App.dataFactory.DeleteShot(this.BindingContext as ShotModel);
+                ShotDeleted?.Invoke(this.BindingContext, EventArgs.Empty);
+            }
         }
     }
 }

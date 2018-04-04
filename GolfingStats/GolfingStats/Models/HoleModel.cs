@@ -57,7 +57,7 @@ namespace GolfingStats.Models
         /// <summary>
         /// Green in regulation
         /// </summary>
-        public bool GIR { get; set; } = true;
+        public bool GIR { get; set; } = false;
 
         //TODO: Add a lot of extra information to let the player discribe the hole when creating it
 

@@ -12,12 +12,12 @@ namespace GolfingStats.Models
     /// </summary>
     public class AllShotsModel
     {
-        public List<DriveModel> DriveASModel { get; set; } = null;
+        public List<DriveModel> DriveASModel { get; set; } = new List<DriveModel>();
 
-        public List<FairwayModel> FairwayASModel { get; set; } = null;
+        public List<FairwayModel> FairwayASModel { get; set; } = new List<FairwayModel>();
 
-        public List<ChipModel> ChipASModel { get; set; } = null;
+        public List<ChipModel> ChipASModel { get; set; } = new List<ChipModel>();
 
-        public List<PuttModel> PuttASModel { get; set; } = null;
+        public List<PuttModel> PuttASModel { get; set; } = new List<PuttModel>();
     }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.Pages.ShotPages.DriveDetailsPage">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
             <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
 
@@ -20,17 +20,16 @@
 
                     <!--DistanceToHole-->
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole" />
+                        <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole:" />
                         <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceToHole}" />
                     </StackLayout>
 
 
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details before shot is hit" />
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details before shot is hit:" />
 
                     <Grid>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -44,7 +43,7 @@
 
                         <!--Club-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Club" />
-                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Club" SelectedItem="{Binding Club}">
+                        <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Club" SelectedItem="{Binding Club}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Driver</x:String>
@@ -75,7 +74,7 @@
                         <!--=============================================================-->
                         <!--Aiming-->
                         <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Aiming" />
-                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding Aiming}">
+                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding Aiming}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Center</x:String>
@@ -88,7 +87,7 @@
 
                         <!--WindForce-->
                         <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Force Of the wind" />
-                        <Picker x:Name="pckWindForce" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindForce}">
+                        <Picker x:Name="pckWindForce" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindForce}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>None</x:String>
@@ -98,34 +97,34 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
+                    </Grid>
 
 
-                        <!--WindDirection-->
-                        <Grid x:Name="grdWindDirection" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                    <!--WindDirection-->
+                    <Grid x:Name="grdWindDirection">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Direction of wind" />
-                            <Picker x:Name="pckWindDirection" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindDirection}">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Left</x:String>
-                                        <x:String>Right</x:String>
-                                        <x:String>Towards</x:String>
-                                        <x:String>Away</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-                        </Grid>
+                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Direction of wind" />
+                        <Picker x:Name="pckWindDirection" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindDirection}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Left</x:String>
+                                    <x:String>Right</x:String>
+                                    <x:String>Towards</x:String>
+                                    <x:String>Away</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
                     </Grid>
                     <!--==================================================================================================================-->
 
 
                     <!--All info after the player has hit the shots-->
                     <!--==================================================================================================================-->
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details after shot is hit" />
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details after shot was hit:" />
 
                     <Grid>
 
@@ -145,12 +144,17 @@
 
                         <!--DistanceHit-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Shot played distance" />
-                        <Entry Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Text="{Binding DistanceHit}" />
+                        <Entry Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Text="{Binding DistanceHit}" />
+
+                        
+                        <!--DistanceLeftToHole-->
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance left to the hole" />
+                        <Entry x:Name="entDistanceLeft" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Text="{Binding DistanceLeftToHole}" />
 
 
                         <!--SwingType-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Swing Type" />
-                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding SwingType}">
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Swing Type" />
+                        <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding SwingType}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Full</x:String>
@@ -163,8 +167,8 @@
 
 
                         <!--BallFlight-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Ball Flight" />
-                        <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding BallFlight}">
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Ball Flight" />
+                        <Picker Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding BallFlight}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Draw</x:String>
@@ -176,60 +180,62 @@
                             </Picker.ItemsSource>
                         </Picker>
 
+                         
                         <!--OnFairway-->
-                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On the Fairway" />
-                        <Switch x:Name="swcOnFairway" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding OnFairway}" />
-
-
-                        <!--PosOnFairwayHorz-->
-                        <Grid x:Name="grdPosOnFairwayHorz" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the Fairway" />
-                            <Picker x:Name="pckPosOnFairwayHorz" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnFairwayHorz}">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Center</x:String>
-                                        <x:String>Left</x:String>
-                                        <x:String>Right</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-                        </Grid>
-
-
-                        <!--PosToFairwayHorz-->
-                        <Grid x:Name="grdPosToFairwayHorz" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On wich side did the ball miss the fairway" />
-                            <Picker x:Name="pckPosToFairwayHorz" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToFairwayHorz}">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Center</x:String>
-                                        <x:String>Left</x:String>
-                                        <x:String>Right</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-                        </Grid>
-
-                        <!--=============================================================-->
-
+                        <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On the Fairway" />
+                        <Switch x:Name="swcOnFairway" Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding OnFairway}" />
                     </Grid>
+
+                    <!--PosOnFairwayHorz-->
+                    <Grid x:Name="grdPosOnFairwayHorz">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the Fairway" />
+                        <Picker x:Name="pckPosOnFairwayHorz" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnFairwayHorz}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Center</x:String>
+                                    <x:String>Left</x:String>
+                                    <x:String>Right</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Grid>
+
+
+                    <!--PosToFairwayHorz-->
+                    <Grid x:Name="grdPosToFairwayHorz">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On wich side did the ball miss the fairway" />
+                        <Picker x:Name="pckPosToFairwayHorz" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToFairwayHorz}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Center</x:String>
+                                    <x:String>Left</x:String>
+                                    <x:String>Right</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Grid>
+
+                    <!--=============================================================-->
                     <!--==================================================================================================================-->
 
                 </StackLayout>
             </ScrollView>
 
-            <!--Sav3 Button-->
-            <Button HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save Shot" Clicked="SaveShot" />
+            <!--Sav3 & Del3te Button-->
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal">
+                <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" BorderColor="DarkRed" Text="Delete" Clicked="DeleteShot" />
+                <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save" Clicked="SaveShot" />
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>
