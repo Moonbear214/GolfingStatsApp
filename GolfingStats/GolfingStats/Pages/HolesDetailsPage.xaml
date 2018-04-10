@@ -68,7 +68,7 @@
 
                         <!--Add shot-->
                         <Picker x:Name="pckShotPicker" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="80"
-                                BackgroundColor="SkyBlue" TextColor="White" Title="Add Shot" SelectedIndexChanged="AddShot">
+                                BackgroundColor="SkyBlue" TextColor="White" Title="Add Shot" SelectedIndexChanged="AddShot" IsVisible="False">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Tee shot</x:String>
@@ -78,6 +78,11 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal" BackgroundColor="MediumSeaGreen">
+                            <Button HorizontalOptions="Start" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousShotPage" />
+                            <Button HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
+                            <Button HorizontalOptions="End" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextShotPage" />
+                        </StackLayout>
 
                     </StackLayout>
                 </ContentPage.Content>

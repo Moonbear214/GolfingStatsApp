@@ -31,6 +31,8 @@ namespace GolfingStats
         /// </summary>
         private void HomePage_Appearing(object sender, EventArgs e)
         {
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.SeaGreen;
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
             GetDisplayAllRounds();
         }
 

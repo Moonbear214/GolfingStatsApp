@@ -17,9 +17,9 @@ namespace GolfingStats.Pages.ShotPages
         public event EventHandler ShotSaved;
         public event EventHandler ShotDeleted;
 
-        public FairwayDetailsPage (int roundId, int holeId, int shotNum)
+        public FairwayDetailsPage (int roundId, int holeId, int shotNum, int disToHole)
         {
-            FairwayModel fairwayModel = new FairwayModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum };
+            FairwayModel fairwayModel = new FairwayModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum, DistanceToHole = disToHole };
             this.BindingContext = fairwayModel;
 
 			InitializeComponent ();

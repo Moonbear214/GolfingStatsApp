@@ -19,10 +19,10 @@
 
 
                     <!--DistanceToHole-->
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                         <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole:" />
                         <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceToHole}" />
-                    </StackLayout>
+                    </StackLayout>-->
 
 
                     <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details before shot is hit:" />
@@ -67,14 +67,19 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
+
+                        
+                        <!--DistanceToHole-->
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole" />
+                        <Entry Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Text="{Binding DistanceToHole}" />
                         <!--=============================================================-->
 
 
                         <!--Shot Type Specific controls-->
                         <!--=============================================================-->
                         <!--Aiming-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Aiming" />
-                        <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding Aiming}">
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Aiming" />
+                        <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding Aiming}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Center</x:String>
@@ -86,8 +91,8 @@
 
 
                         <!--WindForce-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Force Of the wind" />
-                        <Picker x:Name="pckWindForce" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindForce}">
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Force Of the wind" />
+                        <Picker x:Name="pckWindForce" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindForce}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>None</x:String>

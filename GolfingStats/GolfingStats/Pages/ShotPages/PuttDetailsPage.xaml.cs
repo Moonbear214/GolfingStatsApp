@@ -17,9 +17,9 @@ namespace GolfingStats.Pages.ShotPages
         public event EventHandler ShotSaved;
         public event EventHandler ShotDeleted;
 
-        public PuttDetailsPage (int roundId, int holeId, int shotNum)
+        public PuttDetailsPage (int roundId, int holeId, int shotNum, int disToHole)
         {
-            PuttModel puttModel = new PuttModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum };
+            PuttModel puttModel = new PuttModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum, DistanceToHole = disToHole };
             this.BindingContext = puttModel;
 
 			InitializeComponent ();

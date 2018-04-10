@@ -17,9 +17,9 @@ namespace GolfingStats.Pages.ShotPages
         public event EventHandler ShotSaved;
         public event EventHandler ShotDeleted;
 
-        public ChipDetailsPage (int roundId, int holeId, int shotNum)
+        public ChipDetailsPage (int roundId, int holeId, int shotNum, int disToHole)
         {
-            ChipModel chipModel = new ChipModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum };
+            ChipModel chipModel = new ChipModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum, DistanceToHole = disToHole };
             this.BindingContext = chipModel;
 
 			InitializeComponent ();

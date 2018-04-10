@@ -128,9 +128,7 @@ namespace GolfingStats.Factories
                 EmptyRound[i].RoundId = round.Id;
             }
 
-            await CreateHoleList(EmptyRound);
-
-            return new List<HoleModel>(EmptyRound);
+            return await CreateHoleList(EmptyRound);// new List<HoleModel>(EmptyRound);
         }
 
         /// <summary>

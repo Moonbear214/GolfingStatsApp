@@ -17,9 +17,9 @@ namespace GolfingStats.Pages.ShotPages
         public event EventHandler ShotSaved;
         public event EventHandler ShotDeleted;
 
-        public DriveDetailsPage (int roundId, int holeId, int shotNum)
+        public DriveDetailsPage (int roundId, int holeId, int shotNum, int disToHole)
 		{
-            DriveModel driveModel = new DriveModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum };
+            DriveModel driveModel = new DriveModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum, DistanceToHole = disToHole };
             this.BindingContext = driveModel;
 
 			InitializeComponent ();
