@@ -314,7 +314,7 @@
             <!--Sav3 & Del3te Button-->
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal">
                 <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" BorderColor="DarkRed" Text="Delete" Clicked="DeleteShot" />
-                <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="SkyBlue" TextColor="White" BorderColor="LightSeaGreen" Text="Save" Clicked="SaveShot" />
+                <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="MediumSeaGreen" TextColor="White" Text="Save" Clicked="SaveShot" />
             </StackLayout>
 
         </StackLayout>

@@ -5,25 +5,30 @@
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
-
-                <!--<ContentPage.ToolbarItems>
-                    <ToolbarItem x:Name="tlbDelete" Text="Delete" Clicked="DeleteCourse"/>
-                    <ToolbarItem Text="Save" Clicked="Save"/>
-                </ContentPage.ToolbarItems>-->
-
                 <ContentPage.Content>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        
+
                         <!--HoleNumber-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole:" />
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleNumber}" />
                         </StackLayout>
-                        
-                        <!--Par-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Par" />
-                            <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Par" SelectedItem="{Binding Par}">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <!--Par-->
+                            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Par" />
+                            <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Par" SelectedItem="{Binding Par}">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:Int32}">
                                         <x:Int32>3</x:Int32>
@@ -32,12 +37,10 @@
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
-                        </StackLayout>
 
-                        <!--Stroke-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke" />
-                            <Picker HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Title="Stroke" SelectedItem="{Binding Stroke}">
+                            <!--Stroke-->
+                            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke" />
+                            <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Stroke" SelectedItem="{Binding Stroke}">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:Int32}">
                                         <x:Int32>1</x:Int32>
@@ -55,25 +58,23 @@
                                         <x:Int32>13</x:Int32>
                                         <x:Int32>14</x:Int32>
                                         <x:Int32>15</x:Int32>
-                                        <x:Int32>32</x:Int32>
+                                        <x:Int32>16</x:Int32>
                                         <x:Int32>17</x:Int32>
                                         <x:Int32>18</x:Int32>
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
-                        </StackLayout>
 
-                        <!--HoleDistance-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Hole Length" />
-                            <Entry HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Text="{Binding HoleDistance}" />
-                        </StackLayout>
-                        
-                        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <!--HoleDistance-->
+                            <Label Grid.Row="2" Grid.Column="0"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Hole Length" />
+                            <Entry Grid.Row="2" Grid.Column="1"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Text="{Binding HoleDistance}" />
+
+                            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Dogleg" />
                             <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding Dogleg}" />
                         </StackLayout>-->
-                        
+
+                        </Grid>
                     </StackLayout>
                 </ContentPage.Content>
             </ContentPage>

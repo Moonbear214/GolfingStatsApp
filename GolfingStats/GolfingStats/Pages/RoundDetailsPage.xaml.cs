@@ -45,8 +45,8 @@ namespace GolfingStats.Pages
             Title = round.CourseName;
             tlbGoToHole.Text = "View";
             tlbGoToHole.Clicked += ViewRound;
-            dpDatePlayed.MaximumDate = DateTime.Now;
-            stkCoursePick.IsVisible = false;
+            dpDatePlayed.IsEnabled = false;
+            grdChooseCourse.IsVisible = false;
 
             ToolbarItem deleteToolbarItem = new ToolbarItem()
             {

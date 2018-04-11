@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.Pages.RoundDetailsPage">
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="tlbGoToHole" Text="Start Round" />
     </ContentPage.ToolbarItems>
@@ -10,24 +10,34 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-            <!--Course Picker-->
-            <StackLayout x:Name="stkCoursePick" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GolfCourse" />
-                <Picker x:Name="CoursePicker" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" HeightRequest="80" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
-            </StackLayout>
+            <Grid x:Name="grdChooseCourse">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <!--CourseName-->
-            <!--<StackLayout x:Name="stkCourseDisplay" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Course Name" />
-                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding CourseName}" />
-            </StackLayout>-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Course Picker-->
+                <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GolfCourse" />
+                <Picker x:Name="CoursePicker" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="80" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
+            </Grid>
             
-            <!--Date-->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Date Played" />
-                <DatePicker x:Name="dpDatePlayed" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
-            </StackLayout>
-            
+            <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Date-->
+                <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Date Played" />
+                <DatePicker x:Name="dpDatePlayed" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
