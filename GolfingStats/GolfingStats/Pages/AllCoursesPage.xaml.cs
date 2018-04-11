@@ -14,21 +14,6 @@ namespace GolfingStats.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllCoursesPage : ContentPage
     {
-        Entry entCourseName = new Entry
-        {
-            VerticalOptions = LayoutOptions.CenterAndExpand,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            Placeholder = "..."
-        };
-
-        Button btnSaveCourseName = new Button()
-        {
-            VerticalOptions = LayoutOptions.End,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            BackgroundColor = Color.AliceBlue,
-            Text = "Create Course"
-        };
-
         public AllCoursesPage()
         {
             Title = "All Courses";
@@ -44,47 +29,15 @@ namespace GolfingStats.Pages
         {
             lwAllCourses.ItemsSource = await App.dataFactory.GetAllCourses();
             lwAllCourses.IsRefreshing = false;
-
-            btnSaveCourseName.Clicked += SaveAndCreateCourse;
         }
 
         /// <summary>
         /// Shows modal with entry box to add course name then,
         /// takes the user to add to a page to add a new course
         /// </summary>
-        public async void AddCourseTapped()
+        public void AddCourseTapped()
         {
-            ContentPage courseName = new ContentPage()
-            {
-                Title = "AddCourse",
-                Content =
-                    new StackLayout
-                    {
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
-                        VerticalOptions = LayoutOptions.FillAndExpand,
-                        Children =
-                        {
-                            new StackLayout
-                            {
-                                HorizontalOptions = LayoutOptions.FillAndExpand,
-                                VerticalOptions = LayoutOptions.CenterAndExpand,
-                                Children =
-                                {
-                                    new Label
-                                    {
-                                        VerticalOptions = LayoutOptions.CenterAndExpand,
-                                        HorizontalOptions = LayoutOptions.CenterAndExpand,
-                                        Text = "Course Name:"
-                                    },
-                                    entCourseName,
-                                    btnSaveCourseName
-                                }
-                            }
-                        }
-                    }
-            };
-
-            await Navigation.PushModalAsync(courseName, true);
+            CourseNameOverlay.IsVisible = true;
         }
 
         public async void SaveAndCreateCourse(object sender, EventArgs e)
@@ -96,10 +49,8 @@ namespace GolfingStats.Pages
             else
             {
                 CourseModel course = await App.dataFactory.CreateNewCourse(entCourseName.Text);
-
                 await Navigation.PushAsync(new Pages.AddHolesPage(course, true), true);
-
-                await Navigation.PopModalAsync(true);
+                CancelCourseName();
             }
         }
 
@@ -109,8 +60,19 @@ namespace GolfingStats.Pages
         async void OnCourseTapped(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new AddHolesPage(((ListView)sender).SelectedItem as CourseModel, false));
-
             lwAllCourses.SelectedItem = null;
+        }
+
+        void CancelCourseName()
+        {
+            CourseNameOverlay.IsVisible = false;
+            entCourseName.Text = "";
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            CancelCourseName();
+            return true;
         }
     }
 }

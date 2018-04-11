@@ -51,6 +51,7 @@ namespace GolfingStats.Models
 
         /// <summary>
         /// Fairway hit in Regulation
+        /// TODO: Convert to numbers, still true or false (FIR doesn't count on par 3's)
         /// </summary>
         public bool FIR { get; set; } = false;
 
@@ -71,7 +72,7 @@ namespace GolfingStats.Models
 
         //====================Test===============================
         //[Ignore]
-        public IList<ShotModels.ShotModel> ShotsPlayedList = new ObservableCollection<ShotModels.ShotModel>();
+        public ObservableCollection<ShotModels.ShotModel> ShotsPlayedList = new ObservableCollection<ShotModels.ShotModel>();
         //====================Test===============================
 
 

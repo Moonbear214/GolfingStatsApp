@@ -92,6 +92,7 @@ namespace GolfingStats.Pages
             if (await DisplayAlert(string.Format("Delete {0}", Title), "Are you sure you want to delete this round?", "Delete", "Cancel"))
             {
                 App.dataFactory.DeleteRoundHolesShots((RoundModel)this.BindingContext);
+                DependencyService.Get<IMessage>().ShortAlert("Round deleted");
                 await Navigation.PopToRootAsync();
             }
         }

@@ -179,7 +179,7 @@ namespace GolfingStats.Models.ShotModels
                 this._PosToGreenVer = ConvertShotsClass.CenterShortPastConvert(value);
             }
         }
-
+        
         /// <summary>
         /// At what angle is the ball:
         /// 1 = Flat, 2 = Downhill, 3 = Uphill

@@ -4,23 +4,44 @@
              x:Class="GolfingStats.Pages.AllCoursesPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Course" Clicked="AddCourseTapped" />
+        <ToolbarItem x:Name="tlbAddCourse" Text="Add Course" Clicked="AddCourseTapped" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            
-            <!--Courses ListView-->
-            <ListView x:Name="lwAllCourses" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
+        <AbsoluteLayout>
+            <StackLayout 
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
+                AbsoluteLayout.LayoutFlags="All">
+
+                <!--Courses ListView-->
+                <ListView x:Name="lwAllCourses" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
                     ItemTapped="OnCourseTapped" IsRefreshing="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}" TextColor="ForestGreen"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" TextColor="ForestGreen"
                                 Detail="{Binding Par}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
-        </StackLayout>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <ContentView x:Name="CourseNameOverlay" 
+                         IsVisible="False"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
+                AbsoluteLayout.LayoutFlags="All" 
+                BackgroundColor="#C0808080" 
+                Padding="20, 0">
+
+                <StackLayout Padding="30" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label HorizontalOptions="CenterAndExpand" FontSize="Medium" Text="Course name:" />
+                    <Entry x:Name="entCourseName" Placeholder="Empty"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Button HorizontalOptions="FillAndExpand" BackgroundColor="Red" TextColor="White" Clicked="CancelCourseName" Text="Cancel" />
+                        <Button HorizontalOptions="FillAndExpand" BackgroundColor="ForestGreen" TextColor="White" Clicked="SaveAndCreateCourse" Text="Create" />
+                    </StackLayout>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

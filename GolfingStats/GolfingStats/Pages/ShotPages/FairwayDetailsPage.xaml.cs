@@ -11,22 +11,35 @@ using GolfingStats.Models.ShotModels;
 
 namespace GolfingStats.Pages.ShotPages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FairwayDetailsPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class FairwayDetailsPage : ContentPage
     {
         public event EventHandler ShotSaved;
         public event EventHandler ShotDeleted;
 
-        public FairwayDetailsPage (int roundId, int holeId, int shotNum, int disToHole)
+        public FairwayDetailsPage(int roundId, int holeId, int shotNum, ShotModel PrevShotHit)
         {
-            FairwayModel fairwayModel = new FairwayModel() { RoundId = roundId, HoleId = holeId, ShotNumber = shotNum, DistanceToHole = disToHole };
+            FairwayModel fairwayModel = new FairwayModel()
+            {
+                RoundId = roundId,
+                HoleId = holeId,
+                ShotNumber = shotNum,
+                DistanceToHole = PrevShotHit.DistanceLeftToHole
+            };
+
+            if (PrevShotHit.GetType() == typeof(DriveModel))
+            {
+                fairwayModel.BallLie = (((DriveModel)PrevShotHit).OnFairway == true) ? "Fairway" : "Ruff";
+                fairwayModel.BallPositionSide = ((DriveModel)PrevShotHit).PosOnFairwayHorz;
+            }
+
             this.BindingContext = fairwayModel;
 
-			InitializeComponent ();
+            InitializeComponent();
             PageSetup();
         }
 
-        public FairwayDetailsPage (FairwayModel fairwayModel)
+        public FairwayDetailsPage(FairwayModel fairwayModel)
         {
             this.BindingContext = fairwayModel;
 

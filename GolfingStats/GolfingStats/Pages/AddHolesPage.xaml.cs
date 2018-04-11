@@ -76,6 +76,7 @@ namespace GolfingStats.Pages
         {
             courseModel.Holes = (List<HoleModel>)this.ItemsSource;
             await App.dataFactory.UpdateCourse(courseModel);
+            DependencyService.Get<IMessage>().ShortAlert("Course saved");
             await Navigation.PopAsync();
         }
 
@@ -87,6 +88,7 @@ namespace GolfingStats.Pages
             if (await DisplayAlert(string.Format("Delete {0}", Title), "Are you sure you want to delete this course?", "Delete", "Cancel"))
             {
                 App.dataFactory.DeleteCourseAndHoles(courseModel);
+                DependencyService.Get<IMessage>().ShortAlert("Course deleted");
                 await Navigation.PopToRootAsync(true);
             }
         }

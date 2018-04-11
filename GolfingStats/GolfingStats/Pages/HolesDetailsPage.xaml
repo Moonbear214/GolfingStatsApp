@@ -7,61 +7,83 @@
             <ContentPage>
 
                 <ContentPage.ToolbarItems>
-                    <ToolbarItem Text="Save" Clicked="Save"/>
+                    <ToolbarItem Clicked="ReturnToHome" Text="Done"/>
                 </ContentPage.ToolbarItems>
 
                 <ContentPage.Content>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
                         <!--HoleNumber-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5">
                             <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole number:" />
                             <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleNumber}" />
                         </StackLayout>
 
-                        <!--Par-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Par:" />
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Par}" />
+                            <!--Par-->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Par:" />
+                                <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Par}" />
+                            </StackLayout>
+
+                            <!--Stroke-->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke:" />
+                                <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Stroke}" />
+                            </StackLayout>
                         </StackLayout>
 
-                        <!--Stroke-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Stroke:" />
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Stroke}" />
+                            <!--ShotsPlayed-->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
+                                <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
+                            </StackLayout>
+                            
+                            <!--HoleDistance-->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole distance:" />
+                                <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleDistance}" />
+                            </StackLayout>
                         </StackLayout>
 
-                        <!--HoleDistance-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole distance:" />
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleDistance}" />
+                            <!--FIR-->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="FIR" />
+                                <Switch x:Name="swcFIR" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding FIR}" />
+                            </StackLayout>
+
+                            <!--GIR-->
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="GIR" />
+                                <Switch x:Name="swcGIR" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding GIR}" />
+                            </StackLayout>
                         </StackLayout>
 
-                        <!--ShotsPlayed-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
-                            <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
-                        </StackLayout>
+                        <BoxView BackgroundColor="LightGray" HeightRequest="1" />
 
-                        <!--FIR-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="FIR" />
-                            <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding FIR}" />
-                        </StackLayout>
-
-                        <!--GIR-->
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="GIR" />
-                            <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding GIR}" />
-                        </StackLayout>
-
+                        <!--No shots to display label-->
+                        <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No shots played yet." />
+                        
                         <!--Shots played ListView-->
                         <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
                                 ItemTapped="OnShotTapped">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <TextCell Text="{Binding Club}" TextColor="ForestGreen"
-                                              Detail="{Binding DistanceHit, StringFormat='Distance Hit: {0}'}" />
+                                    <ViewCell>
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                                            <!--<Label HorizontalOptions="StartAndExpand" VerticalOptions="Start" TextColor="ForestGreen" Text="{Binding Club}" />-->
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="ForestGreen" Text="{Binding Club, StringFormat='Club: {0}'}" />
+                                                <!--<Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceHit, StringFormat='Hit: {0}m'}" />-->
+                                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceLeftToHole, StringFormat='Distance Left: {0}m'}" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </ViewCell>
+                                    <!--<TextCell Text="{Binding Club}" TextColor="ForestGreen"
+                                              Detail="{Binding DistanceHit, StringFormat='Distance Hit: {0}'}"
+                                              Detail="{Binding DistanceHit, StringFormat='Distance Hit: {0}'}" />-->
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
@@ -79,9 +101,9 @@
                             </Picker.ItemsSource>
                         </Picker>
                         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal" BackgroundColor="MediumSeaGreen">
-                            <Button HorizontalOptions="Start" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousShotPage" />
+                            <Button HorizontalOptions="Start" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousHolePage" />
                             <Button HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
-                            <Button HorizontalOptions="End" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextShotPage" />
+                            <Button HorizontalOptions="End" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextHolePage" />
                         </StackLayout>
 
                     </StackLayout>

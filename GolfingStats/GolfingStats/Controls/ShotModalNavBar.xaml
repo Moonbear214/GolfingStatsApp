@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:local="clr-namespace:GolfingStats"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GolfingStats.Controls.ShotModalNavBar"
+             x:Name="this"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Start"
+             BackgroundColor="SeaGreen">
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+        <Button x:Name="btnCloseModal" HorizontalOptions="Start" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" FontSize="Medium" Text="&lt;" />
+        <Label x:Name="lblHoleNumber" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="15, 0" TextColor="White" FontSize="Medium" />
+    </StackLayout>
+</StackLayout>

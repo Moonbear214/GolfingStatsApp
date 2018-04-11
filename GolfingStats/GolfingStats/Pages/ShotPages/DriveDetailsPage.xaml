@@ -1,31 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:GolfingStats.Controls"
              x:Class="GolfingStats.Pages.ShotPages.DriveDetailsPage">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <control:ShotModalNavBar Title="{Binding ShotNumber}"  />
             <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Padding="10">
 
                     <!--All info before the player hits the shot-->
                     <!--==================================================================================================================-->
                     <!--Shared Shot controls-->
                     <!--=============================================================-->
-                    <!--ShotNumber-->
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="ShotNumber:" />
-                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotNumber}" />
-                    </StackLayout>
-
-
-                    <!--DistanceToHole-->
-                    <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole:" />
-                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceToHole}" />
-                    </StackLayout>-->
-
-
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details before shot is hit:" />
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" FontSize="Medium" TextColor="MediumSeaGreen" Text="Details before shot is hit:" />
+                    <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
 
                     <Grid>
 
@@ -129,7 +118,8 @@
 
                     <!--All info after the player has hit the shots-->
                     <!--==================================================================================================================-->
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Text="Details after shot was hit:" />
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" FontSize="Medium" TextColor="MediumSeaGreen" Text="Details after shot was hit:" />
+                    <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
 
                     <Grid>
 
@@ -238,8 +228,8 @@
 
             <!--Sav3 & Del3te Button-->
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal">
-                <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" BorderColor="DarkRed" Text="Delete" Clicked="DeleteShot" />
-                <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="SkyBlue" TextColor="White" BorderColor="AliceBlue" Text="Save" Clicked="SaveShot" />
+                <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" Text="Delete" Clicked="DeleteShot" />
+                <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="MediumSeaGreen" TextColor="White" Text="Save" Clicked="SaveShot" />
             </StackLayout>
 
         </StackLayout>

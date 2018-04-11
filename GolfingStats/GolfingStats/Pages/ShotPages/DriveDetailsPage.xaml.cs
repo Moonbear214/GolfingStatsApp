@@ -112,5 +112,10 @@ namespace GolfingStats.Pages.ShotPages
                 ShotDeleted?.Invoke(this.BindingContext, EventArgs.Empty);
             }
         }
+
+        async void CloseModal()
+        {
+            await Navigation.PopModalAsync(true);
+        }
     }
 }
