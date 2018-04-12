@@ -22,6 +22,13 @@ namespace GolfingStats.Pages
             PageSetup();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            lwAllCourses.IsRefreshing = true;
+            PageSetup();
+        }
+
         /// <summary>
         /// Method to setup extra UI for page
         /// </summary>
@@ -29,6 +36,10 @@ namespace GolfingStats.Pages
         {
             lwAllCourses.ItemsSource = await App.dataFactory.GetAllCourses();
             lwAllCourses.IsRefreshing = false;
+            if (((List<CourseModel>)lwAllCourses.ItemsSource).Count == 0)
+                lblEmptyList.IsVisible = true;
+            else
+                lblEmptyList.IsVisible = false;
         }
 
         /// <summary>

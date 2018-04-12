@@ -127,5 +127,17 @@ namespace GolfingStats.Pages.ShotPages
                 ShotDeleted?.Invoke(this.BindingContext, EventArgs.Empty);
             }
         }
+
+        private void EntryFocus(object sender, FocusEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text) || ((Entry)sender).Text == "0")
+                ((Entry)sender).Text = "";
+        }
+
+        private void EntryUnfocus(object sender, FocusEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
+                ((Entry)sender).Text = "0";
+        }
     }
 }

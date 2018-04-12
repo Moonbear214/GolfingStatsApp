@@ -117,5 +117,17 @@ namespace GolfingStats.Pages.ShotPages
         {
             await Navigation.PopModalAsync(true);
         }
+
+        private void EntryFocus(object sender, FocusEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text) || ((Entry)sender).Text == "0")
+                ((Entry)sender).Text = "";
+        }
+
+        private void EntryUnfocus(object sender, FocusEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
+                ((Entry)sender).Text = "0";
+        }
     }
 }

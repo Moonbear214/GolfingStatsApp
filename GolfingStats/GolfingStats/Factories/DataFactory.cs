@@ -10,7 +10,7 @@ namespace GolfingStats.Factories
 {
     public class DataFactory
     {
-        private GolfstatsRepository GolfstatsRepository { get; set; }
+        private static GolfstatsRepository GolfstatsRepository { get; set; }
 
         //======================================
         //For use only to add dummy data to storage to work with

@@ -22,7 +22,7 @@ namespace GolfingStats.Models
         /// <summary>
         /// Name of the course that the user creates
         /// </summary>
-        public int Par { get; set; } = 0;
+        public int Par { get; set; } = 72;
 
         /// <summary>
         /// List of all the holes that the player creates that is on the course

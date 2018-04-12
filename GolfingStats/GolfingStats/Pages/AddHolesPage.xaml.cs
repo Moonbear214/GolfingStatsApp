@@ -77,7 +77,7 @@ namespace GolfingStats.Pages
             courseModel.Holes = (List<HoleModel>)this.ItemsSource;
             await App.dataFactory.UpdateCourse(courseModel);
             DependencyService.Get<IMessage>().ShortAlert("Course saved");
-            await Navigation.PopAsync();
+            await Navigation.PopToRootAsync();
         }
 
         /// <summary>
@@ -93,5 +93,16 @@ namespace GolfingStats.Pages
             }
         }
 
+        private void EntryFocus(object sender, FocusEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text) || ((Entry)sender).Text == "0")
+                ((Entry)sender).Text = "";
+        }
+
+        private void EntryUnfocus(object sender, FocusEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
+                ((Entry)sender).Text = "0";
+        }
     }
 }

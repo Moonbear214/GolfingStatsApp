@@ -66,8 +66,8 @@
                             </Picker>
 
                             <!--HoleDistance-->
-                            <Label Grid.Row="2" Grid.Column="0"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Hole Length" />
-                            <Entry Grid.Row="2" Grid.Column="1"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Text="{Binding HoleDistance}" />
+                            <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Hole Length" />
+                            <Entry Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Keyboard="Numeric" Focused="EntryFocus" Unfocused="EntryUnfocus" Text="{Binding HoleDistance}" />
 
                             <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Dogleg" />

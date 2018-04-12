@@ -9,9 +9,9 @@
 
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout 
-                AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
-                AbsoluteLayout.LayoutFlags="All">
+            
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No courses created yet" />
 
                 <!--Courses ListView-->
                 <ListView x:Name="lwAllCourses" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
@@ -41,6 +41,7 @@
                         <Button HorizontalOptions="FillAndExpand" BackgroundColor="ForestGreen" TextColor="White" Clicked="SaveAndCreateCourse" Text="Create" />
                     </StackLayout>
                 </StackLayout>
+                
             </ContentView>
         </AbsoluteLayout>
     </ContentPage.Content>
