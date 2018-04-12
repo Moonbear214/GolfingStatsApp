@@ -80,7 +80,7 @@
 
 
                         <!--WindForce-->
-                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Force Of the wind" />
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Force of wind" />
                         <Picker x:Name="pckWindForce" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding WindForce}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -143,12 +143,12 @@
 
                         
                         <!--DistanceLeftToHole-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance left to the hole" />
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance left to hole" />
                         <Entry x:Name="entDistanceLeft" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Focused="EntryFocus" Unfocused="EntryUnfocus" Text="{Binding DistanceLeftToHole}" />
 
 
                         <!--SwingType-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Swing Type" />
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Swing type" />
                         <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding SwingType}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -162,7 +162,7 @@
 
 
                         <!--BallFlight-->
-                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Ball Flight" />
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Ball flight" />
                         <Picker Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding BallFlight}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -177,7 +177,7 @@
 
                          
                         <!--OnFairway-->
-                        <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On the Fairway" />
+                        <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On fairway" />
                         <Switch x:Name="swcOnFairway" Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding OnFairway}" />
                     </Grid>
 
@@ -188,7 +188,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the Fairway" />
+                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Side of fairway" />
                         <Picker x:Name="pckPosOnFairwayHorz" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnFairwayHorz}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -208,7 +208,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On wich side did the ball miss the fairway" />
+                        <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Side missed" />
                         <Picker x:Name="pckPosToFairwayHorz" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToFairwayHorz}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">

@@ -11,7 +11,7 @@
         <AbsoluteLayout>
             
             <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
-                <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No courses created yet" />
+                <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No courses created yet." />
 
                 <!--Courses ListView-->
                 <ListView x:Name="lwAllCourses" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
@@ -30,13 +30,13 @@
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1" 
                 AbsoluteLayout.LayoutFlags="All" 
                 BackgroundColor="#C0808080" 
-                Padding="20, 0">
+                Padding="30, 100, 30, 0">
 
-                <StackLayout Padding="30" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                    <Label HorizontalOptions="CenterAndExpand" FontSize="Medium" Text="Course name:" />
+                <StackLayout Padding="30" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="Medium" Text="Course name:" />
                     <Entry x:Name="entCourseName" Placeholder="Empty"/>
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                         <Button HorizontalOptions="FillAndExpand" BackgroundColor="Red" TextColor="White" Clicked="CancelCourseName" Text="Cancel" />
                         <Button HorizontalOptions="FillAndExpand" BackgroundColor="ForestGreen" TextColor="White" Clicked="SaveAndCreateCourse" Text="Create" />
                     </StackLayout>

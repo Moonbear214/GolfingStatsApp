@@ -112,8 +112,13 @@ namespace GolfingStats.Pages.ShotPages
         /// </summary>
         public async void SaveShot()
         {
-            await App.dataFactory.CreateShot(this.BindingContext as FairwayModel);
-            ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
+            if (string.IsNullOrEmpty(((ShotModel)this.BindingContext).Club))
+                await DisplayAlert("Club", "Please select the club that was used.", "Okay");
+            else
+            {
+                await App.dataFactory.CreateShot(this.BindingContext as FairwayModel);
+                ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
+            }
         }
 
         /// <summary>

@@ -102,7 +102,13 @@ namespace GolfingStats.Pages
         /// </summary>
         private async void UpdateCoursePicker()
         {
-            CoursePicker.ItemsSource = await App.dataFactory.GetAllCourses();
+            List<CourseModel> AllCourses = await App.dataFactory.GetAllCourses();
+            if (AllCourses.Count == 0)
+            {
+                AllCourses.Add(new CourseModel() { Name = "Please add a course from the homescreen." });
+                CoursePicker.SelectedIndexChanged += (sender, e) => CoursePicker.SelectedIndex = -1;
+            }
+            CoursePicker.ItemsSource = AllCourses;
             CoursePicker.ItemDisplayBinding = new Binding("Name");
         }
 

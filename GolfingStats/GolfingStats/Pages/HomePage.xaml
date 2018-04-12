@@ -10,7 +10,7 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No rounds played yet" />
+            <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No rounds played yet." />
 
             <!--Rounds played ListView-->
             <ListView x:Name="lwRoundsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 

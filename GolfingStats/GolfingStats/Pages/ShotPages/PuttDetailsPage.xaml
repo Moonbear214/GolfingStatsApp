@@ -38,7 +38,6 @@
                         </Grid.ColumnDefinitions>
 
 
-
                         <!--DistanceToHole-->
                         <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole" />
                         <Entry Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Focused="EntryFocus" Unfocused="EntryUnfocus" Text="{Binding DistanceToHole}" />
@@ -65,7 +64,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!--AimingDistance-->
-                            <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="How far are you aiming in the given direction" />
+                            <Label Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Aiming distance" />
                             <Picker Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AimingDistance}">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
@@ -87,7 +86,7 @@
 
 
                         <!--AngleOfGreen-->
-                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="At what angle is the green when looking at the flag" />
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Green angle" />
                         <Picker Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding AngleOfGreen}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -135,7 +134,7 @@
 
 
                         <!--PullBackStrength-->
-                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="How hard did you putt the ball" />
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Putt strenght" />
                         <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PullBackStrength}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -149,7 +148,7 @@
 
 
                         <!--GreenBreak-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="To what side did the green break" />
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Green break" />
                         <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding GreenBreak}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -162,7 +161,7 @@
 
 
                         <!--InHole-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Is the ball in the hole" />
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="In hole" />
                         <Switch x:Name="swcInHole" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding InHole}" />
 
                     </Grid>
@@ -190,7 +189,10 @@
                         
                             <!--TODO:Better wording for this (This is where the ball ended after the putt)-->
                         <!--PosToHoleVer-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the hole (Vertical)" />
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side missed" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Vertical)" />
+                        </StackLayout>
                         <Picker x:Name="pckPosToHoleVer" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToHoleVer}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -203,7 +205,10 @@
 
 
                         <!--PosToHoleHorz-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Which side of the hole (Horizontal)" />
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="side missed" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Vertical)" />
+                        </StackLayout>
                         <Picker x:Name="pckPosToHoleHorz" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToHoleHorz}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">

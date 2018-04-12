@@ -142,7 +142,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Straight, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
-        public Int16 _GreenBreak { get; set; } = 0;
+        public Int16 _GreenBreak { get; set; } = 1;
 
         [Ignore]
         public String GreenBreak

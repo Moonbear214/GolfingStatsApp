@@ -99,7 +99,10 @@ namespace GolfingStats.Pages
             Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
             lblShotsPlayed.Text = ((HoleModel)this.SelectedItem).ShotsPlayed.ToString();
 
-            PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
+            if (((HoleModel)this.SelectedItem).ShotsPlayedList.Count != 0)
+                PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
+            else
+                PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
 
             Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
             if (lblShotsPlayed.Text == "0")
