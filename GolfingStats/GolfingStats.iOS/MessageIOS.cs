@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 
 using Foundation;
+using GolfingStats.iOS;
 using UIKit;
 
+[assembly: Xamarin.Forms.Dependency(typeof(MessageIOS))]
 namespace GolfingStats.iOS
 {
     public class MessageIOS : IMessage
