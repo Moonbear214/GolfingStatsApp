@@ -150,6 +150,12 @@ namespace GolfingStats.Pages
                 puttDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(puttDetailsPage);
             }
+            else if (picker.SelectedIndex == 4)
+            {
+                DropShotDetailsPage dropDetailsPage = new DropShotDetailsPage(roundId, holeId, shotNum);
+                dropDetailsPage.ShotSaved += ShotSaved;
+                await Navigation.PushModalAsync(dropDetailsPage);
+            }
 
             picker.SelectedIndex = -1;
         }
@@ -174,7 +180,7 @@ namespace GolfingStats.Pages
             //Check if the shot is already in the listview itemsource and update if found
             for (int i = 0; i < HolePage.ShotsPlayedList.Count; i++)
             {
-                if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id)
+                if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id && HolePage.ShotsPlayedList[i].GetType() == shotReturned.GetType())
                 {
                     //Shots played list
                     ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
@@ -201,9 +207,7 @@ namespace GolfingStats.Pages
                 Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
                 HolePage.ShotsPlayed = Int32.Parse(lblShotsPlayed.Text) + 1;
                 lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
-
-                PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
-
+                
                 Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
                 if (lblShotsPlayed.Text == "0")
                     lblEmptyList.IsVisible = true;
@@ -290,10 +294,20 @@ namespace GolfingStats.Pages
                 puttDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(puttDetailsPage);
             }
+            else if (sender.SelectedItem.GetType() == typeof(DropShotModel))
+            {
+                DropShotDetailsPage dropDetailsPage = new DropShotDetailsPage((DropShotModel)sender.SelectedItem);
+                dropDetailsPage.ShotSaved += ShotSaved;
+                dropDetailsPage.ShotDeleted += ShotDeleted;
+                Navigation.PushModalAsync(dropDetailsPage);
+            }
 
             sender.SelectedItem = null;
         }
 
+        /// <summary>
+        /// Mehtod to check when the GIR and FIR switches should be switched when a new shot is created
+        /// </summary>
         HoleModel CheckGIRFIR(ShotModel shotReturned)
         {
             HoleModel HolePlayed = (HoleModel)this.SelectedItem;
@@ -439,13 +453,20 @@ namespace GolfingStats.Pages
             return HolePlayed;
         }
 
-
+        /// <summary>
+        /// Changed shot picker to a button that focuses on the shot picker.
+        /// Ui can now be changed on the button
+        /// </summary>
         void ShotPickerFocus()
         {
             Picker pckShotPicker = this.CurrentPage.FindByName<Picker>("pckShotPicker");
             pckShotPicker.Focus();
         }
 
+        /// <summary>
+        /// Takes user to the previous hole when the button is pressed
+        /// (Also goes to the last hole when one the first)
+        /// </summary>
         void GoPreviousHolePage()
         {
             int currentPageNum = ((HoleModel)this.SelectedItem).HoleNumber - 1;
@@ -462,6 +483,10 @@ namespace GolfingStats.Pages
 
         }
 
+        /// <summary>
+        /// Takes user tp the next hole when the button is pressed
+        /// (Also goes to the first hole when on the last)
+        /// </summary>
         void GoNextHolePage()
         {
             int currentPageNum = ((HoleModel)this.SelectedItem).HoleNumber - 1;

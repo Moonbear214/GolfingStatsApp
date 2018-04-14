@@ -941,9 +941,9 @@ namespace GolfingStats.Models.ShotModels
 
         //=========================================================================================================
         /// <summary>
-        /// Converts Putting aiming distance values to string or integer depending on what is needed:
+        /// Converts club used values to string or integer depending what is needed:
         /// 1 = Driver, 2 = 3 Wood, 3 = 5 Wood, 4 = 3 Hybrid, 5 = 5 Hybrid, 6 = 2 Iron, 7 = 3 Iron, 8 = 4 Iron, 9 = 5 Iron, 10 = 6 Iron,
-        /// 11 = 7 Iron, 12 = 8 Iron, 13 = 9 Iron, 14 = PW, 15 = 52 Wedge, 16 = 56 Wedge, 17 = 60 Wedge,  18 = Putter
+        /// 11 = 7 Iron, 12 = 8 Iron, 13 = 9 Iron, 14 = PW, 15 = 52 Wedge, 16 = 56 Wedge, 17 = 60 Wedge,  18 = Putter, 19 = Drop shot
         /// </summary>
         public string ClubUsed(Int16 valueParam)
         {
@@ -1007,6 +1007,9 @@ namespace GolfingStats.Models.ShotModels
                     break;
                 case 18:
                     Value = "Putter";
+                    break;
+                case 19:
+                    Value = "Drop shot";
                     break;
             }
 
@@ -1075,6 +1078,117 @@ namespace GolfingStats.Models.ShotModels
                     break;
                 case "Putter":
                     Value = 18;
+                    break;
+                case "Drop Shot":
+                    Value = 19;
+                    break;
+            }
+
+            return Value;
+        }
+        //=========================================================================================================
+
+        /// <summary>
+        /// Converts Water, Lost ball, Unplayable, out of bounds values to string or integer depending on what is needed:
+        /// 1 = Water, 2 = Lost ball, 3 = Unplayable, 4 = Out of bounds
+        /// </summary>
+        public string WaterLostUnplayableBounds(Int16 valueParam)
+        {
+            String Value = null;
+
+            switch (valueParam)
+            {
+                case 0:
+                    Value = null;
+                    break;
+                case 1:
+                    Value = "Water";
+                    break;
+                case 2:
+                    Value = "Lost ball";
+                    break;
+                case 3:
+                    Value = "Unplayable";
+                    break;
+                case 4:
+                    Value = "Out of bounds";
+                    break;
+            }
+
+            return Value;
+        }
+
+        public Int16 WaterLostUnplayableBounds(String valueParam)
+        {
+            Int16 Value = 0;
+
+            switch (valueParam)
+            {
+                case null:
+                    Value = 0;
+                    break;
+                case "Water":
+                    Value = 1;
+                    break;
+                case "Lost ball":
+                    Value = 2;
+                    break;
+                case "Unplayable":
+                    Value = 3;
+                    break;
+                case "Out of bounds":
+                    Value = 4;
+                    break;
+            }
+
+            return Value;
+        }
+        //=========================================================================================================
+
+        /// <summary>
+        /// Converts Water, Lost ball, Unplayable, out of bounds values to string or integer depending on what is needed:
+        /// 1 = Closest point of relieve, 2 = Point of entry, 3 = Replay previous shot
+        /// </summary>
+        public string ClosestEntryReplay(Int16 valueParam)
+        {
+            String Value = null;
+
+            switch (valueParam)
+            {
+                case 0:
+                    Value = null;
+                    break;
+                case 1:
+                    Value = "Closest point of relieve";
+                    break;
+                case 2:
+                    Value = "Point of entry";
+                    break;
+                case 3:
+                    Value = "Replay previous shot";
+                    break;
+            }
+
+            return Value;
+        }
+
+        public Int16 ClosestEntryReplay(String valueParam)
+        {
+            Int16 Value = 0;
+
+            switch (valueParam)
+            {
+                case null:
+                    Value = 0;
+                    break;
+                case "Closest point of relieve":
+                    Value = 1;
+                    break;
+                case "Point of entry":
+                    Value = 2;
+                    break;
+                case "Replay previous shot":
+                    Value = 3;
                     break;
             }
 

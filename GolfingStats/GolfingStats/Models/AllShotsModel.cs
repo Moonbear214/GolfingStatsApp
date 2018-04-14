@@ -19,5 +19,7 @@ namespace GolfingStats.Models
         public List<ChipModel> ChipASModel { get; set; } = new List<ChipModel>();
 
         public List<PuttModel> PuttASModel { get; set; } = new List<PuttModel>();
+
+        public List<DropShotModel> DropASModel { get; set; } = new List<DropShotModel>();
     }
 }

@@ -26,23 +26,28 @@ namespace GolfingStats
             this.Appearing += HomePage_Appearing;
         }
 
-        /// <summary>
-        /// Gets and displays all the rounds that are saved in local storage as soon as the page will appear
-        /// </summary>
         private void HomePage_Appearing(object sender, EventArgs e)
         {
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.SeaGreen;
-            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
             GetDisplayAllRounds();
         }
 
+        /// <summary>
+        /// Gets and displays all the rounds that are saved in local storage as soon as the page will appear
+        /// </summary>
         async void GetDisplayAllRounds()
         {
-            lwRoundsPlayed.ItemsSource = await App.dataFactory.GetAllRounds();
-            if (((List<RoundModel>)lwRoundsPlayed.ItemsSource).Count == 0)
+            try
+            {
+                lwRoundsPlayed.ItemsSource = await App.dataFactory.GetAllRounds();
+                if (((List<RoundModel>)lwRoundsPlayed.ItemsSource).Count == 0)
+                    lblEmptyList.IsVisible = true;
+                else
+                    lblEmptyList.IsVisible = false;
+            }
+            catch
+            {
                 lblEmptyList.IsVisible = true;
-            else
-                lblEmptyList.IsVisible = false;
+            }
         }
 
         /// <summary>

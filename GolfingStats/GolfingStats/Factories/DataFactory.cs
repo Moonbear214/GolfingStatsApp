@@ -177,12 +177,20 @@ namespace GolfingStats.Factories
                 return await GolfstatsRepository.AddNewShot(putt);
         }
 
+        public async Task<DropShotModel> CreateShot(DropShotModel drop)
+        {
+            //If the shot already has an ID, update the shot in local storage
+            if (drop.Id != 0)
+                return await UpdateShot(drop);
+            else
+                return await GolfstatsRepository.AddNewShot(drop);
+        }
         //==================================================================================
 
 
         // Methods for updating tables in local storage
         //==================================================================================
-        
+
         public async Task<CourseModel> UpdateCourse(CourseModel course)
         {
             await UpdateHoles(course.Holes);
@@ -229,6 +237,11 @@ namespace GolfingStats.Factories
         }
 
         public async Task<PuttModel> UpdateShot(PuttModel shot)
+        {
+            return await GolfstatsRepository.UpdateShot(shot);
+        }
+
+        public async Task<DropShotModel> UpdateShot(DropShotModel shot)
         {
             return await GolfstatsRepository.UpdateShot(shot);
         }
@@ -326,8 +339,13 @@ namespace GolfingStats.Factories
         {
             return await GolfstatsRepository.GetAllShotsPutt();
         }
+
+        public async Task<List<DropShotModel>> GetAllShotsDrop()
+        {
+            return await GolfstatsRepository.GetAllShotsDrop();
+        }
         //==================================================================================
-        
+
         //Delete data from local storage
         //==================================================================================
         public void DeleteRoundHolesShots(RoundModel round)
@@ -374,6 +392,11 @@ namespace GolfingStats.Factories
             for (int i = 0; i < allShots.PuttASModel.Count; i++)
             {
                 shotModel.Add(allShots.PuttASModel[i]);
+            }
+
+            for (int i = 0; i < allShots.DropASModel.Count; i++)
+            {
+                shotModel.Add(allShots.DropASModel[i]);
             }
 
             return shotModel;

@@ -13,7 +13,7 @@ namespace GolfingStats.Models.ShotModels
 
         /// <summary>
         /// Indecator of which shot model type is used by the shot:
-        /// 0 = Drive, 1 = Fairway, 2 = Chip, 3 = Putt
+        /// 0 = Drive, 1 = Fairway, 2 = Chip, 3 = Putt, 4 = Drop
         /// </summary>
         public int ShotType { get; } = 2;
 

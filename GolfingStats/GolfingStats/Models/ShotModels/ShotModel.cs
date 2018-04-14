@@ -41,7 +41,7 @@ namespace GolfingStats.Models.ShotModels
         public int DistanceLeftToHole { get; set; } = 0;
 
         /// <summary>
-        /// Driver, 3/5 Wood, 3/5 Hybrid, 2/3/4/5/6/7/8/9 Iron, PW, 52/56/60 Wedge, Putter
+        /// Driver, 3/5 Wood, 3/5 Hybrid, 2/3/4/5/6/7/8/9 Iron, PW, 52/56/60 Wedge, Putter, Drop shot
         /// </summary>
         [MaxLength(2)]
         public Int16 _Club { get; set; } = 0;
@@ -58,7 +58,5 @@ namespace GolfingStats.Models.ShotModels
                 this._Club = ConvertShotsClass.ClubUsed(value);
             }
         }
-
-        //TODO: Add drop shot variable for waterhazards, Out-of-Bounds ect.
     }
 }

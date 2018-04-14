@@ -82,8 +82,13 @@ namespace GolfingStats.Pages
 
         protected override bool OnBackButtonPressed()
         {
-            CancelCourseName();
-            return true;
+            if (CourseNameOverlay.IsVisible)
+            {
+                CancelCourseName();
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

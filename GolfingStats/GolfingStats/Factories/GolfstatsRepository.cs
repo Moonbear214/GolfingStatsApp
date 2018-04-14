@@ -32,6 +32,7 @@ namespace GolfingStats
             await conn.CreateTableAsync<FairwayModel>();
             await conn.CreateTableAsync<ChipModel>();
             await conn.CreateTableAsync<PuttModel>();
+            await conn.CreateTableAsync<DropShotModel>();
         }
 
         //Methods for adding to local storage data for all classes (courses, rounds, holes, shots)
@@ -159,6 +160,22 @@ namespace GolfingStats
         //Putt
         //================================
         public async Task<PuttModel> AddNewShot(PuttModel shot)
+        {
+            try
+            {
+                await conn.InsertAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+
+        //DropShot
+        //================================
+        public async Task<DropShotModel> AddNewShot(DropShotModel shot)
         {
             try
             {
@@ -313,6 +330,22 @@ namespace GolfingStats
                 throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
             }
         }
+
+        //DropShot
+        //================================
+        public async Task<DropShotModel> UpdateShot(DropShotModel shot)
+        {
+            try
+            {
+                await conn.UpdateAsync(shot);
+                return shot;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
         //================================
 
         //========================================================================================================================================================================
@@ -427,7 +460,8 @@ namespace GolfingStats
                     DriveASModel = await conn.Table<DriveModel>().Where(t => t.HoleId == holeId).ToListAsync(),
                     FairwayASModel = await conn.Table<FairwayModel>().Where(t => t.HoleId == holeId).ToListAsync(),
                     ChipASModel = await conn.Table<ChipModel>().Where(t => t.HoleId == holeId).ToListAsync(),
-                    PuttASModel = await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync()
+                    PuttASModel = await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync(),
+                    DropASModel = await conn.Table<DropShotModel>().Where(t => t.HoleId == holeId).ToListAsync()
                 };
 
                 return allShots;
@@ -453,6 +487,7 @@ namespace GolfingStats
                     allShots.FairwayASModel.AddRange(await conn.Table<FairwayModel>().Where(t => t.HoleId == holeId).ToListAsync());
                     allShots.ChipASModel.AddRange(await conn.Table<ChipModel>().Where(t => t.HoleId == holeId).ToListAsync());
                     allShots.PuttASModel.AddRange(await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync());
+                    allShots.DropASModel.AddRange(await conn.Table<DropShotModel>().Where(t => t.HoleId == holeId).ToListAsync());
                 }
 
                 return allShots;
@@ -476,7 +511,8 @@ namespace GolfingStats
                     DriveASModel = await conn.Table<DriveModel>().ToListAsync(),
                     FairwayASModel = await conn.Table<FairwayModel>().ToListAsync(),
                     ChipASModel = await conn.Table<ChipModel>().ToListAsync(),
-                    PuttASModel = await conn.Table<PuttModel>().ToListAsync()
+                    PuttASModel = await conn.Table<PuttModel>().ToListAsync(),
+                    DropASModel = await conn.Table<DropShotModel>().ToListAsync()
                 };
 
                 return allShots;
@@ -544,6 +580,21 @@ namespace GolfingStats
             try
             {
                 return await conn.Table<PuttModel>().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+
+        //DropShot
+        //================================
+        public async Task<List<DropShotModel>> GetAllShotsDrop()
+        {
+            try
+            {
+                return await conn.Table<DropShotModel>().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -648,6 +699,7 @@ namespace GolfingStats
                 await conn.ExecuteAsync(string.Format("DELETE FROM FairwayShot WHERE RoundId = {0}", roundId));
                 await conn.ExecuteAsync(string.Format("DELETE FROM ChipShot WHERE RoundId = {0}", roundId));
                 await conn.ExecuteAsync(string.Format("DELETE FROM PuttShot WHERE RoundId = {0}", roundId));
+                await conn.ExecuteAsync(string.Format("DELETE FROM DropShot WHERE RoundId = {0}", roundId));
             }
             catch (Exception ex)
             {
@@ -668,6 +720,7 @@ namespace GolfingStats
             await conn.ExecuteAsync("DELETE FROM FairwayShot");
             await conn.ExecuteAsync("DELETE FROM ChipShot");
             await conn.ExecuteAsync("DELETE FROM PuttShot");
+            await conn.ExecuteAsync("DELETE FROM DropShot");
         }
         //========================================================================================================================================================================
     }

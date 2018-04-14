@@ -73,17 +73,12 @@
                                 <DataTemplate>
                                     <ViewCell>
                                         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
-                                            <!--<Label HorizontalOptions="StartAndExpand" VerticalOptions="Start" TextColor="ForestGreen" Text="{Binding Club}" />-->
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="ForestGreen" Text="{Binding Club, StringFormat='Club: {0}'}" />
-                                                <!--<Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceHit, StringFormat='Hit: {0}m'}" />-->
                                                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DistanceLeftToHole, StringFormat='Distance Left: {0}m'}" />
                                             </StackLayout>
                                         </StackLayout>
                                     </ViewCell>
-                                    <!--<TextCell Text="{Binding Club}" TextColor="ForestGreen"
-                                              Detail="{Binding DistanceHit, StringFormat='Distance Hit: {0}'}"
-                                              Detail="{Binding DistanceHit, StringFormat='Distance Hit: {0}'}" />-->
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
@@ -97,6 +92,7 @@
                                     <x:String>Approach</x:String>
                                     <x:String>Chip</x:String>
                                     <x:String>Putt</x:String>
+                                    <x:String>Drop shot</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>

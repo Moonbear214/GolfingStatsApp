@@ -100,6 +100,12 @@ namespace GolfingStats
         {
             return new PuttModel();
         }
+
+        //Drop
+        public DropShotModel OneShotDrop()
+        {
+            return new DropShotModel();
+        }
         //=================================================
 
         //Returns 4 shots with no hole or round Id's assigned
@@ -155,6 +161,19 @@ namespace GolfingStats
 
             return fourShots;
         }
+
+        //Returns 4 Putts with no hole or round Id's assigned 
+        public List<DropShotModel> FourShotsDrop()
+        {
+            List<DropShotModel> fourShots = new List<DropShotModel>();
+
+            while (fourShots.Count < 4)
+            {
+                fourShots.Add(new DropShotModel());
+            }
+
+            return fourShots;
+        }
         //=================================================
 
         //Returns 4 shots with hole or round Id's assigned
@@ -206,6 +225,19 @@ namespace GolfingStats
             while (fourShots.Count < 4)
             {
                 fourShots.Add(new PuttModel() { RoundId = roundId, HoleId = holeId });
+            }
+
+            return fourShots;
+        }
+
+        //Returns 4 Putts with hole or round Id's assigned 
+        public List<DropShotModel> FourShotsDrop(int roundId, int holeId)
+        {
+            List<DropShotModel> fourShots = new List<DropShotModel>();
+
+            while (fourShots.Count < 4)
+            {
+                fourShots.Add(new DropShotModel() { RoundId = roundId, HoleId = holeId });
             }
 
             return fourShots;

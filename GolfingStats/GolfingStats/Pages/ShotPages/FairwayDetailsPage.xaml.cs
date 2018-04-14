@@ -133,12 +133,19 @@ namespace GolfingStats.Pages.ShotPages
             }
         }
 
+        /// <summary>
+        /// Changes the text of the entry to "" if the text is 0 (Which is default)
+        /// Help speed up pace of entering information
+        /// </summary>
         private void EntryFocus(object sender, FocusEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(((Entry)sender).Text) || ((Entry)sender).Text == "0")
                 ((Entry)sender).Text = "";
         }
 
+        /// <summary>
+        /// Changes the text of the entry to 0 if the text is ""
+        /// </summary>
         private void EntryUnfocus(object sender, FocusEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(((Entry)sender).Text))
