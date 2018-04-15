@@ -8,7 +8,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
 
             <Grid x:Name="grdChooseCourse">
                 <Grid.RowDefinitions>
@@ -21,7 +21,7 @@
 
                 <!--Course Picker-->
                 <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GolfCourse" />
-                <Picker x:Name="CoursePicker" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="80" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
+                <Picker x:Name="CoursePicker" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
             </Grid>
 
             <Grid>

@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GolfingStats.Pages.HolesDetailsPage"
-             x:Name="HolePageRoot">
+             x:Class="GolfingStats.Pages.HolesDetailsPage">
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
@@ -13,7 +12,6 @@
 
                 <ContentPage.Content>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BindingContext="{x:Reference Name=HolePageRoot}" IsVisible="{Binding PageIsLoading, Mode=OneWayToSource}" IsRunning="{Binding PageIsLoading, Mode=OneWayToSource}"/>
 
                         <!--HoleNumber-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5">

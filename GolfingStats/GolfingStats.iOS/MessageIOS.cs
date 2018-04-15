@@ -12,8 +12,8 @@ namespace GolfingStats.iOS
 {
     public class MessageIOS : IMessage
     {
-        const double LONG_DELAY = 3.5;
-        const double SHORT_DELAY = 2.0;
+        const double LONG_DELAY = 2.5;
+        const double SHORT_DELAY = 1.0;
 
         NSTimer alertDelay;
         UIAlertController alert;

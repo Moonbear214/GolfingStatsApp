@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Acr.UserDialogs;
 
 using GolfingStats.Models;
 using GolfingStats.Models.ShotModels;
@@ -16,10 +17,6 @@ namespace GolfingStats.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HolesDetailsPage : CarouselPage
     {
-        //========================================================
-        public bool PageIsLoading { get; set; } = true;
-        //========================================================
-
         ShotModel PrevShotHit = new ShotModel();
 
         public HolesDetailsPage(RoundModel round, CourseModel course)
@@ -58,30 +55,31 @@ namespace GolfingStats.Pages
         /// <param name="round"></param>
         async void ViewPreviousRound(RoundModel round)
         {
-            List<HoleModel> holes = await App.dataFactory.GetHolesFromRoundId(round.Id);
-
-            List<int> holeIds = new List<int>();
-            foreach (HoleModel hole in holes)
+            using (UserDialogs.Instance.Loading(null, null, null, true, MaskType.Black))
             {
-                holeIds.Add(hole.Id);
-            }
+                List<HoleModel> holes = await App.dataFactory.GetHolesFromRoundId(round.Id);
 
-            List<ShotModel> ShotsPlayed = await App.dataFactory.GetShotsFromHoleIdList(holeIds);
-
-            foreach (HoleModel hole in holes)
-            {
-                foreach (ShotModel shot in ShotsPlayed)
+                List<int> holeIds = new List<int>();
+                foreach (HoleModel hole in holes)
                 {
-                    if (shot.HoleId == hole.Id)
+                    holeIds.Add(hole.Id);
+                }
+
+                List<ShotModel> ShotsPlayed = await App.dataFactory.GetShotsFromHoleIdList(holeIds);
+
+                foreach (HoleModel hole in holes)
+                {
+                    foreach (ShotModel shot in ShotsPlayed)
                     {
-                        hole.ShotsPlayedList.Add(shot);
+                        if (shot.HoleId == hole.Id)
+                        {
+                            hole.ShotsPlayedList.Add(shot);
+                        }
                     }
                 }
+
+                this.ItemsSource = holes;
             }
-
-            this.ItemsSource = holes;
-
-            this.PageIsLoading = false;
         }
 
         /// <summary>

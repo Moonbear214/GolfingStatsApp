@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Acr.UserDialogs;
 
 namespace GolfingStats.Droid
 {
@@ -20,6 +21,7 @@ namespace GolfingStats.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            UserDialogs.Init(this);
             string dbPath = FileAccessHelper.GetLocalFilePath("golfstats.db3");
             LoadApplication(new App(dbPath));
         }
