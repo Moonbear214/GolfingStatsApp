@@ -18,6 +18,17 @@ namespace GolfingStats.Pages
         CourseModel courseModel;
         bool NewCourse = true;
 
+        ToolbarItem tlbSave = new ToolbarItem()
+        {
+            Text = "Save"
+        };
+
+        ToolbarItem tlbDelete = new ToolbarItem()
+        {
+            Text = "Delete"
+        };
+
+
         public AddHolesPage(CourseModel course, bool newCourse)
         {
             courseModel = course;
@@ -27,26 +38,18 @@ namespace GolfingStats.Pages
             Title = course.Name;
 
             this.ItemsSource = course.Holes;
-
+            
             NewCourse = newCourse;
-            PageSetup();
+            this.Appearing += PageSetup;
         }
 
         /// <summary>
         /// Method to setup extra UI for page
+        /// (Has to run when page appears, else buttons are only added when user swipes for the first time)
         /// </summary>
-        private void PageSetup()
+        private void PageSetup(object sender, EventArgs e)
         {
-            ToolbarItem tlbSave = new ToolbarItem()
-            {
-                Text = "Save"
-            };
             tlbSave.Clicked += UpdateCourseCheck;
-
-            ToolbarItem tlbDelete = new ToolbarItem()
-            {
-                Text = "Delete"
-            };
             tlbDelete.Clicked += DeleteCourse;
 
             if (!NewCourse)
@@ -72,12 +75,15 @@ namespace GolfingStats.Pages
             }
         }
 
+        /// <summary>
+        /// Updates/Saves the course in local storage and takes user back to home page
+        /// </summary>
         async void UpdateCourse()
         {
             courseModel.Holes = (List<HoleModel>)this.ItemsSource;
             await App.dataFactory.UpdateCourse(courseModel);
-            DependencyService.Get<IMessage>().ShortAlert("Course saved");
             await Navigation.PopToRootAsync();
+            DependencyService.Get<IMessage>().ShortAlert("Course saved");
         }
 
         /// <summary>
@@ -88,17 +94,24 @@ namespace GolfingStats.Pages
             if (await DisplayAlert(string.Format("Delete {0}", Title), "Are you sure you want to delete this course?", "Delete", "Cancel"))
             {
                 App.dataFactory.DeleteCourseAndHoles(courseModel);
-                DependencyService.Get<IMessage>().ShortAlert("Course deleted");
                 await Navigation.PopToRootAsync(true);
+                DependencyService.Get<IMessage>().ShortAlert("Course deleted");
             }
         }
 
+        /// <summary>
+        /// Changes the text of the entry to "" if the text is 0 (Which is default)
+        /// Help speed up pace of entering information
+        /// </summary>
         private void EntryFocus(object sender, FocusEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(((Entry)sender).Text) || ((Entry)sender).Text == "0")
                 ((Entry)sender).Text = "";
         }
 
+        /// <summary>
+        /// Changes the text of the entry to 0 if the text is ""
+        /// </summary>
         private void EntryUnfocus(object sender, FocusEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(((Entry)sender).Text))

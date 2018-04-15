@@ -18,14 +18,12 @@ namespace GolfingStats.Pages
         {
             Title = "All Courses";
             InitializeComponent();
-
             PageSetup();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            lwAllCourses.IsRefreshing = true;
             PageSetup();
         }
 
@@ -35,11 +33,16 @@ namespace GolfingStats.Pages
         async void PageSetup()
         {
             lwAllCourses.ItemsSource = await App.dataFactory.GetAllCourses();
-            lwAllCourses.IsRefreshing = false;
             if (((List<CourseModel>)lwAllCourses.ItemsSource).Count == 0)
+            {
+                lwAllCourses.IsVisible = false;
                 lblEmptyList.IsVisible = true;
+            }
             else
+            {
+                lwAllCourses.IsVisible = true;
                 lblEmptyList.IsVisible = false;
+            }
         }
 
         /// <summary>

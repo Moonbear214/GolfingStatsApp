@@ -14,14 +14,17 @@
                 <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No courses created yet." />
 
                 <!--Courses ListView-->
-                <ListView x:Name="lwAllCourses" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
-                    ItemTapped="OnCourseTapped" IsRefreshing="True">
+                <ListView x:Name="lwAllCourses" HorizontalOptions="FillAndExpand" VerticalOptions="Start" 
+                    ItemTapped="OnCourseTapped" IsVisible="False">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding Name}" TextColor="ForestGreen"
                                 Detail="{Binding Par}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Label />
+                    </ListView.Footer>
                 </ListView>
             </StackLayout>
 

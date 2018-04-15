@@ -5,6 +5,7 @@
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
+                
                 <ContentPage.Content>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 

@@ -7,8 +7,15 @@
              HorizontalOptions="FillAndExpand"
              VerticalOptions="Start"
              BackgroundColor="SeaGreen">
+
     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
-        <Button x:Name="btnCloseModal" HorizontalOptions="Start" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" FontSize="Medium" Text="&lt;" />
-        <Label x:Name="lblHoleNumber" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="15, 0" TextColor="White" FontSize="Medium" />
+        <StackLayout.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS">0,30,0,0</On>
+            </OnPlatform>
+        </StackLayout.Margin>
+        <Label x:Name="lblHoleNumber" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="15, 0" TextColor="White" FontSize="Medium" FontAttributes="Bold" />
+        <!--TODO:Add facing arrow to close modal-->
+        <Button x:Name="btnCloseModal" HorizontalOptions="End" VerticalOptions="CenterAndExpand" Margin="20,0" BackgroundColor="SeaGreen" TextColor="White" FontSize="Medium" Text="&lt;" />
     </StackLayout>
 </StackLayout>

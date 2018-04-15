@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GolfingStats.Pages.HolesDetailsPage">
+             x:Class="GolfingStats.Pages.HolesDetailsPage"
+             x:Name="HolePageRoot">
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
@@ -12,6 +13,7 @@
 
                 <ContentPage.Content>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BindingContext="{x:Reference Name=HolePageRoot}" IsVisible="{Binding PageIsLoading, Mode=OneWayToSource}" IsRunning="{Binding PageIsLoading, Mode=OneWayToSource}"/>
 
                         <!--HoleNumber-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5">
@@ -64,10 +66,10 @@
                         <BoxView BackgroundColor="LightGray" HeightRequest="1" />
 
                         <!--No shots to display label-->
-                        <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" Text="No shots played yet." />
+                        <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="True" Text="No shots played yet." />
                         
                         <!--Shots played ListView-->
-                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" 
+                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="Start" IsVisible="False"
                                 ItemTapped="OnShotTapped">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -81,6 +83,9 @@
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+                            <ListView.Footer>
+                                <Label />
+                            </ListView.Footer>
                         </ListView>
 
                         <!--Add shot-->

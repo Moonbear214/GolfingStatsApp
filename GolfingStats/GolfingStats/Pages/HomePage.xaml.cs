@@ -21,8 +21,6 @@ namespace GolfingStats
 
             InitializeComponent();
 
-            GetDisplayAllRounds();
-
             this.Appearing += HomePage_Appearing;
         }
 
@@ -36,16 +34,25 @@ namespace GolfingStats
         /// </summary>
         async void GetDisplayAllRounds()
         {
+            //Very ugly fix. Page loads before tables are done creating in local storage (Mostly first time user starts app), if this happens, show no rounds created yet.
+            // TODO: Fix this (Homepage table creation problem)
             try
             {
                 lwRoundsPlayed.ItemsSource = await App.dataFactory.GetAllRounds();
                 if (((List<RoundModel>)lwRoundsPlayed.ItemsSource).Count == 0)
+                {
+                    lwRoundsPlayed.IsVisible = false;
                     lblEmptyList.IsVisible = true;
+                }
                 else
+                {
+                    lwRoundsPlayed.IsVisible = true;
                     lblEmptyList.IsVisible = false;
+                }
             }
             catch
             {
+                lwRoundsPlayed.IsVisible = false;
                 lblEmptyList.IsVisible = true;
             }
         }

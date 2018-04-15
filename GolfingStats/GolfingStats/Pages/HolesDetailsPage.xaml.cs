@@ -16,6 +16,10 @@ namespace GolfingStats.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HolesDetailsPage : CarouselPage
     {
+        //========================================================
+        public bool PageIsLoading { get; set; } = true;
+        //========================================================
+
         ShotModel PrevShotHit = new ShotModel();
 
         public HolesDetailsPage(RoundModel round, CourseModel course)
@@ -76,6 +80,8 @@ namespace GolfingStats.Pages
             }
 
             this.ItemsSource = holes;
+
+            this.PageIsLoading = false;
         }
 
         /// <summary>
@@ -84,8 +90,8 @@ namespace GolfingStats.Pages
         async void ReturnToHome()
         {
             await App.dataFactory.UpdateHoles(this.ItemsSource.Cast<HoleModel>());
-            DependencyService.Get<IMessage>().ShortAlert("Round saved");
             await Navigation.PopToRootAsync();
+            DependencyService.Get<IMessage>().ShortAlert("Round saved");
         }
 
         void UpdateShotsListview(object sender, EventArgs e)
@@ -93,22 +99,30 @@ namespace GolfingStats.Pages
             //Shots played list
             ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
             if (lwShotsPlayed.ItemsSource == null)
+            {
                 lwShotsPlayed.ItemsSource = ((HoleModel)this.SelectedItem).ShotsPlayedList.OrderBy(x => x.ShotNumber);
 
-            //Shots played label
-            Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
-            lblShotsPlayed.Text = ((HoleModel)this.SelectedItem).ShotsPlayed.ToString();
+                //Shots played label
+                Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
+                lblShotsPlayed.Text = ((HoleModel)this.SelectedItem).ShotsPlayed.ToString();
 
-            if (((HoleModel)this.SelectedItem).ShotsPlayedList.Count != 0)
-                PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
-            else
-                PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
+                if (((HoleModel)this.SelectedItem).ShotsPlayedList.Count != 0)
+                    PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
+                else
+                    PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
 
-            Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
-            if (lblShotsPlayed.Text == "0")
-                lblEmptyList.IsVisible = true;
-            else
-                lblEmptyList.IsVisible = false;
+                Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
+                if (lblShotsPlayed.Text == "0")
+                {
+                    lwShotsPlayed.IsVisible = false;
+                    lblEmptyList.IsVisible = true;
+                }
+                else
+                {
+                    lwShotsPlayed.IsVisible = true;
+                    lblEmptyList.IsVisible = false;
+                }
+            }
         }
 
         /// <summary>
@@ -176,7 +190,7 @@ namespace GolfingStats.Pages
             ShotModel shotReturned = (ShotModel)sender;
 
             PrevShotHit = shotReturned;
-            
+
             //Check if the shot is already in the listview itemsource and update if found
             for (int i = 0; i < HolePage.ShotsPlayedList.Count; i++)
             {
@@ -207,12 +221,18 @@ namespace GolfingStats.Pages
                 Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
                 HolePage.ShotsPlayed = Int32.Parse(lblShotsPlayed.Text) + 1;
                 lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
-                
+
                 Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
                 if (lblShotsPlayed.Text == "0")
+                {
+                    lwShotsPlayed.IsVisible = false;
                     lblEmptyList.IsVisible = true;
+                }
                 else
+                {
+                    lwShotsPlayed.IsVisible = true;
                     lblEmptyList.IsVisible = false;
+                }
 
                 await App.dataFactory.UpdateHole(CheckGIRFIR(shotReturned));
             }
@@ -250,9 +270,15 @@ namespace GolfingStats.Pages
 
                     Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
                     if (lblShotsPlayed.Text == "0")
+                    {
+                        lwShotsPlayed.IsVisible = false;
                         lblEmptyList.IsVisible = true;
+                    }
                     else
+                    {
+                        lwShotsPlayed.IsVisible = true;
                         lblEmptyList.IsVisible = false;
+                    }
 
                     DependencyService.Get<IMessage>().ShortAlert("Shot deleted");
                     //TODO: Remove GIR and FIR from hole if shot changes were made
