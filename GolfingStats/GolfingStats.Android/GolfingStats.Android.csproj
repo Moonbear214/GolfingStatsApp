@@ -81,6 +81,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidAsset Include="Assets\FontAwesomeReg.ttf" />
+    <AndroidAsset Include="Assets\FontAwesomeSolid.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\drawable\splash.png" />

@@ -16,6 +16,6 @@
         </StackLayout.Margin>
         <Label x:Name="lblHoleNumber" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" FontSize="Medium" FontAttributes="Bold" />
         <!--TODO:Add facing arrow to close modal-->
-        <Button x:Name="btnCloseModal" HorizontalOptions="End" VerticalOptions="CenterAndExpand" Margin="20,0,0,0" BackgroundColor="SeaGreen" TextColor="White" FontSize="Medium" Text="&lt;" />
+        <Button x:Name="btnCloseModal" HorizontalOptions="End" VerticalOptions="CenterAndExpand" WidthRequest="40" BackgroundColor="SeaGreen" TextColor="White" Style="{StaticResource FontAwesomeSolid}" Text="&#xf063;" />
     </StackLayout>
 </StackLayout>

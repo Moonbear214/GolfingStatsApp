@@ -12,14 +12,14 @@ using GolfingStats.Models.ShotModels;
 namespace GolfingStats.Pages.ShotPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FairwayDetailsPage : ContentPage
+    public partial class ApproachDetailsPage : ContentPage
     {
         public event EventHandler ShotSaved;
         public event EventHandler ShotDeleted;
 
-        public FairwayDetailsPage(int roundId, int holeId, int shotNum, ShotModel PrevShotHit)
+        public ApproachDetailsPage(int roundId, int holeId, int shotNum, ShotModel PrevShotHit)
         {
-            FairwayModel fairwayModel = new FairwayModel()
+            ApproachModel fairwayModel = new ApproachModel()
             {
                 RoundId = roundId,
                 HoleId = holeId,
@@ -39,7 +39,7 @@ namespace GolfingStats.Pages.ShotPages
             PageSetup();
         }
 
-        public FairwayDetailsPage(FairwayModel fairwayModel)
+        public ApproachDetailsPage(ApproachModel fairwayModel)
         {
             this.BindingContext = fairwayModel;
 
@@ -116,7 +116,7 @@ namespace GolfingStats.Pages.ShotPages
                 await DisplayAlert("Club", "Please select the club that was used.", "Okay");
             else
             {
-                await App.dataFactory.CreateShot(this.BindingContext as FairwayModel);
+                await App.dataFactory.CreateShot(this.BindingContext as ApproachModel);
                 ShotSaved?.Invoke(this.BindingContext, EventArgs.Empty);
             }
         }

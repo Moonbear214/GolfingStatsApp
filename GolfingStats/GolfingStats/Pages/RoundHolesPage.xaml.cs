@@ -15,11 +15,11 @@ using GolfingStats.Pages.ShotPages;
 namespace GolfingStats.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HolesDetailsPage : CarouselPage
+    public partial class RoundHolesPage : CarouselPage
     {
         ShotModel PrevShotHit = new ShotModel();
 
-        public HolesDetailsPage(RoundModel round, CourseModel course)
+        public RoundHolesPage(RoundModel round, CourseModel course)
         {
             InitializeComponent();
 
@@ -28,7 +28,7 @@ namespace GolfingStats.Pages
             CreateNewRound(round, course.Holes);
         }
 
-        public HolesDetailsPage(RoundModel round)
+        public RoundHolesPage(RoundModel round)
         {
             InitializeComponent();
 
@@ -47,6 +47,8 @@ namespace GolfingStats.Pages
         async void CreateNewRound(RoundModel round, List<HoleModel> holes)
         {
             this.ItemsSource = await App.dataFactory.CreateNewFullRound(round, holes);
+
+            Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 2]);
         }
 
         /// <summary>
@@ -146,7 +148,7 @@ namespace GolfingStats.Pages
             }
             else if (picker.SelectedIndex == 1 || (picker.SelectedIndex == 0 && par == 3))
             {
-                FairwayDetailsPage fairwayDetailsPage = new FairwayDetailsPage(roundId, holeId, shotNum, PrevShotHit);
+                ApproachDetailsPage fairwayDetailsPage = new ApproachDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 fairwayDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(fairwayDetailsPage);
             }
@@ -297,9 +299,9 @@ namespace GolfingStats.Pages
                 driveDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(driveDetailsPage);
             }
-            else if (sender.SelectedItem.GetType() == typeof(FairwayModel))
+            else if (sender.SelectedItem.GetType() == typeof(ApproachModel))
             {
-                FairwayDetailsPage fairwayDetailsPage = new FairwayDetailsPage((FairwayModel)sender.SelectedItem);
+                ApproachDetailsPage fairwayDetailsPage = new ApproachDetailsPage((ApproachModel)sender.SelectedItem);
                 fairwayDetailsPage.ShotSaved += ShotSaved;
                 fairwayDetailsPage.ShotDeleted += ShotDeleted;
                 Navigation.PushModalAsync(fairwayDetailsPage);
@@ -340,9 +342,9 @@ namespace GolfingStats.Pages
             {
                 if (shotReturned.ShotNumber == 1)
                 {
-                    if (shotReturned.GetType() == typeof(FairwayModel))
+                    if (shotReturned.GetType() == typeof(ApproachModel))
                     {
-                        if (((FairwayModel)shotReturned).OnGreen == true)
+                        if (((ApproachModel)shotReturned).OnGreen == true)
                         {
                             Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
                             swcFIR.IsToggled = true;
@@ -387,9 +389,9 @@ namespace GolfingStats.Pages
                 }
                 else if (shotReturned.ShotNumber == 2)
                 {
-                    if (shotReturned.GetType() == typeof(FairwayModel))
+                    if (shotReturned.GetType() == typeof(ApproachModel))
                     {
-                        if (((FairwayModel)shotReturned).OnGreen == true)
+                        if (((ApproachModel)shotReturned).OnGreen == true)
                         {
                             Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
                             swcGIR.IsToggled = true;
@@ -441,9 +443,9 @@ namespace GolfingStats.Pages
                 }
                 else if (shotReturned.ShotNumber == 2 || shotReturned.ShotNumber == 3)
                 {
-                    if (shotReturned.GetType() == typeof(FairwayModel))
+                    if (shotReturned.GetType() == typeof(ApproachModel))
                     {
-                        if (((FairwayModel)shotReturned).OnGreen == true)
+                        if (((ApproachModel)shotReturned).OnGreen == true)
                         {
                             Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
                             swcGIR.IsToggled = true;

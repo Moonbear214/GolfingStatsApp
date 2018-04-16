@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:GolfingStats.Controls"
-             x:Class="GolfingStats.Pages.ShotPages.FairwayDetailsPage">
+             x:Class="GolfingStats.Pages.ShotPages.ApproachDetailsPage">
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -15,7 +15,7 @@
                     <!--Shared Shot controls-->
                     <!--=============================================================-->
                     <Label HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" FontSize="Medium" TextColor="MediumSeaGreen" Text="Details before shot is hit:" />
-                    <BoxView BackgroundColor="Black" HeightRequest="1" Margin="40,-3,40,0" />
+                    <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
 
                     <Grid>
 

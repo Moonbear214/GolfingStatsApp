@@ -2,20 +2,40 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.App">
-	<Application.Resources>
+    <Application.Resources>
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
 
-		<!-- Application resource dictionary -->
-        <!--<ResourceDictionary>
+            <!--FontAwesome for button text.--> 
+            <!--To use add this in button xaml: Style="{StaticResource FontAwesomeReg}" Text="&#x(FontCodeHere: https://fontawesome.com/cheatsheet);"
+            <Button Style="{StaticResource FontAwesomeReg}" Text="&#xf11a;" />-->
+            <Style x:Key="FontAwesomeReg" TargetType="Button">
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String" Android="FontAwesomeReg.ttf#Font Awesome 5 Free Regular" iOS="Font Awesome 5 Free" WinPhone="Assets/FontAwesomeReg.ttf#Font Awesome 5 Free" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-            <Style x:Key="baseLabelStyle" TargetType="Label">
+            <!--To use add this in button xaml: Style="{StaticResource FontAwesomeSolid}" Text="&#x(FontCodeHere: https://fontawesome.com/cheatsheet);"
+            <Button Style="{StaticResource FontAwesomeSolid}" Text="&#xf11a;" />-->
+            <Style x:Key="FontAwesomeSolid" TargetType="Button" >
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String" Android="FontAwesomeSolid.ttf#Font Awesome 5 Free Solid" iOS="Font Awesome 5 Free" WinPhone="Assets/FontAwesomeSolid.ttf#Font Awesome 5 Free" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            
+            <!--<Style x:Key="baseLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="22" />
             </Style>
 
             <Style x:Key="infoLabelStyle" BasedOn="{StaticResource baseLabelStyle}" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
-            </Style>
+            </Style>-->
 
-        </ResourceDictionary>-->
-        
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

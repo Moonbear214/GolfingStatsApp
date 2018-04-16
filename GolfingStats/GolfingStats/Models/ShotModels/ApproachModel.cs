@@ -6,8 +6,8 @@ using SQLite;
 
 namespace GolfingStats.Models.ShotModels
 {
-    [Table("FairwayShot")]
-    public partial class FairwayModel : ShotModel
+    [Table("ApproachShot")]
+    public partial class ApproachModel : ShotModel
     {
         ConvertShotsClass ConvertShotsClass = new ConvertShotsClass();
 

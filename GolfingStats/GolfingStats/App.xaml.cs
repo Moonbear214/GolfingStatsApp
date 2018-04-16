@@ -11,6 +11,8 @@ namespace GolfingStats
 {
 	public partial class App : Application
 	{
+        // Creates a static datafactory here that can be referenced through entire app.
+        // App.dataFactory...
         public static DataFactory dataFactory;
 
 		public App (string dbPath)
@@ -19,7 +21,7 @@ namespace GolfingStats
 
             dataFactory = new DataFactory(dbPath);
             
-			MainPage = new NavigationPage(new GolfingStats.HomePage());
+			this.MainPage = new NavigationPage(new HomePage());
 		}
 
         protected override void OnStart ()

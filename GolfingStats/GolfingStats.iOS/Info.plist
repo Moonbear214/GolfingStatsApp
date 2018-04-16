@@ -50,5 +50,10 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>GolfingStats</string>
+  <key>UIAppFonts</key>
+  <array>
+    <string>FontAwesomeSolid.ttf</string>
+    <string>FontAwesomeReg.ttf</string>
+  </array>
 </dict>
 </plist>

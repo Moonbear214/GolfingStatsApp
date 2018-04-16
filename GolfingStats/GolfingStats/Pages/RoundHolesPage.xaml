@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GolfingStats.Pages.HolesDetailsPage">
+             x:Class="GolfingStats.Pages.RoundHolesPage">
     <CarouselPage.ItemTemplate>
         <DataTemplate>
             <ContentPage>
@@ -87,8 +87,7 @@
                         </ListView>
 
                         <!--Add shot-->
-                        <Picker x:Name="pckShotPicker" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="80"
-                                BackgroundColor="SkyBlue" TextColor="White" Title="Add Shot" SelectedIndexChanged="AddShot" IsVisible="False">
+                        <Picker x:Name="pckShotPicker" Title="Add Shot" SelectedIndexChanged="AddShot" IsVisible="False">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Tee shot</x:String>
@@ -99,11 +98,28 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal" BackgroundColor="MediumSeaGreen">
-                            <Button HorizontalOptions="Start" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousHolePage" />
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="10, 5" BackgroundColor="MediumSeaGreen">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousHolePage" />
+                            <Button Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
+                            <Button Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextHolePage" />
+                        </Grid>
+                        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="10" BackgroundColor="MediumSeaGreen">
+                            <Button HorizontalOptions="Start" VerticalOptions="FillAndExpand" Margin="15, 0" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousHolePage" />
                             <Button HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
-                            <Button HorizontalOptions="End" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextHolePage" />
-                        </StackLayout>
+                            <Button HorizontalOptions="End" VerticalOptions="FillAndExpand" Margin="30, 0" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextHolePage" />
+                        </StackLayout>-->
 
                     </StackLayout>
                 </ContentPage.Content>

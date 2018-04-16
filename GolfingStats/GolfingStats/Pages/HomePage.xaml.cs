@@ -70,7 +70,7 @@ namespace GolfingStats
         /// </summary>
         async void NavCoursesPage()
         {
-            await Navigation.PushAsync(new Pages.AllCoursesPage(), true);
+            await Navigation.PushAsync(new Pages.CoursesPage(), true);
         }
 
         /// <summary>

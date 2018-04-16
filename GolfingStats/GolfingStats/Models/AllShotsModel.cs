@@ -14,7 +14,7 @@ namespace GolfingStats.Models
     {
         public List<DriveModel> DriveASModel { get; set; } = new List<DriveModel>();
 
-        public List<FairwayModel> FairwayASModel { get; set; } = new List<FairwayModel>();
+        public List<ApproachModel> FairwayASModel { get; set; } = new List<ApproachModel>();
 
         public List<ChipModel> ChipASModel { get; set; } = new List<ChipModel>();
 

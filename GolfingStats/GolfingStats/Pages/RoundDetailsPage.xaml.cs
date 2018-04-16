@@ -22,6 +22,7 @@ namespace GolfingStats.Pages
         /// </summary>
         public RoundDetailsPage()
         {
+            var asdf = this.Navigation.NavigationStack;
             InitializeComponent();
 
             Title = "New Round";
@@ -71,7 +72,7 @@ namespace GolfingStats.Pages
             {
                 RoundModel round = (RoundModel)this.BindingContext;
                 round.CourseName = selectedCourse.Name;
-                await Navigation.PushAsync(new Pages.HolesDetailsPage(round, selectedCourse));
+                await Navigation.PushAsync(new Pages.RoundHolesPage(round, selectedCourse));
             }
         }
 
@@ -81,7 +82,7 @@ namespace GolfingStats.Pages
         private async void ViewRound(object sender, EventArgs args)
         {
             RoundModel round = (RoundModel)this.BindingContext;
-            await Navigation.PushAsync(new Pages.HolesDetailsPage(round));
+            await Navigation.PushAsync(new Pages.RoundHolesPage(round));
         }
 
         /// <summary>

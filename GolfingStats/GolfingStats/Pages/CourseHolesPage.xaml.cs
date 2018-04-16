@@ -13,7 +13,7 @@ using GolfingStats.Pages.ShotPages;
 namespace GolfingStats.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AddHolesPage : CarouselPage
+	public partial class CourseHolesPage : CarouselPage
     {
         CourseModel courseModel;
         bool NewCourse = true;
@@ -29,7 +29,7 @@ namespace GolfingStats.Pages
         };
 
 
-        public AddHolesPage(CourseModel course, bool newCourse)
+        public CourseHolesPage(CourseModel course, bool newCourse)
         {
             courseModel = course;
 

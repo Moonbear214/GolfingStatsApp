@@ -31,13 +31,13 @@ namespace GolfingStats.iOS
         {
             alertDelay = NSTimer.CreateScheduledTimer(seconds, (obj) =>
             {
-                dismissMessage();
+                DismissMessage();
             });
             alert = UIAlertController.Create(null, message, UIAlertControllerStyle.Alert);
             UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
         }
 
-        void dismissMessage()
+        void DismissMessage()
         {
             if (alert != null)
             {

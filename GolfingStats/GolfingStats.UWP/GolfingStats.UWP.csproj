@@ -102,6 +102,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\FontAwesomeReg.ttf" />
+    <Content Include="Assets\FontAwesomeSolid.ttf" />
     <None Include="GolfingStats.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

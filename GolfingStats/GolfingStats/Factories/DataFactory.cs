@@ -150,7 +150,7 @@ namespace GolfingStats.Factories
                 return await GolfstatsRepository.AddNewShot(drive);
         }
 
-        public async Task<FairwayModel> CreateShot(FairwayModel fairway)
+        public async Task<ApproachModel> CreateShot(ApproachModel fairway)
         {
             //If the shot already has an ID, update the shot in local storage
             if (fairway.Id != 0)
@@ -226,7 +226,7 @@ namespace GolfingStats.Factories
             return await GolfstatsRepository.UpdateShot(shot);
         }
 
-        public async Task<FairwayModel> UpdateShot(FairwayModel shot)
+        public async Task<ApproachModel> UpdateShot(ApproachModel shot)
         {
             return await GolfstatsRepository.UpdateShot(shot);
         }
@@ -325,7 +325,7 @@ namespace GolfingStats.Factories
             return await GolfstatsRepository.GetAllShotsDrive();
         }
 
-        public async Task<List<FairwayModel>> GetAllShotsFairway()
+        public async Task<List<ApproachModel>> GetAllShotsFairway()
         {
             return await GolfstatsRepository.GetAllShotsFairway();
         }

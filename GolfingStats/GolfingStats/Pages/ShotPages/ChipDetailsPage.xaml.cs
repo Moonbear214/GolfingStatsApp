@@ -27,12 +27,12 @@ namespace GolfingStats.Pages.ShotPages
                 DistanceToHole = prevShotHit.DistanceLeftToHole
             };
 
-            if (prevShotHit.GetType() == typeof(FairwayModel))
+            if (prevShotHit.GetType() == typeof(ApproachModel))
             {
-                chipModel.PinPositionVert = ((FairwayModel)prevShotHit).PinPositionVert;
-                chipModel.PinPositionHorz = ((FairwayModel)prevShotHit).PinPositionHorz;
-                chipModel.PosToGreenVer = ((FairwayModel)prevShotHit).PosToGreenVer;
-                chipModel.PosToGreenHorz = ((FairwayModel)prevShotHit).PosToGreenHorz;
+                chipModel.PinPositionVert = ((ApproachModel)prevShotHit).PinPositionVert;
+                chipModel.PinPositionHorz = ((ApproachModel)prevShotHit).PinPositionHorz;
+                chipModel.PosToGreenVer = ((ApproachModel)prevShotHit).PosToGreenVer;
+                chipModel.PosToGreenHorz = ((ApproachModel)prevShotHit).PosToGreenHorz;
             };
 
             this.BindingContext = chipModel;

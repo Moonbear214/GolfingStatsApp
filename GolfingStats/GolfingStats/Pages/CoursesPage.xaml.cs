@@ -12,9 +12,9 @@ using GolfingStats.Models;
 namespace GolfingStats.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AllCoursesPage : ContentPage
+    public partial class CoursesPage : ContentPage
     {
-        public AllCoursesPage()
+        public CoursesPage()
         {
             Title = "All Courses";
             InitializeComponent();
@@ -63,7 +63,7 @@ namespace GolfingStats.Pages
             else
             {
                 CourseModel course = await App.dataFactory.CreateNewCourse(entCourseName.Text);
-                await Navigation.PushAsync(new Pages.AddHolesPage(course, true), true);
+                await Navigation.PushAsync(new Pages.CourseHolesPage(course, true), true);
                 CancelCourseName();
             }
         }
@@ -73,7 +73,7 @@ namespace GolfingStats.Pages
         /// </summary>
         async void OnCourseTapped(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new AddHolesPage(((ListView)sender).SelectedItem as CourseModel, false));
+            await Navigation.PushAsync(new CourseHolesPage(((ListView)sender).SelectedItem as CourseModel, false));
             lwAllCourses.SelectedItem = null;
         }
 

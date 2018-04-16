@@ -84,9 +84,9 @@ namespace GolfingStats
         }
 
         //Fairwway
-        public FairwayModel OneShotFairway()
+        public ApproachModel OneShotFairway()
         {
-            return new FairwayModel();
+            return new ApproachModel();
         }
 
         //Chip
@@ -124,13 +124,13 @@ namespace GolfingStats
         }
 
         //Returns 4 Fairway shots with no hole or round Id's assigned 
-        public List<FairwayModel> FourShotsFairway()
+        public List<ApproachModel> FourShotsFairway()
         {
-            List<FairwayModel> fourShots = new List<FairwayModel>();
+            List<ApproachModel> fourShots = new List<ApproachModel>();
 
             while (fourShots.Count < 4)
             {
-                fourShots.Add(new FairwayModel());
+                fourShots.Add(new ApproachModel());
             }
 
             return fourShots;
@@ -192,13 +192,13 @@ namespace GolfingStats
         }
 
         //Returns 4 Fairway shots with hole or round Id's assigned 
-        public List<FairwayModel> FourShotsFairway(int roundId, int holeId)
+        public List<ApproachModel> FourShotsFairway(int roundId, int holeId)
         {
-            List<FairwayModel> fourShots = new List<FairwayModel>();
+            List<ApproachModel> fourShots = new List<ApproachModel>();
 
             while (fourShots.Count < 4)
             {
-                fourShots.Add(new FairwayModel() { RoundId = roundId, HoleId = holeId });
+                fourShots.Add(new ApproachModel() { RoundId = roundId, HoleId = holeId });
             }
 
             return fourShots;
