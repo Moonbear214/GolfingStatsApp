@@ -139,7 +139,7 @@
                         <Picker Grid.Row="6" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding Aiming}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
-                                    <x:String>Center</x:String>
+                                    <x:String>Straight</x:String>
                                     <x:String>Left</x:String>
                                     <x:String>Right</x:String>
                                 </x:Array>
@@ -331,7 +331,7 @@
             </ScrollView>
 
             <!--Sav3 & Del3te Button-->
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal" Padding="5">
                 <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" BorderColor="DarkRed" Text="Delete" Clicked="DeleteShot" />
                 <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="MediumSeaGreen" TextColor="White" Text="Save" Clicked="SaveShot" />
             </StackLayout>

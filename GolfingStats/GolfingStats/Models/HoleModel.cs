@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using SQLite;
 
 namespace GolfingStats.Models
 {
     [Table("Holes")]
-    public class HoleModel
+    public class HoleModel : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; private set; }
@@ -71,8 +72,24 @@ namespace GolfingStats.Models
         //public bool Dogleg { get; set; } = false;
 
         //====================Test===============================
-        //[Ignore]
-        public ObservableCollection<ShotModels.ShotModel> ShotsPlayedList = new ObservableCollection<ShotModels.ShotModel>();
+        public event PropertyChangedEventHandler PropertyChanged;
+        [Ignore]
+        private ObservableCollection<ShotModels.ShotModel> _ShotsPlayedList { get; set; } = new ObservableCollection<ShotModels.ShotModel>();
+        [Ignore]
+        public ObservableCollection<ShotModels.ShotModel> ShotsPlayedList
+        {
+            get { return _ShotsPlayedList; }
+            set { _ShotsPlayedList = value; OnPropertyChanged("ShotsPlayedList"); } 
+        }
+
+        private void OnPropertyChanged(string v)
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged(this, new PropertyChangedEventArgs(v));
+        }
+
         //====================Test===============================
 
 

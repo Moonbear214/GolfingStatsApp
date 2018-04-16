@@ -63,7 +63,7 @@
             </ScrollView>
 
             <!--Sav3 & Del3te Button-->
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="End" Orientation="Horizontal" Padding="5">
                 <Button x:Name="btnDeleteShot" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsVisible="False" BackgroundColor="Red" TextColor="White" Text="Delete" Clicked="DeleteShot" />
                 <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="MediumSeaGreen" TextColor="White" Text="Save" Clicked="SaveShot" />
             </StackLayout>

@@ -11,13 +11,15 @@ using Acr.UserDialogs;
 using GolfingStats.Models;
 using GolfingStats.Models.ShotModels;
 using GolfingStats.Pages.ShotPages;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace GolfingStats.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RoundHolesPage : CarouselPage
     {
-        ShotModel PrevShotHit = new ShotModel();
+        List<int> holeStorageChecked;
 
         public RoundHolesPage(RoundModel round, CourseModel course)
         {
@@ -30,13 +32,14 @@ namespace GolfingStats.Pages
 
         public RoundHolesPage(RoundModel round)
         {
+            ViewPreviousRound(round);
+
             InitializeComponent();
 
             Title = round.CourseName;
 
+            holeStorageChecked = new List<int>();
             this.CurrentPageChanged += UpdateShotsListview;
-
-            ViewPreviousRound(round);
         }
 
         /// <summary>
@@ -47,7 +50,8 @@ namespace GolfingStats.Pages
         async void CreateNewRound(RoundModel round, List<HoleModel> holes)
         {
             this.ItemsSource = await App.dataFactory.CreateNewFullRound(round, holes);
-
+            //Removes the new round page from stack
+            //TODO: Find better way to do this, makes Ui change unexpectedly
             Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 2]);
         }
 
@@ -84,32 +88,19 @@ namespace GolfingStats.Pages
             }
         }
 
-        /// <summary>
-        /// Returns user to the home page and saves round
-        /// </summary>
-        async void ReturnToHome()
-        {
-            await App.dataFactory.UpdateHoles(this.ItemsSource.Cast<HoleModel>());
-            await Navigation.PopToRootAsync();
-            DependencyService.Get<IMessage>().ShortAlert("Round saved");
-        }
-
         void UpdateShotsListview(object sender, EventArgs e)
         {
-            //Shots played list
-            ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
-            if (lwShotsPlayed.ItemsSource == null)
+            if (!holeStorageChecked.Contains(((HoleModel)this.SelectedItem).HoleNumber))
             {
+                holeStorageChecked.Add(((HoleModel)this.SelectedItem).HoleNumber);
+
+                //Shots played list
+                ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
                 lwShotsPlayed.ItemsSource = ((HoleModel)this.SelectedItem).ShotsPlayedList.OrderBy(x => x.ShotNumber);
 
                 //Shots played label
                 Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
                 lblShotsPlayed.Text = ((HoleModel)this.SelectedItem).ShotsPlayed.ToString();
-
-                if (((HoleModel)this.SelectedItem).ShotsPlayedList.Count != 0)
-                    PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
-                else
-                    PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
 
                 Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
                 if (lblShotsPlayed.Text == "0")
@@ -126,6 +117,16 @@ namespace GolfingStats.Pages
         }
 
         /// <summary>
+        /// Returns user to the home page and saves round
+        /// </summary>
+        async void ReturnToHome()
+        {
+            await App.dataFactory.UpdateHoles(this.ItemsSource.Cast<HoleModel>());
+            await Navigation.PopToRootAsync();
+            DependencyService.Get<IMessage>().ShortAlert("Round saved");
+        }
+
+        /// <summary>
         /// Is called when the user taps on the add shot button.
         /// The code will check which shot type was selected and navigate the user
         /// to the corresponding page to add that type of shot.
@@ -134,11 +135,17 @@ namespace GolfingStats.Pages
         {
             Picker picker = (Picker)sender;
             HoleModel holeModel = (HoleModel)this.SelectedItem;
+            ShotModel PrevShotHit = new ShotModel();
 
             int holeId = holeModel.Id;
             int roundId = holeModel.RoundId;
             int shotNum = holeModel.ShotsPlayed + 1; //Lets the page know what number shot is being hit
             int par = holeModel.Par;
+
+            if (((HoleModel)this.SelectedItem).ShotsPlayedList.Count != 0)
+                PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
+            else
+                PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
 
             if (picker.SelectedIndex == 0 && par != 3)
             {
@@ -189,8 +196,6 @@ namespace GolfingStats.Pages
             HoleModel HolePage = (HoleModel)this.SelectedItem;
             ShotModel shotReturned = (ShotModel)sender;
 
-            PrevShotHit = shotReturned;
-
             //Check if the shot is already in the listview itemsource and update if found
             for (int i = 0; i < HolePage.ShotsPlayedList.Count; i++)
             {
@@ -201,8 +206,6 @@ namespace GolfingStats.Pages
                     HolePage.ShotsPlayedList[i] = shotReturned;
                     lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList.OrderBy(x => x.ShotNumber);
                     NewShotCreated = false;
-
-                    PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
 
                     if (shotReturned.ShotNumber == 1 || shotReturned.ShotNumber == 2 || shotReturned.ShotNumber == 3)
                         await App.dataFactory.UpdateHole(CheckGIRFIR(shotReturned));
@@ -266,8 +269,6 @@ namespace GolfingStats.Pages
                     HolePage.ShotsPlayed = Int32.Parse(lblShotsPlayed.Text) - 1;
                     lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
 
-                    PrevShotHit = ((HoleModel)this.SelectedItem).ShotsPlayedList.LastOrDefault() as ShotModel;
-
                     Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
                     if (lblShotsPlayed.Text == "0")
                     {
@@ -281,7 +282,6 @@ namespace GolfingStats.Pages
                     }
 
                     DependencyService.Get<IMessage>().ShortAlert("Shot deleted");
-                    //TODO: Remove GIR and FIR from hole if shot changes were made
                     await App.dataFactory.UpdateHole((HoleModel)this.SelectedItem);
                 }
             }

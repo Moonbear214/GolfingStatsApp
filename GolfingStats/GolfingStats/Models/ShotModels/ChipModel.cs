@@ -22,7 +22,7 @@ namespace GolfingStats.Models.ShotModels
 
         /// <summary>
         /// Where is the player aiming to land in relation to the flag:
-        /// 1 = Center, 2 = Left, 3 = Right
+        /// 1 = Straight, 2 = Left, 3 = Right
         /// </summary>
         [MaxLength(1)]
         public Int16 _Aiming { get; set; } = 1;
@@ -32,11 +32,11 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.CenterLeftRightConvert(this._Aiming);
+                return ConvertShotsClass.StraightLeftRightConvert(this._Aiming);
             }
             set
             {
-                this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
+                this._Aiming = ConvertShotsClass.StraightLeftRightConvert(value);
             }
         }
 

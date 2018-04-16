@@ -39,7 +39,7 @@
                                 <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
                                 <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
                             </StackLayout>
-                            
+
                             <!--HoleDistance-->
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                 <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole distance:" />
@@ -65,10 +65,9 @@
 
                         <!--No shots to display label-->
                         <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="True" Text="No shots played yet." />
-                        
+
                         <!--Shots played ListView-->
-                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="Start" IsVisible="False"
-                                ItemTapped="OnShotTapped">
+                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="False" ItemTapped="OnShotTapped">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -111,15 +110,10 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousHolePage" />
-                            <Button Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
-                            <Button Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextHolePage" />
+                            <Button Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Style="{StaticResource FontAwesomeSolid}" Text="&#xf104;" Clicked="GoPreviousHolePage" />
+                            <Button Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
+                            <Button Grid.Column="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Style="{StaticResource FontAwesomeSolid}" Text="&#xf105;"  Clicked="GoNextHolePage" />
                         </Grid>
-                        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="10" BackgroundColor="MediumSeaGreen">
-                            <Button HorizontalOptions="Start" VerticalOptions="FillAndExpand" Margin="15, 0" FontSize="Large" BackgroundColor="SeaGreen" TextColor="White" Text="&lt;" Clicked="GoPreviousHolePage" />
-                            <Button HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="SeaGreen" TextColor="White" Text="Add shot" Clicked="ShotPickerFocus" />
-                            <Button HorizontalOptions="End" VerticalOptions="FillAndExpand" Margin="30, 0" FontSize="23" BackgroundColor="SeaGreen" TextColor="White" Text="&gt;"  Clicked="GoNextHolePage" />
-                        </StackLayout>-->
 
                     </StackLayout>
                 </ContentPage.Content>
