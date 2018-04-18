@@ -8,7 +8,8 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+        <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+
 
             <Grid x:Name="grdNewCourse">
                 <Grid.RowDefinitions>
@@ -30,32 +31,15 @@
                 <DatePicker x:Name="dpDatePlayed" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
             </Grid>
 
-            <Grid x:Name="grdRoundStats" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <StackLayout x:Name="stkRoundStats" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                    <!--Date-->
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
-                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Date, StringFormat='Date: {0:dd/MM/yyyy}'}" />
-                    </StackLayout>
+                <!--Date-->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Date, StringFormat='Date: {0:dd/MM/yyyy}'}" />
+                </StackLayout>
 
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,10">
                     <!--ShotsTotal-->
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
                         <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Score:" />
@@ -63,127 +47,299 @@
                     </StackLayout>
                 </StackLayout>
 
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="Scoring Totals" />
-                    <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
+                <!--======================================================================-->
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                    <!--Eagles-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Eagles}" />
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Eagles" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--======================================================================-->
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0,5,0,0">
+                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="End" Margin="30,0,0,0" TextColor="SeaGreen" FontSize="Medium" Text="Scoring Totals" />
+                        <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
                     </StackLayout>
 
-                    <!--Birdies-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Birdies}" />
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Birdies" />
-                    </StackLayout>
+                    <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <!--Pars-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Pars}" />
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Pars" />
-                    </StackLayout>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <!--Bogeys-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Bogeys}" />
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Bogeys" />
-                    </StackLayout>
+                        <!--Eagles-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Eagles}" />
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Eagles" />
 
-                    <!--DoubleBogeys-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DoubleBogeys}" />
+                        <!--Birdies-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Birdies}" />
+                        <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Birdies" />
+
+                        <!--Pars-->
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Pars}" />
+                        <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Pars" />
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Bogeys-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Bogeys}" />
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Bogeys" />
+
+                        <!--DoubleBogeys-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DoubleBogeys}" />
+                        <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Double" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Bogeys" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="bogeys" />
                         </StackLayout>
-                    </StackLayout>
 
-                    <!--TripleBogeysPlus-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding TripleBogeysPlus}" />
-                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <!--TripleBogeysPlus-->
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding TripleBogeysPlus}" />
+                        <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Triple" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Bogeys+" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="bogeys+" />
                         </StackLayout>
+                    </Grid>
+                    <!--======================================================================-->
+
+
+                    <!--======================================================================-->
+                    <StackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0,10,0,0">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="SeaGreen" FontSize="Medium" Text="FIR Stats" />
+                        <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
                     </StackLayout>
-                </StackLayout>
 
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="FIR Stats" />
-                    <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
+                    <Grid Grid.Row="6" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <!--FIRMissLeft-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissLeft}" />
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--FIRMissLeft-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissLeft}" />
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Left" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
+
+                        <!--FIRPDisplay-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRPDisplay, StringFormat='{0}%'}" />
+                        <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
+
+                        <!--FIRMissRight-->
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissRight}" />
+                        <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
+                        </StackLayout>
+                    </Grid>
+                    <!--======================================================================-->
+
+
+                    <!--======================================================================-->
+                    <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0,10,0,0">
+                        <Label HorizontalOptions="EndAndExpand" VerticalOptions="End" Margin="0,0,30,0" TextColor="SeaGreen" FontSize="Medium" Text="GIR Stats" />
+                        <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
                     </StackLayout>
 
-                    <!--FIRPerc-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRPerc, StringFormat='{0}%'}" />
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
-                    </StackLayout>
+                    <Grid Grid.Row="9" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <!--FIRMissRight-->
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissRight}" />
-                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
-                    </StackLayout>
-                </StackLayout>
-
-                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="GIR Stats" />
-                    <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
                         <!--GIRMissLeft-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissLeft}" />
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Left" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
-                            </StackLayout>
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissLeft}" />
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Left" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
 
-                        <!--GIRPerc-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRPerc, StringFormat='{0}%'}" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GIR" />
-                        </StackLayout>
+                        <!--GIRPDisplay-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRPDisplay, StringFormat='{0}%'}" />
+                        <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GIR" />
 
                         <!--GIRMissRight-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissRight}" />
-                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissRight}" />
+                        <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                    <!--GIRMissShort-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissShort}" />
-                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    </Grid>
+
+                    <Grid Grid.Row="11" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,5,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--GIRMissShort-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissShort}" />
+                        <StackLayout Grid.Row="1" Grid.Column="0"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Short" />
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
-                    </StackLayout>
 
-                    <!--GIRMissOver-->
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissOver}" />
-                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <!--GIRMissOver-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissOver}" />
+                        <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Over" />
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
-                    </StackLayout>
-                </StackLayout>
-            </Grid>
+                    </Grid>
+                    <!--======================================================================-->
 
-        </StackLayout>
+                    <!--======================================================================-->
+                    <StackLayout Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0,10,0,0">
+                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="End" Margin="30,0,0,0" TextColor="SeaGreen" FontSize="Medium" Text="Putts Stats" />
+                        <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
+                    </StackLayout>
+
+                    <Grid Grid.Row="14" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--PuttsOne-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsOne}" />
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="One" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="putts" />
+                        </StackLayout>
+
+                        <!--PuttsTwo-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsTwo}" />
+                        <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Two" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="putts" />
+                        </StackLayout>
+
+                        <!--PuttsThreePlus-->
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsThreePlus}" />
+                        <StackLayout Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Three" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="putts" />
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="16" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--PuttsLeft-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsLeft}" />
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Left" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
+                        </StackLayout>
+
+                        <!--PuttsRight-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsRight}" />
+                        <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="18" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="0,5,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--PuttsShort-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsShort}" />
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Short" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
+                        </StackLayout>
+                        
+                        <!--PuttsPast-->
+                        <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding PuttsPast}" />
+                        <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Past" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
+                        </StackLayout>
+                    </Grid>
+                    <!--======================================================================-->
+                </Grid>
+            </StackLayout>
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

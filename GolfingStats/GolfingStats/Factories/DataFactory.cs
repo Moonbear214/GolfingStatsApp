@@ -211,24 +211,34 @@ namespace GolfingStats.Factories
 
 
 
-        public async Task<RoundModel> UpdateRound(RoundModel round, bool updateStats = false)
+        public async Task<RoundModel> UpdateRound(RoundModel round, bool updateStats = false, bool reloadFromStorage = false)
         {
-            if (round.ReloadStats == true)
+            if (updateStats)
             {
-                if (updateStats)
+                if (reloadFromStorage)
                 {
-                    RoundModel UpdatedRound = StatisticsFactory.CalculateRoundStats(round, await GetHolesFromRoundId(round.Id), await GetShotsFromRoundId(round.Id));
-                    return await GolfstatsRepository.UpdateRound(UpdatedRound);
+                    RoundModel savedRound = await GetOneRound(round);
+                    if (savedRound.ReloadStats == true)
+                    {
+                        RoundModel UpdatedRound = StatisticsFactory.CalculateRoundStats(savedRound, await GetHolesFromRoundId(round.Id), await GetShotsFromRoundId(round.Id));
+                        return await GolfstatsRepository.UpdateRound(UpdatedRound);
+                    }
+                    else
+                        return savedRound;
                 }
                 else
                 {
-                    return await GolfstatsRepository.UpdateRound(round);
+                    if (round.ReloadStats == true)
+                    {
+                        RoundModel UpdatedRound = StatisticsFactory.CalculateRoundStats(round, await GetHolesFromRoundId(round.Id), await GetShotsFromRoundId(round.Id));
+                        return await GolfstatsRepository.UpdateRound(UpdatedRound);
+                    }
+                    else
+                        return round;
                 }
             }
             else
-            {
                 return await GolfstatsRepository.UpdateRound(round);
-            }
         }
 
         public async Task<HoleModel> UpdateHole(HoleModel hole)
@@ -283,6 +293,11 @@ namespace GolfingStats.Factories
             }
 
             return AllCourses;
+        }
+
+        public async Task<RoundModel> GetOneRound(RoundModel round)
+        {
+            return await GolfstatsRepository.GetOneRound(round);
         }
 
         public async Task<List<RoundModel>> GetAllRounds()

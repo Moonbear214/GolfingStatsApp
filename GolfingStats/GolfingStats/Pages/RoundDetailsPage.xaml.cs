@@ -17,13 +17,13 @@ namespace GolfingStats.Pages
 	public partial class RoundDetailsPage : ContentPage
     {
         private CourseModel selectedCourse;
+        bool UpdateRoundCheck = false;
 
         /// <summary>
         /// Enters when player is about to start new round
         /// </summary>
         public RoundDetailsPage()
         {
-            var asdf = this.Navigation.NavigationStack;
             InitializeComponent();
 
             Title = "New Round";
@@ -48,7 +48,7 @@ namespace GolfingStats.Pages
             tlbGoToHole.Text = "View";
             tlbGoToHole.Clicked += ViewRound;
             grdNewCourse.IsVisible = false;
-            grdRoundStats.IsVisible = true;
+            stkRoundStats.IsVisible = true;
 
             ToolbarItem deleteToolbarItem = new ToolbarItem()
             {
@@ -63,12 +63,20 @@ namespace GolfingStats.Pages
                 this.BindingContext = round;
         }
 
-        async void ReloadRound(RoundModel round)
+        async void ReloadRound(RoundModel round, bool reloadFromStorage = false)
         {
             using (UserDialogs.Instance.Loading("Calculating Statistics", null, null, true, MaskType.Black))
-                this.BindingContext = await App.dataFactory.UpdateRound(round);
+            {
+                this.BindingContext = await App.dataFactory.UpdateRound(round, true, reloadFromStorage);
+            }
         }
 
+        protected override void OnAppearing()
+        {
+            if (UpdateRoundCheck)
+                ReloadRound((RoundModel)this.BindingContext, true);
+        }
+        
         /// <summary>
         /// New round is created and saved. Player is taken to page to add shots for each hole
         /// </summary>
@@ -92,6 +100,7 @@ namespace GolfingStats.Pages
         private async void ViewRound(object sender, EventArgs args)
         {
             RoundModel round = (RoundModel)this.BindingContext;
+            UpdateRoundCheck = true;
             await Navigation.PushAsync(new Pages.RoundHolesPage(round));
         }
 

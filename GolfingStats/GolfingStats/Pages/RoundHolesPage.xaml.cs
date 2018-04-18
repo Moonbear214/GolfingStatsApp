@@ -127,11 +127,11 @@ namespace GolfingStats.Pages
         async void ReturnToHome()
         {
             await App.dataFactory.UpdateHoles(this.ItemsSource.Cast<HoleModel>());
+            CurrentRound.ReloadStats = true;
             foreach (HoleModel hole in ItemsSource as List<HoleModel>)
             {
                 CurrentRound.ShotsTotal += hole.ShotsPlayed;
             }
-            CurrentRound.ReloadStats = true;
             await App.dataFactory.UpdateRound(CurrentRound);
             await Navigation.PopToRootAsync();
             DependencyService.Get<IMessage>().ShortAlert("Round saved");
@@ -303,6 +303,12 @@ namespace GolfingStats.Pages
 
                 await App.dataFactory.UpdateHole(CheckGIRFIR(shotReturned));
             }
+
+            if (!CurrentRound.ReloadStats)
+            {
+                CurrentRound.ReloadStats = true;
+                await App.dataFactory.UpdateRound(CurrentRound);
+            }
         }
 
         /// <summary>
@@ -345,9 +351,19 @@ namespace GolfingStats.Pages
                         lblEmptyList.IsVisible = false;
                     }
 
-                    DependencyService.Get<IMessage>().ShortAlert("Shot deleted");
                     await App.dataFactory.UpdateHole((HoleModel)this.SelectedItem);
+                    DependencyService.Get<IMessage>().ShortAlert("Shot deleted");
                 }
+            }
+
+            if (!CurrentRound.ReloadStats)
+            {
+                foreach (HoleModel hole in ItemsSource as List<HoleModel>)
+                {
+                    CurrentRound.ShotsTotal += hole.ShotsPlayed;
+                }
+                CurrentRound.ReloadStats = true;
+                await App.dataFactory.UpdateRound(CurrentRound);
             }
         }
 

@@ -371,6 +371,19 @@ namespace GolfingStats
 
         //Round
         //==========================================================
+        public async Task<RoundModel> GetOneRound(RoundModel round)
+        {
+            try
+            {
+                return await conn.Table<RoundModel>().Where(r => r.Id == round.Id).FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+
         public async Task<List<RoundModel>> GetAllRounds()
         {
             try
@@ -414,7 +427,7 @@ namespace GolfingStats
 
                 foreach (int holeId in holeIds)
                 {
-                    tempList.Add(await conn.Table<HoleModel>().Where(t => t.Id == holeId).FirstOrDefaultAsync());
+                    tempList.Add(await conn.Table<HoleModel>().Where(h => h.Id == holeId).FirstOrDefaultAsync());
                 }
 
                 return tempList;

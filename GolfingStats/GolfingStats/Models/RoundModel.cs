@@ -67,10 +67,12 @@ namespace GolfingStats.Models
         public int TripleBogeysPlus { get; set; } = 0;
 
         public float FIRPerc { get; set; } = 0;
+        public int FIRPDisplay { get { return Convert.ToInt32(FIRPerc); } }
         public int FIRMissLeft { get; set; } = 0;
         public int FIRMissRight { get; set; } = 0;
 
         public float GIRPerc { get; set; } = 0;
+        public int GIRPDisplay { get { return Convert.ToInt32(GIRPerc); } }
         public int GIRMissLeft { get; set; } = 0;
         public int GIRMissRight { get; set; } = 0;
         public int GIRMissShort { get; set; } = 0;
