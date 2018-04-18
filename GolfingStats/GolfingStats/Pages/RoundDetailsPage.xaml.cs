@@ -48,7 +48,7 @@ namespace GolfingStats.Pages
             tlbGoToHole.Text = "View";
             tlbGoToHole.Clicked += ViewRound;
             grdNewCourse.IsVisible = false;
-            stkRoundStats.IsVisible = true;
+            grdRoundStats.IsVisible = true;
 
             ToolbarItem deleteToolbarItem = new ToolbarItem()
             {

@@ -68,6 +68,8 @@
 
                         <!--Shots played ListView-->
                         <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="False" ItemTapped="OnShotTapped">
+                            <!--TODO: This finally works, implement it! (Remember to hide label)-->
+                            <!--ItemsSource="{Binding ShotsPlayedList}">-->
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

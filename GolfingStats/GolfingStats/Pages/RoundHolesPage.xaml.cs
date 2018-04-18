@@ -145,12 +145,7 @@ namespace GolfingStats.Pages
         {
             if (((HoleModel)this.SelectedItem).ShotsPlayed == 0 || Reteeing)
             {
-                Picker tempPick = new Picker
-                {
-                    ItemsSource = new string[] { "Tee shot" }
-                };
-                tempPick.SelectedItem = "Tee shot";
-                AddShot(tempPick, new EventArgs());
+                AddShot("Tee shot", new EventArgs());
             }
             else
             {
@@ -166,7 +161,35 @@ namespace GolfingStats.Pages
         /// </summary>
         async void AddShot(object sender, EventArgs args)
         {
-            Picker picker = (Picker)sender;
+            // Picker.SelectedIndex had to be used else when setting it back to -1 exp is thrown.
+            // This is the best solution for now
+            //====================================================
+            string ShotAddType = null;
+            if (sender.GetType() == typeof(Picker))
+            {
+                switch(((Picker)sender).SelectedIndex)
+                {
+                    case 0:
+                        ShotAddType = "Approach";
+                        break;
+                    case 1:
+                        ShotAddType = "Chip";
+                        break;
+                    case 2:
+                        ShotAddType = "Putt";
+                        break;
+                    case 3:
+                        ShotAddType = "Drop shot";
+                        break;
+                }
+                ((Picker)sender).SelectedIndex = -1;
+            }
+            else if(sender.GetType() == typeof(string))
+            {
+                ShotAddType = sender.ToString();
+            }
+            //====================================================
+
             HoleModel holeModel = (HoleModel)this.SelectedItem;
             ShotModel PrevShotHit = new ShotModel();
 
@@ -180,38 +203,37 @@ namespace GolfingStats.Pages
             else
                 PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
 
-            if (picker.SelectedItem.ToString() == "Tee shot" && par != 3)
+            if (ShotAddType == "Tee shot" && par != 3)
             {
                 DriveDetailsPage driveDetailsPage = new DriveDetailsPage(roundId, holeId, shotNum, holeModel.HoleDistance);
                 driveDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(driveDetailsPage);
             }
-            else if (picker.SelectedItem.ToString() == "Approach" || (picker.SelectedItem.ToString() == "Tee shot" && par == 3))
+
+            if (ShotAddType == "Approach" || (ShotAddType == "Tee shot" && par == 3))
             {
                 ApproachDetailsPage fairwayDetailsPage = new ApproachDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 fairwayDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(fairwayDetailsPage);
             }
-            else if (picker.SelectedItem.ToString() == "Chip")
+            else if (ShotAddType == "Chip")
             {
                 ChipDetailsPage chipDetailsPage = new ChipDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 chipDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(chipDetailsPage);
             }
-            else if (picker.SelectedItem.ToString() == "Putt")
+            else if (ShotAddType == "Putt")
             {
                 PuttDetailsPage puttDetailsPage = new PuttDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 puttDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(puttDetailsPage);
             }
-            else if (picker.SelectedItem.ToString() == "Drop shot")
+            else if (ShotAddType == "Drop shot")
             {
                 DropShotDetailsPage dropDetailsPage = new DropShotDetailsPage(roundId, holeId, shotNum);
                 dropDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(dropDetailsPage);
             }
-
-            picker.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -272,7 +294,7 @@ namespace GolfingStats.Pages
 
                 if (shotReturned.GetType() == typeof(DropShotModel))
                 {
-                    if(((DropShotModel)shotReturned).ShotNumber == 2 && ((HoleModel)this.SelectedItem).Par != 3 && ((DropShotModel)shotReturned).DropPosition == "Replay previous shot")
+                    if(((DropShotModel)shotReturned).ShotNumber == 2 && ((DropShotModel)shotReturned).DropPosition == "Replay previous shot")
                     {
                         //TODO: Add ability to retee multiple times (For worst case scenarios..)
                         Reteeing = true;
@@ -538,7 +560,7 @@ namespace GolfingStats.Pages
                 currentPageNum--;
                 this.CurrentPage = this.Children[currentPageNum];
             }
-            Task.Delay(2000);
+            //Task.Delay(2000);
         }
 
         /// <summary>

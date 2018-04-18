@@ -30,7 +30,26 @@
                 <DatePicker x:Name="dpDatePlayed" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
             </Grid>
 
-            <StackLayout x:Name="stkRoundStats" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid x:Name="grdRoundStats" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                     <!--Date-->
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
@@ -44,93 +63,83 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                     <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="Scoring Totals" />
                     <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <!--Eagles-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Eagles}" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Eagles" />
-                        </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <!--Eagles-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Eagles}" />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Eagles" />
+                    </StackLayout>
 
-                        <!--Birdies-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Birdies}" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Birdies" />
-                        </StackLayout>
+                    <!--Birdies-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Birdies}" />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Birdies" />
+                    </StackLayout>
 
-                        <!--Pars-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Pars}" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Pars" />
+                    <!--Pars-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Pars}" />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Pars" />
+                    </StackLayout>
+
+                    <!--Bogeys-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Bogeys}" />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Bogeys" />
+                    </StackLayout>
+
+                    <!--DoubleBogeys-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DoubleBogeys}" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Double" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Bogeys" />
                         </StackLayout>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                        <!--Bogeys-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Bogeys}" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Bogeys" />
-                        </StackLayout>
-
-                        <!--DoubleBogeys-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding DoubleBogeys}" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Double" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Bogeys" />
-                            </StackLayout>
-                        </StackLayout>
-
-                        <!--TripleBogeysPlus-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding TripleBogeysPlus}" />
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Triple" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Bogeys+" />
-                            </StackLayout>
+                    <!--TripleBogeysPlus-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding TripleBogeysPlus}" />
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Triple" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Bogeys+" />
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                     <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="FIR Stats" />
                     <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
-                    
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                        <!--FIRMissLeft-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissLeft}" />
-                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Left" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
-                            </StackLayout>
-                        </StackLayout>
 
-                        <!--FIRPerc-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRPerc, StringFormat='{0}%'}" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
+                    <!--FIRMissLeft-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissLeft}" />
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Left" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
                         </StackLayout>
+                    </StackLayout>
 
-                        <!--FIRMissRight-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissRight}" />
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
-                            </StackLayout>
-                        </StackLayout>
+                    <!--FIRPerc-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRPerc, StringFormat='{0}%'}" />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
+                    </StackLayout>
+
+                    <!--FIRMissRight-->
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding FIRMissRight}" />
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="GIR Stats" />
+                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" TextColor="MediumSeaGreen" Text="GIR Stats" />
                     <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="40,-3,40,0" />
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
                         <!--GIRMissLeft-->
                         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                             <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissLeft}" />
@@ -147,35 +156,33 @@
                         </StackLayout>
 
                         <!--GIRMissRight-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissRight}" />
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
-                            </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissRight}" />
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Right" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="Misses" />
                         </StackLayout>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                        <!--GIRMissShort-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissShort}" />
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Short" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
-                            </StackLayout>
+                    <!--GIRMissShort-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissShort}" />
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Short" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
+                    </StackLayout>
 
-                        <!--GIRMissOver-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissOver}" />
-                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Over" />
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
-                            </StackLayout>
+                    <!--GIRMissOver-->
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding GIRMissOver}" />
+                        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Over" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="misses" />
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
+            </Grid>
 
         </StackLayout>
     </ContentPage.Content>
