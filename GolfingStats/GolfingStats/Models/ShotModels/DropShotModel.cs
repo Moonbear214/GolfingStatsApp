@@ -63,6 +63,7 @@ namespace GolfingStats.Models.ShotModels
 
         public DropShotModel()
         {
+            //TODO: Display better
             this.Club = "Drop Shot";
         }
     }

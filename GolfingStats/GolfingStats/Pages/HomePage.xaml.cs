@@ -17,14 +17,11 @@ namespace GolfingStats
     {
         public HomePage()
         {
-            this.Title = "All Rounds";
-
             InitializeComponent();
-
-            this.Appearing += HomePage_Appearing;
+            this.Title = "All Rounds";
         }
 
-        private void HomePage_Appearing(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
             GetDisplayAllRounds();
         }

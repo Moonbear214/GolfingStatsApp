@@ -61,7 +61,15 @@ namespace GolfingStats.Pages.ShotPages
             pckWindForce.SelectedIndexChanged += PckWindForce_SelectedIndexChanged;
             //===========================================================
 
-            //On/Off Fairway 
+            //On/Off Green 
+            //===========================================================
+            if (swcLayup.IsToggled)
+                grdGreenControls.IsVisible = false;
+
+            swcLayup.Toggled += SwcLayup_Toggled;
+            //===========================================================
+
+            //On/Off Green 
             //===========================================================
             if (swcOnGreen.IsToggled)
                 grdOffGreen.IsVisible = false;
@@ -84,6 +92,24 @@ namespace GolfingStats.Pages.ShotPages
             }
             else
                 grdWindDirection.IsVisible = false;
+        }
+
+        /// <summary>
+        /// Displays or hides the onGreen switch and pos on/to green controls deppending on what the user chose
+        /// </summary>
+        private void SwcLayup_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (((Switch)sender).IsToggled)
+            {
+                grdGreenControls.IsVisible = false;
+                swcOnGreen.IsToggled = false;
+                pckPosToGreenHorz.SelectedIndex = -1;
+                pckPosToGreenVer.SelectedIndex = -1;
+            }
+            else
+            {
+                grdGreenControls.IsVisible = true;
+            }
         }
 
         /// <summary>

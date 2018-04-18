@@ -31,6 +31,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -105,8 +106,8 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-
-
+                        
+                        
                         <!--BallToGreen-->
                         <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Slope to green" />
                         <Picker Grid.Row="4" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding BallToGreen}">
@@ -289,15 +290,14 @@
                         </Picker>
 
                         
-                        <!--OnGreen-->
-                        <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On green" />
-                        <Switch x:Name="swcOnGreen" Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding OnGreen}" />
+                        <!--LayupShot-->
+                        <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Playing layup" />
+                        <Switch x:Name="swcLayup" Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding LayupShot}" />
                     </Grid>
 
 
                     <!--Ball is on green-->
-                    <Grid x:Name="grdOnGreen">
-
+                    <Grid x:Name="grdGreenControls">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -307,83 +307,101 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        
+                        <!--OnGreen-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="On green" />
+                        <Switch x:Name="swcOnGreen" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsToggled="{Binding OnGreen}" />
+                        
+                        <!--Ball is on green-->
+                        <Grid x:Name="grdOnGreen" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
 
-                        <!--PosOnGreenVer-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side of green" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Vertical)" />
-                        </StackLayout>
-                        <Picker x:Name="pckPosOnGreenVer" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnGreenVer}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Center</x:String>
-                                    <x:String>Front</x:String>
-                                    <x:String>Back</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <!--PosOnGreenHorz-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side of green" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Horiontal)" />
-                        </StackLayout>
-                        <Picker x:Name="pckPosOnGreenHorz" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnGreenHorz}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Center</x:String>
-                                    <x:String>Left</x:String>
-                                    <x:String>Right</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </Grid>
-
-
-                    <!--Ball is not on green-->
-                    <Grid x:Name="grdOffGreen">
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!--PosToGreenVer-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side missed" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Vertical)" />
-                        </StackLayout>
-                        <Picker x:Name="pckPosToGreenVer" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToGreenVer}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Center</x:String>
-                                    <x:String>Short</x:String>
-                                    <x:String>Past</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+                            <!--PosOnGreenVer-->
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side of green" />
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Vertical)" />
+                            </StackLayout>
+                            <Picker x:Name="pckPosOnGreenVer" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnGreenVer}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Center</x:String>
+                                        <x:String>Front</x:String>
+                                        <x:String>Back</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
 
 
-                        <!--PosToGreenHorz-->
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side missed" />
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Horiontal)" />
-                        </StackLayout>
-                        <Picker x:Name="pckPosToGreenHorz" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToGreenHorz}">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Center</x:String>
-                                    <x:String>Left</x:String>
-                                    <x:String>Right</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+                            <!--PosOnGreenHorz-->
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side of green" />
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Horiontal)" />
+                            </StackLayout>
+                            <Picker x:Name="pckPosOnGreenHorz" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosOnGreenHorz}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Center</x:String>
+                                        <x:String>Left</x:String>
+                                        <x:String>Right</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
+
+
+                        <!--Ball is not on green-->
+                        <Grid x:Name="grdOffGreen" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--PosToGreenVer-->
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0">
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side missed" />
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Vertical)" />
+                            </StackLayout>
+                            <Picker x:Name="pckPosToGreenVer" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToGreenVer}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Center</x:String>
+                                        <x:String>Short</x:String>
+                                        <x:String>Past</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+
+                            <!--PosToGreenHorz-->
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0">
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,0,0,-3" Text="Side missed" />
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="0,-3,0,0" Text="(Horiontal)" />
+                            </StackLayout>
+                            <Picker x:Name="pckPosToGreenHorz" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding PosToGreenHorz}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Center</x:String>
+                                        <x:String>Left</x:String>
+                                        <x:String>Right</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
                     </Grid>
 
                     <!--=============================================================-->

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using GolfingStats.Models;
@@ -11,6 +12,8 @@ namespace GolfingStats.Factories
     public class DataFactory
     {
         private static GolfstatsRepository GolfstatsRepository { get; set; }
+
+        private static StatisticsFactory StatisticsFactory = new StatisticsFactory();
 
         //======================================
         //For use only to add dummy data to storage to work with
@@ -88,8 +91,8 @@ namespace GolfingStats.Factories
 
         //Methods that is connected to local storage (GolfstatsRepository)
         //========================================================================================================================================================================
-            
-            //Create methods that adds the data to local storage
+
+        //Create methods that adds the data to local storage
         //==================================================================================
 
         /// <summary>
@@ -140,7 +143,7 @@ namespace GolfingStats.Factories
         {
             return new List<HoleModel>(await GolfstatsRepository.AddNewHoleList(holes));
         }
-        
+
         public async Task<DriveModel> CreateShot(DriveModel drive)
         {
             //If the shot already has an ID, update the shot in local storage
@@ -206,9 +209,26 @@ namespace GolfingStats.Factories
             return course;
         }
 
-        public async Task<RoundModel> UpdateRound(RoundModel round)
+
+
+        public async Task<RoundModel> UpdateRound(RoundModel round, bool updateStats = false)
         {
-            return await GolfstatsRepository.UpdateRound(round);
+            if (round.ReloadStats == true)
+            {
+                if (updateStats)
+                {
+                    RoundModel UpdatedRound = StatisticsFactory.CalculateRoundStats(round, await GetHolesFromRoundId(round.Id), await GetShotsFromRoundId(round.Id));
+                    return await GolfstatsRepository.UpdateRound(UpdatedRound);
+                }
+                else
+                {
+                    return await GolfstatsRepository.UpdateRound(round);
+                }
+            }
+            else
+            {
+                return await GolfstatsRepository.UpdateRound(round);
+            }
         }
 
         public async Task<HoleModel> UpdateHole(HoleModel hole)
@@ -282,7 +302,7 @@ namespace GolfingStats.Factories
         /// <returns></returns>
         public async Task<List<HoleModel>> GetHolesFromList(List<int> holeIds)
         {
-            return await GolfstatsRepository.GetHolesFromList(holeIds); 
+            return await GolfstatsRepository.GetHolesFromList(holeIds);
         }
 
         /// <summary>
@@ -295,6 +315,17 @@ namespace GolfingStats.Factories
             return await GolfstatsRepository.GetHolesFromRoundId(roundId);
         }
 
+
+        /// <summary>
+        /// Returns a list of "ShotModel" objects that has all been played on the roundId that was given
+        /// </summary>
+        /// <param name="roundId"></param>
+        /// <returns></returns>
+        public async Task<List<ShotModel>> GetShotsFromRoundId(int roundId)
+        {
+            AllShotsModel allShots = await GolfstatsRepository.GetShotsFromRoundId(roundId);
+            return AllShotsList(allShots);
+        }
 
         /// <summary>
         /// Returns a list of "ShotModel" objects that has all been played on the holeId that was given

@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 
 using GolfingStats.Models;
 using GolfingStats.Factories;
+using Acr.UserDialogs;
 
 namespace GolfingStats.Pages
 {
@@ -46,8 +47,8 @@ namespace GolfingStats.Pages
             Title = round.CourseName;
             tlbGoToHole.Text = "View";
             tlbGoToHole.Clicked += ViewRound;
-            dpDatePlayed.IsEnabled = false;
-            grdChooseCourse.IsVisible = false;
+            grdNewCourse.IsVisible = false;
+            stkRoundStats.IsVisible = true;
 
             ToolbarItem deleteToolbarItem = new ToolbarItem()
             {
@@ -56,7 +57,16 @@ namespace GolfingStats.Pages
             deleteToolbarItem.Clicked += DeleteRound;
             ToolbarItems.Add(deleteToolbarItem);
 
-            this.BindingContext = round;
+            if (round.ReloadStats)
+                ReloadRound(round);
+            else
+                this.BindingContext = round;
+        }
+
+        async void ReloadRound(RoundModel round)
+        {
+            using (UserDialogs.Instance.Loading("Calculating Statistics", null, null, true, MaskType.Black))
+                this.BindingContext = await App.dataFactory.UpdateRound(round);
         }
 
         /// <summary>

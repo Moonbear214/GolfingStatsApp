@@ -19,26 +19,6 @@ namespace GolfingStats.Models.ShotModels
 
         //Before Swing (All info about the shot before the player has hit the ball)
         //============================================================================
-
-        /// <summary>
-        /// Where is the player aiming to land on the green:
-        /// 1 = Center, 2 = Left, 3 = Right
-        /// </summary>
-        public Int16 _Aiming { get; set; } = 1;
-
-        [Ignore]
-        public String Aiming
-        {
-            get
-            {
-                return ConvertShotsClass.CenterLeftRightConvert(this._Aiming);
-            }
-            set
-            {
-                this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
-            }
-        }
-
         /// <summary>
         /// On what side of the green is the pin located:
         /// 1 = Center, 2 = Left, 3 = Right
@@ -76,6 +56,25 @@ namespace GolfingStats.Models.ShotModels
             set
             {
                 this._PinPositionVert = ConvertShotsClass.CenterFrontBackConvert(value);
+            }
+        }
+
+        /// <summary>
+        /// Where is the player aiming to land on the green:
+        /// 1 = Center, 2 = Left, 3 = Right
+        /// </summary>
+        public Int16 _Aiming { get; set; } = 1;
+
+        [Ignore]
+        public String Aiming
+        {
+            get
+            {
+                return ConvertShotsClass.CenterLeftRightConvert(this._Aiming);
+            }
+            set
+            {
+                this._Aiming = ConvertShotsClass.CenterLeftRightConvert(value);
             }
         }
 
@@ -249,7 +248,6 @@ namespace GolfingStats.Models.ShotModels
             }
         }
 
-
         /// <summary>
         /// Is the ball on the green
         /// </summary>
@@ -277,6 +275,11 @@ namespace GolfingStats.Models.ShotModels
                 _OnGreen = value;
             }
         }
+
+        /// <summary>
+        /// Is the player playing a layup shot or going for green
+        /// </summary>
+        public bool LayupShot { get; set; } = false;
 
         /// <summary>
         /// How far did the player hit the shot

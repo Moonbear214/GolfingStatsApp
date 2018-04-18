@@ -449,6 +449,31 @@ namespace GolfingStats
         //Shots
         //==========================================================
 
+        //All Shots on round list
+        //================================
+        public async Task<AllShotsModel> GetShotsFromRoundId(int RoundId)
+        {
+            try
+            {
+                AllShotsModel allShots = new AllShotsModel
+                {
+                    DriveASModel = await conn.Table<DriveModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
+                    FairwayASModel = await conn.Table<ApproachModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
+                    ChipASModel = await conn.Table<ChipModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
+                    PuttASModel = await conn.Table<PuttModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
+                    DropASModel = await conn.Table<DropShotModel>().Where(t => t.RoundId == RoundId).ToListAsync()
+                };
+
+                return allShots;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+                throw new Exception(string.Format("Exception at: {0}. Message: {1}", ex.Source, ex.Message));
+            }
+        }
+        //================================
+
         //All Shots on hole
         //================================
         public async Task<AllShotsModel> GetShotsFromHoleId(int holeId)

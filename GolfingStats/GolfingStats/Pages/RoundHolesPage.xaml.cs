@@ -19,7 +19,10 @@ namespace GolfingStats.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RoundHolesPage : CarouselPage
     {
+        RoundModel CurrentRound;
         List<int> holeStorageChecked;
+        //Rare instance where player hits drive away, takes drop shot and replays shot num 3 from tee
+        bool Reteeing = false;
 
         public RoundHolesPage(RoundModel round, CourseModel course)
         {
@@ -53,6 +56,7 @@ namespace GolfingStats.Pages
             //Removes the new round page from stack
             //TODO: Find better way to do this, makes Ui change unexpectedly
             Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 2]);
+            CurrentRound = round;
         }
 
         /// <summary>
@@ -85,6 +89,7 @@ namespace GolfingStats.Pages
                 }
 
                 this.ItemsSource = holes;
+                CurrentRound = round;
             }
         }
 
@@ -122,8 +127,36 @@ namespace GolfingStats.Pages
         async void ReturnToHome()
         {
             await App.dataFactory.UpdateHoles(this.ItemsSource.Cast<HoleModel>());
+            foreach (HoleModel hole in ItemsSource as List<HoleModel>)
+            {
+                CurrentRound.ShotsTotal += hole.ShotsPlayed;
+            }
+            CurrentRound.ReloadStats = true;
+            await App.dataFactory.UpdateRound(CurrentRound);
             await Navigation.PopToRootAsync();
             DependencyService.Get<IMessage>().ShortAlert("Round saved");
+        }
+
+        /// <summary>
+        /// Changed shot picker to a button that focuses on the shot picker.
+        /// Ui can now be changed on the button
+        /// </summary>
+        void ShotPickerFocus()
+        {
+            if (((HoleModel)this.SelectedItem).ShotsPlayed == 0 || Reteeing)
+            {
+                Picker tempPick = new Picker
+                {
+                    ItemsSource = new string[] { "Tee shot" }
+                };
+                tempPick.SelectedItem = "Tee shot";
+                AddShot(tempPick, new EventArgs());
+            }
+            else
+            {
+                Picker pckShotPicker = this.CurrentPage.FindByName<Picker>("pckShotPicker");
+                pckShotPicker.Focus();
+            }
         }
 
         /// <summary>
@@ -147,31 +180,31 @@ namespace GolfingStats.Pages
             else
                 PrevShotHit.DistanceLeftToHole = ((HoleModel)this.SelectedItem).HoleDistance;
 
-            if (picker.SelectedIndex == 0 && par != 3)
+            if (picker.SelectedItem.ToString() == "Tee shot" && par != 3)
             {
                 DriveDetailsPage driveDetailsPage = new DriveDetailsPage(roundId, holeId, shotNum, holeModel.HoleDistance);
                 driveDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(driveDetailsPage);
             }
-            else if (picker.SelectedIndex == 1 || (picker.SelectedIndex == 0 && par == 3))
+            else if (picker.SelectedItem.ToString() == "Approach" || (picker.SelectedItem.ToString() == "Tee shot" && par == 3))
             {
                 ApproachDetailsPage fairwayDetailsPage = new ApproachDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 fairwayDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(fairwayDetailsPage);
             }
-            else if (picker.SelectedIndex == 2)
+            else if (picker.SelectedItem.ToString() == "Chip")
             {
                 ChipDetailsPage chipDetailsPage = new ChipDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 chipDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(chipDetailsPage);
             }
-            else if (picker.SelectedIndex == 3)
+            else if (picker.SelectedItem.ToString() == "Putt")
             {
                 PuttDetailsPage puttDetailsPage = new PuttDetailsPage(roundId, holeId, shotNum, PrevShotHit);
                 puttDetailsPage.ShotSaved += ShotSaved;
                 await Navigation.PushModalAsync(puttDetailsPage);
             }
-            else if (picker.SelectedIndex == 4)
+            else if (picker.SelectedItem.ToString() == "Drop shot")
             {
                 DropShotDetailsPage dropDetailsPage = new DropShotDetailsPage(roundId, holeId, shotNum);
                 dropDetailsPage.ShotSaved += ShotSaved;
@@ -235,6 +268,15 @@ namespace GolfingStats.Pages
                 {
                     lwShotsPlayed.IsVisible = true;
                     lblEmptyList.IsVisible = false;
+                }
+
+                if (shotReturned.GetType() == typeof(DropShotModel))
+                {
+                    if(((DropShotModel)shotReturned).ShotNumber == 2 && ((HoleModel)this.SelectedItem).Par != 3 && ((DropShotModel)shotReturned).DropPosition == "Replay previous shot")
+                    {
+                        //TODO: Add ability to retee multiple times (For worst case scenarios..)
+                        Reteeing = true;
+                    }
                 }
 
                 await App.dataFactory.UpdateHole(CheckGIRFIR(shotReturned));
@@ -480,16 +522,6 @@ namespace GolfingStats.Pages
         }
 
         /// <summary>
-        /// Changed shot picker to a button that focuses on the shot picker.
-        /// Ui can now be changed on the button
-        /// </summary>
-        void ShotPickerFocus()
-        {
-            Picker pckShotPicker = this.CurrentPage.FindByName<Picker>("pckShotPicker");
-            pckShotPicker.Focus();
-        }
-
-        /// <summary>
         /// Takes user to the previous hole when the button is pressed
         /// (Also goes to the last hole when one the first)
         /// </summary>
@@ -506,7 +538,7 @@ namespace GolfingStats.Pages
                 currentPageNum--;
                 this.CurrentPage = this.Children[currentPageNum];
             }
-
+            Task.Delay(2000);
         }
 
         /// <summary>

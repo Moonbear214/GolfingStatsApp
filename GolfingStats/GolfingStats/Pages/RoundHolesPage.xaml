@@ -89,7 +89,6 @@
                         <Picker x:Name="pckShotPicker" Title="Add Shot" SelectedIndexChanged="AddShot" IsVisible="False">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
-                                    <x:String>Tee shot</x:String>
                                     <x:String>Approach</x:String>
                                     <x:String>Chip</x:String>
                                     <x:String>Putt</x:String>
