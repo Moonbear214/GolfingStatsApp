@@ -11,8 +11,8 @@
 
                         <!--HoleNumber-->
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Hole:" />
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding HoleNumber}" />
+                            <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="Hole:" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="{Binding HoleNumber}" />
                         </StackLayout>
 
                         <Grid>

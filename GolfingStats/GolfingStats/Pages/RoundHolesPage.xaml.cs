@@ -20,7 +20,6 @@ namespace GolfingStats.Pages
     public partial class RoundHolesPage : CarouselPage
     {
         RoundModel CurrentRound;
-        List<int> holeStorageChecked;
         //Rare instance where player hits drive away, takes drop shot and replays shot num 3 from tee
         bool Reteeing = false;
 
@@ -40,9 +39,6 @@ namespace GolfingStats.Pages
             InitializeComponent();
 
             Title = round.CourseName;
-
-            holeStorageChecked = new List<int>();
-            this.CurrentPageChanged += UpdateShotsListview;
         }
 
         /// <summary>
@@ -86,38 +82,11 @@ namespace GolfingStats.Pages
                             hole.ShotsPlayedList.Add(shot);
                         }
                     }
+                    hole.ShotsPlayedList.OrderBy(x => x.ShotNumber);
                 }
 
                 this.ItemsSource = holes;
                 CurrentRound = round;
-            }
-        }
-
-        void UpdateShotsListview(object sender, EventArgs e)
-        {
-            if (!holeStorageChecked.Contains(((HoleModel)this.SelectedItem).HoleNumber))
-            {
-                holeStorageChecked.Add(((HoleModel)this.SelectedItem).HoleNumber);
-
-                //Shots played list
-                ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
-                lwShotsPlayed.ItemsSource = ((HoleModel)this.SelectedItem).ShotsPlayedList.OrderBy(x => x.ShotNumber);
-
-                //Shots played label
-                Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
-                lblShotsPlayed.Text = ((HoleModel)this.SelectedItem).ShotsPlayed.ToString();
-
-                Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
-                if (lblShotsPlayed.Text == "0")
-                {
-                    lwShotsPlayed.IsVisible = false;
-                    lblEmptyList.IsVisible = true;
-                }
-                else
-                {
-                    lwShotsPlayed.IsVisible = true;
-                    lblEmptyList.IsVisible = false;
-                }
             }
         }
 
@@ -126,13 +95,6 @@ namespace GolfingStats.Pages
         /// </summary>
         async void ReturnToHome()
         {
-            await App.dataFactory.UpdateHoles(this.ItemsSource.Cast<HoleModel>());
-            CurrentRound.ReloadStats = true;
-            foreach (HoleModel hole in ItemsSource as List<HoleModel>)
-            {
-                CurrentRound.ShotsTotal += hole.ShotsPlayed;
-            }
-            await App.dataFactory.UpdateRound(CurrentRound);
             await Navigation.PopToRootAsync();
             DependencyService.Get<IMessage>().ShortAlert("Round saved");
         }
@@ -167,7 +129,7 @@ namespace GolfingStats.Pages
             string ShotAddType = null;
             if (sender.GetType() == typeof(Picker))
             {
-                switch(((Picker)sender).SelectedIndex)
+                switch (((Picker)sender).SelectedIndex)
                 {
                     case 0:
                         ShotAddType = "Approach";
@@ -184,7 +146,7 @@ namespace GolfingStats.Pages
                 }
                 ((Picker)sender).SelectedIndex = -1;
             }
-            else if(sender.GetType() == typeof(string))
+            else if (sender.GetType() == typeof(string))
             {
                 ShotAddType = sender.ToString();
             }
@@ -240,7 +202,6 @@ namespace GolfingStats.Pages
         /// Closes the modal for adding a shot and returns the details of the shot added.
         /// Details returned are updated on the holepage.
         /// The hole is also updated in local storage to keep details up to date.
-        /// (Only way to update listview to display all shots is by adding the itemsource from a different class)
         /// </summary>
         async void ShotSaved(object sender, EventArgs args)
         {
@@ -256,56 +217,33 @@ namespace GolfingStats.Pages
             {
                 if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id && HolePage.ShotsPlayedList[i].GetType() == shotReturned.GetType())
                 {
-                    //Shots played list
-                    ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
                     HolePage.ShotsPlayedList[i] = shotReturned;
-                    lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList.OrderBy(x => x.ShotNumber);
                     NewShotCreated = false;
 
                     if (shotReturned.ShotNumber == 1 || shotReturned.ShotNumber == 2 || shotReturned.ShotNumber == 3)
-                        await App.dataFactory.UpdateHole(CheckGIRFIR(shotReturned));
+                        await App.dataFactory.UpdateHole(CheckGIRFIR(HolePage, shotReturned));
+
+                    if (!CurrentRound.ReloadStats)
+                    {
+                        CurrentRound.ReloadStats = true;
+                        await App.dataFactory.UpdateRound(CurrentRound);
+                    }
                 }
             }
 
             //Adds a new shot if it was not found in the list
             if (NewShotCreated)
             {
-                //Shots played list
-                ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
                 HolePage.ShotsPlayedList.Add(shotReturned);
-                lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList.OrderBy(x => x.ShotNumber);
-
-                //Shots played label
-                Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
-                HolePage.ShotsPlayed = Int32.Parse(lblShotsPlayed.Text) + 1;
-                lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
-
-                Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
-                if (lblShotsPlayed.Text == "0")
-                {
-                    lwShotsPlayed.IsVisible = false;
-                    lblEmptyList.IsVisible = true;
-                }
-                else
-                {
-                    lwShotsPlayed.IsVisible = true;
-                    lblEmptyList.IsVisible = false;
-                }
 
                 if (shotReturned.GetType() == typeof(DropShotModel))
-                {
-                    if(((DropShotModel)shotReturned).ShotNumber == 2 && ((DropShotModel)shotReturned).DropPosition == "Replay previous shot")
-                    {
-                        //TODO: Add ability to retee multiple times (For worst case scenarios..)
-                        Reteeing = true;
-                    }
-                }
+                    if (((DropShotModel)shotReturned).ShotNumber == 2 && ((DropShotModel)shotReturned).DropPosition == "Replay previous shot")
+                        Reteeing = true; //TODO: Add ability to retee multiple times (For worst case scenarios..)
 
-                await App.dataFactory.UpdateHole(CheckGIRFIR(shotReturned));
-            }
+                HolePage.ShotsPlayed += 1;
+                await App.dataFactory.UpdateHole(CheckGIRFIR(HolePage, shotReturned));
 
-            if (!CurrentRound.ReloadStats)
-            {
+                CurrentRound.ShotsTotal += 1;
                 CurrentRound.ReloadStats = true;
                 await App.dataFactory.UpdateRound(CurrentRound);
             }
@@ -329,42 +267,32 @@ namespace GolfingStats.Pages
             {
                 if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id)
                 {
-                    //Shots played list
-                    ListView lwShotsPlayed = this.CurrentPage.FindByName<ListView>("lwShotsPlayed");
                     HolePage.ShotsPlayedList.RemoveAt(i);
-                    lwShotsPlayed.ItemsSource = HolePage.ShotsPlayedList.OrderBy(x => x.ShotNumber);
-
-                    //Shots played label
-                    Label lblShotsPlayed = this.CurrentPage.FindByName<Label>("lblShotsPlayed");
-                    HolePage.ShotsPlayed = Int32.Parse(lblShotsPlayed.Text) - 1;
-                    lblShotsPlayed.Text = HolePage.ShotsPlayed.ToString();
-
-                    Label lblEmptyList = this.CurrentPage.FindByName<Label>("lblEmptyList");
-                    if (lblShotsPlayed.Text == "0")
-                    {
-                        lwShotsPlayed.IsVisible = false;
-                        lblEmptyList.IsVisible = true;
-                    }
-                    else
-                    {
-                        lwShotsPlayed.IsVisible = true;
-                        lblEmptyList.IsVisible = false;
-                    }
-
-                    await App.dataFactory.UpdateHole((HoleModel)this.SelectedItem);
-                    DependencyService.Get<IMessage>().ShortAlert("Shot deleted");
                 }
-            }
-
-            if (!CurrentRound.ReloadStats)
-            {
-                foreach (HoleModel hole in ItemsSource as List<HoleModel>)
+                else if (HolePage.ShotsPlayedList[i].ShotNumber > shotReturned.ShotNumber)
                 {
-                    CurrentRound.ShotsTotal += hole.ShotsPlayed;
+                    HolePage.ShotsPlayedList[i].ShotNumber -= 1;
+                    if (HolePage.ShotsPlayedList[i].GetType() == typeof(DriveModel))
+                        await App.dataFactory.UpdateShot((DriveModel)HolePage.ShotsPlayedList[i]);
+                    if (HolePage.ShotsPlayedList[i].GetType() == typeof(ApproachModel))
+                        await App.dataFactory.UpdateShot((ApproachModel)HolePage.ShotsPlayedList[i]);
+                    if (HolePage.ShotsPlayedList[i].GetType() == typeof(ChipModel))
+                        await App.dataFactory.UpdateShot((ChipModel)HolePage.ShotsPlayedList[i]);
+                    if (HolePage.ShotsPlayedList[i].GetType() == typeof(PuttModel))
+                        await App.dataFactory.UpdateShot((PuttModel)HolePage.ShotsPlayedList[i]);
+                    if (HolePage.ShotsPlayedList[i].GetType() == typeof(DropShotModel))
+                        await App.dataFactory.UpdateShot((DropShotModel)HolePage.ShotsPlayedList[i]);
                 }
-                CurrentRound.ReloadStats = true;
-                await App.dataFactory.UpdateRound(CurrentRound);
             }
+
+            HolePage.ShotsPlayed -= 1;
+            await App.dataFactory.UpdateHole(HolePage);
+
+            CurrentRound.ShotsTotal -= 1;
+            CurrentRound.ReloadStats = true;
+            await App.dataFactory.UpdateRound(CurrentRound);
+
+            DependencyService.Get<IMessage>().ShortAlert("Shot deleted");
         }
 
         /// <summary>
@@ -414,149 +342,67 @@ namespace GolfingStats.Pages
         /// <summary>
         /// Mehtod to check when the GIR and FIR switches should be switched when a new shot is created
         /// </summary>
-        HoleModel CheckGIRFIR(ShotModel shotReturned)
+        HoleModel CheckGIRFIR(HoleModel holePlayed, ShotModel shotReturned)
         {
-            HoleModel HolePlayed = (HoleModel)this.SelectedItem;
-
-            if (HolePlayed.Par == 3)
+            if (holePlayed.Par == 3)
             {
                 if (shotReturned.ShotNumber == 1)
-                {
                     if (shotReturned.GetType() == typeof(ApproachModel))
-                    {
                         if (((ApproachModel)shotReturned).OnGreen == true)
-                        {
-                            Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
-                            swcFIR.IsToggled = true;
-                            HolePlayed.FIR = true;
-
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = true;
-                            HolePlayed.GIR = true;
-                        }
+                            holePlayed.GIR = true;
                         else
-                        {
-                            Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
-                            swcFIR.IsToggled = false;
-                            HolePlayed.FIR = false;
-
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = false;
-                            HolePlayed.GIR = false;
-                        }
-                    }
-                }
+                            holePlayed.GIR = false;
             }
-            else if (HolePlayed.Par == 4)
+            else if (holePlayed.Par == 4)
             {
                 if (shotReturned.ShotNumber == 1)
                 {
                     if (shotReturned.GetType() == typeof(DriveModel))
-                    {
                         if (((DriveModel)shotReturned).OnFairway == true)
-                        {
-                            Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
-                            swcFIR.IsToggled = true;
-                            HolePlayed.FIR = true;
-                        }
+                            holePlayed.FIR = true;
                         else
-                        {
-                            Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
-                            swcFIR.IsToggled = false;
-                            HolePlayed.FIR = false;
-                        }
-                    }
+                            holePlayed.FIR = false;
                 }
                 else if (shotReturned.ShotNumber == 2)
                 {
                     if (shotReturned.GetType() == typeof(ApproachModel))
-                    {
                         if (((ApproachModel)shotReturned).OnGreen == true)
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = true;
-                            HolePlayed.GIR = true;
-                        }
+                            holePlayed.GIR = true;
                         else
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = false;
-                            HolePlayed.GIR = false;
-                        }
-                    }
+                            holePlayed.GIR = false;
                     else if (shotReturned.GetType() == typeof(ChipModel))
-                    {
                         if (((ChipModel)shotReturned).OnGreen == true)
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = true;
-                            HolePlayed.GIR = true;
-                        }
+                            holePlayed.GIR = true;
                         else
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = false;
-                            HolePlayed.GIR = false;
-                        }
-                    }
+                            holePlayed.GIR = false;
                 }
             }
-            else if (HolePlayed.Par == 5)
+            else if (holePlayed.Par == 5)
             {
                 if (shotReturned.ShotNumber == 1)
                 {
                     if (shotReturned.GetType() == typeof(DriveModel))
-                    {
                         if (((DriveModel)shotReturned).OnFairway == true)
-                        {
-                            Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
-                            swcFIR.IsToggled = true;
-                            HolePlayed.FIR = true;
-                        }
+                            holePlayed.FIR = true;
                         else
-                        {
-                            Switch swcFIR = this.CurrentPage.FindByName<Switch>("swcFIR");
-                            swcFIR.IsToggled = false;
-                            HolePlayed.FIR = false;
-                        }
-                    }
+                            holePlayed.FIR = false;
                 }
                 else if (shotReturned.ShotNumber == 2 || shotReturned.ShotNumber == 3)
                 {
                     if (shotReturned.GetType() == typeof(ApproachModel))
-                    {
                         if (((ApproachModel)shotReturned).OnGreen == true)
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = true;
-                            HolePlayed.GIR = true;
-                        }
+                            holePlayed.GIR = true;
                         else
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = false;
-                            HolePlayed.GIR = false;
-                        }
-                    }
+                            holePlayed.GIR = false;
                     else if (shotReturned.GetType() == typeof(ChipModel))
-                    {
                         if (((ChipModel)shotReturned).OnGreen == true)
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = true;
-                            HolePlayed.GIR = true;
-                        }
+                            holePlayed.GIR = true;
                         else
-                        {
-                            Switch swcGIR = this.CurrentPage.FindByName<Switch>("swcGIR");
-                            swcGIR.IsToggled = false;
-                            HolePlayed.GIR = false;
-                        }
-                    }
+                            holePlayed.GIR = false;
                 }
             }
 
-            return HolePlayed;
+            return holePlayed;
         }
 
         /// <summary>
@@ -565,6 +411,8 @@ namespace GolfingStats.Pages
         /// </summary>
         void GoPreviousHolePage()
         {
+            //TODO: TEST!!!!!!!!!!!!
+            Task.Delay(2000);
             int currentPageNum = ((HoleModel)this.SelectedItem).HoleNumber - 1;
 
             if (currentPageNum == 0)
@@ -576,7 +424,6 @@ namespace GolfingStats.Pages
                 currentPageNum--;
                 this.CurrentPage = this.Children[currentPageNum];
             }
-            //Task.Delay(2000);
         }
 
         /// <summary>
@@ -585,6 +432,8 @@ namespace GolfingStats.Pages
         /// </summary>
         void GoNextHolePage()
         {
+            //TODO: TEST!!!!!!!!!!!!
+            Task.Delay(2000);
             int currentPageNum = ((HoleModel)this.SelectedItem).HoleNumber - 1;
 
             if (currentPageNum == 17)

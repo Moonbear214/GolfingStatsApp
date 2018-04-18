@@ -12,7 +12,7 @@ namespace GolfingStats.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; private set; }
-        
+
         [Indexed]
         /// <summary>
         /// <summary>
@@ -41,8 +41,18 @@ namespace GolfingStats.Models
         /// <summary>
         /// Score on the hole
         /// </summary>
+        private int _ShotsPlayed { get; set; } = 0;
         [MaxLength(2)]
-        public int ShotsPlayed { get; set; } = 0;
+        public int ShotsPlayed {
+            get { return _ShotsPlayed; }
+            set
+            {
+                this._ShotsPlayed = value;
+                OnPropertyChanged("ShotsPlayed");
+                OnPropertyChanged("DisplayListEmptyLabel");
+                OnPropertyChanged("DisplayShotListview");
+            }
+        }
 
         /// <summary>
         /// Distance of the hole (meter)
@@ -52,34 +62,58 @@ namespace GolfingStats.Models
 
         /// <summary>
         /// Fairway hit in Regulation
-        /// TODO: Convert to numbers, still true or false (FIR doesn't count on par 3's)
+        /// (False for par 3's)
         /// </summary>
-        public bool FIR { get; set; } = false;
+        private bool _FIR { get; set; } = false;
+        public bool FIR {
+            get { return _FIR; }
+            set
+            {
+                this._FIR = value;
+                OnPropertyChanged("FIR");
+            }
+        }
 
         /// <summary>
         /// Green in regulation
         /// </summary>
-        public bool GIR { get; set; } = false;
-
-        //TODO: Add a lot of extra information to let the player discribe the hole when creating it
-
-        //TODO: Change from, bool to value (String)
-        /// <summary>
-        /// Does the hole bend a direction. Left/Right/None
-        /// </summary>
-        //[MaxLength(5)]
-        //public string Dogleg { get; set; }
-        //public bool Dogleg { get; set; } = false;
-
-        //====================Test===============================
-        public event PropertyChangedEventHandler PropertyChanged;
-        [Ignore]
-        private ObservableCollection<ShotModels.ShotModel> _ShotsPlayedList { get; set; } = new ObservableCollection<ShotModels.ShotModel>();
-        [Ignore]
-        public ObservableCollection<ShotModels.ShotModel> ShotsPlayedList
+        private bool _GIR { get; set; } = false;
+        public bool GIR
         {
-            get { return _ShotsPlayedList; }
-            set { _ShotsPlayedList = value; OnPropertyChanged("ShotsPlayedList"); } 
+            get { return _GIR; }
+            set
+            {
+                this._GIR = value;
+                OnPropertyChanged("GIR");
+            }
+        }
+
+        [Ignore]
+        public ObservableCollection<ShotModels.ShotModel> ShotsPlayedList { get; set; } = new ObservableCollection<ShotModels.ShotModel>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [Ignore]
+        public bool DisplayListEmptyLabel {
+            get
+            {
+                if (ShotsPlayed == 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        [Ignore]
+        public bool DisplayShotListview
+        {
+            get
+            {
+                if (ShotsPlayed != 0)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         private void OnPropertyChanged(string v)
@@ -90,8 +124,14 @@ namespace GolfingStats.Models
             PropertyChanged(this, new PropertyChangedEventArgs(v));
         }
 
-        //====================Test===============================
+        //TODO: Add a lot of extra information to let the player discribe the hole when creating it
 
+        /// <summary>
+        /// Does the hole bend a direction. Left/Right/None
+        /// </summary>
+        //[MaxLength(5)]
+        //public string Dogleg { get; set; }
+        //public bool Dogleg { get; set; } = false;
 
         /// <summary>
         /// A variable that holds 18 holes inside that has no values assigned to them yet other than default.

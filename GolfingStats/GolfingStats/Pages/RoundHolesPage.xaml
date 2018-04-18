@@ -50,7 +50,7 @@
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                             <!--FIR-->
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="FIR" />
+                                <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
                                 <Switch x:Name="swcFIR" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding FIR}" />
                             </StackLayout>
 
@@ -64,12 +64,10 @@
                         <BoxView BackgroundColor="LightGray" HeightRequest="1" />
 
                         <!--No shots to display label-->
-                        <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="True" Text="No shots played yet." />
+                        <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding DisplayListEmptyLabel}" Text="No shots played yet." />
 
                         <!--Shots played ListView-->
-                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="False" ItemTapped="OnShotTapped">
-                            <!--TODO: This finally works, implement it! (Remember to hide label)-->
-                            <!--ItemsSource="{Binding ShotsPlayedList}">-->
+                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="{Binding DisplayShotListview}" ItemTapped="OnShotTapped" ItemsSource="{Binding ShotsPlayedList}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -98,7 +96,7 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="End" Padding="10, 5" BackgroundColor="MediumSeaGreen">
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Padding="10, 5" BackgroundColor="MediumSeaGreen">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
