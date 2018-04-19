@@ -30,6 +30,13 @@ namespace GolfingStats.Models
         /// </summary>
         [MaxLength(1)]
         public int Par { get; set; } = 4;
+        [Ignore]
+        public bool NotPar3 {
+            get
+            {
+                return (this.Par != 3) ? true : false;
+            }
+        }
 
         /// <summary>
         /// Stroke (Difficulty) of the hole

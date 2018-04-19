@@ -48,11 +48,14 @@ namespace GolfingStats.Pages
         /// <param name="holes"></param>
         async void CreateNewRound(RoundModel round, List<HoleModel> holes)
         {
-            this.ItemsSource = await App.dataFactory.CreateNewFullRound(round, holes);
-            //Removes the new round page from stack
-            //TODO: Find better way to do this, makes Ui change unexpectedly
-            Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 2]);
-            CurrentRound = round;
+            using (UserDialogs.Instance.Loading(null, null, null, true, MaskType.Black))
+            {
+                this.ItemsSource = await App.dataFactory.CreateNewFullRound(round, holes);
+                //Removes the new round page from stack
+                //TODO: Find better way to do this, makes Ui change unexpectedly
+                Application.Current.MainPage.Navigation.RemovePage(Application.Current.MainPage.Navigation.NavigationStack[Application.Current.MainPage.Navigation.NavigationStack.Count - 2]);
+                CurrentRound = round;
+            }
         }
 
         /// <summary>

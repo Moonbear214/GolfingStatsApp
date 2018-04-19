@@ -171,7 +171,7 @@
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Center</x:String>
                                     <x:String>Short</x:String>
-                                    <x:String>Over</x:String>
+                                    <x:String>Past</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>

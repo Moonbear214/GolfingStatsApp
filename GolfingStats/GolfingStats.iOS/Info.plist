@@ -23,7 +23,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Golfing Stats</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.GolfingStats</string>
+	<string>com.GolfingStats</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
@@ -48,12 +48,12 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>GolfingStats</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>FontAwesomeSolid.ttf</string>
-		<string>FontAwesomeReg.ttf</string>
-	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
+  <key>UIAppFonts</key>
+  <array>
+    <string>FontAwesomeSolid.ttf</string>
+    <string>FontAwesomeReg.ttf</string>
+  </array>
 </dict>
 </plist>

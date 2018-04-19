@@ -37,7 +37,7 @@
                             <!--ShotsPlayed-->
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                 <Label HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Text="Shots Played:" />
-                                <Label x:Name="lblShotsPlayed" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
+                                <Label HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ShotsPlayed}" />
                             </StackLayout>
 
                             <!--HoleDistance-->
@@ -51,23 +51,23 @@
                             <!--FIR-->
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="FIR" />
-                                <Switch x:Name="swcFIR" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding FIR}" />
+                                <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsEnabled="{Binding NotPar3}" IsToggled="{Binding FIR}" />
                             </StackLayout>
 
                             <!--GIR-->
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                 <Label HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" Text="GIR" />
-                                <Switch x:Name="swcGIR" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding GIR}" />
+                                <Switch HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" IsToggled="{Binding GIR}" />
                             </StackLayout>
                         </StackLayout>
 
                         <BoxView BackgroundColor="LightGray" HeightRequest="1" />
 
                         <!--No shots to display label-->
-                        <Label x:Name="lblEmptyList" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding DisplayListEmptyLabel}" Text="No shots played yet." />
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding DisplayListEmptyLabel}" Text="No shots played yet." />
 
                         <!--Shots played ListView-->
-                        <ListView x:Name="lwShotsPlayed" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="{Binding DisplayShotListview}" ItemTapped="OnShotTapped" ItemsSource="{Binding ShotsPlayedList}">
+                        <ListView HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" IsVisible="{Binding DisplayShotListview}" ItemTapped="OnShotTapped" ItemsSource="{Binding ShotsPlayedList}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

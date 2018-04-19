@@ -67,8 +67,8 @@ namespace GolfingStats.Pages
             tlbGoToRound.Clicked += ViewRound;
             tlbDeleteRound.Clicked += DeleteRound;
 
-            ToolbarItems.Add(tlbDeleteRound);
             ToolbarItems.Add(tlbGoToRound);
+            ToolbarItems.Add(tlbDeleteRound);
 
             if (round.ReloadStats)
                 ReloadRound(round);
