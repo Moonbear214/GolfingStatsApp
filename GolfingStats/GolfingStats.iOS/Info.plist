@@ -21,7 +21,7 @@
 	<key>MinimumOSVersion</key>
 	<string>11.3</string>
 	<key>CFBundleDisplayName</key>
-	<string>Golfing Stats</string>
+	<string>Golfshot Statistics</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.GolfingStats</string>
 	<key>CFBundleVersion</key>
@@ -49,11 +49,13 @@
 	<key>CFBundleName</key>
 	<string>GolfingStats</string>
 	<key>XSAppIconAssets</key>
-	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
-  <key>UIAppFonts</key>
-  <array>
-    <string>FontAwesomeSolid.ttf</string>
-    <string>FontAwesomeReg.ttf</string>
-  </array>
+	<string>Resources/Assets.xcassets/AppIcons.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesomeSolid.ttf</string>
+		<string>FontAwesomeReg.ttf</string>
+	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>
