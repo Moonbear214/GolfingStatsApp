@@ -13,8 +13,8 @@ using Acr.UserDialogs;
 
 namespace GolfingStats.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RoundDetailsPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class RoundDetailsPage : ContentPage
     {
         private CourseModel selectedCourse;
         bool UpdateRoundCheck = false;
@@ -27,8 +27,14 @@ namespace GolfingStats.Pages
             InitializeComponent();
 
             Title = "New Round";
-            tlbGoToHole.Text = "Start Round";
-            tlbGoToHole.Clicked += StartNewRound;
+
+            ToolbarItem tlbGoToRound = new ToolbarItem
+            {
+                Text = "Start Round"
+            };
+            tlbGoToRound.Clicked += StartNewRound;
+            ToolbarItems.Add(tlbGoToRound);
+
             dpDatePlayed.MaximumDate = DateTime.Now;
 
             UpdateCoursePicker();
@@ -40,22 +46,29 @@ namespace GolfingStats.Pages
         /// Enters when old round is passed to this page
         /// </summary>
         /// <param name="round"></param>
-        public RoundDetailsPage (RoundModel round)
-		{
-			InitializeComponent ();
+        public RoundDetailsPage(RoundModel round)
+        {
+            InitializeComponent();
 
             Title = round.CourseName;
-            tlbGoToHole.Text = "View";
-            tlbGoToHole.Clicked += ViewRound;
             grdNewCourse.IsVisible = false;
             scrRoundStats.IsVisible = true;
 
-            ToolbarItem deleteToolbarItem = new ToolbarItem()
+            ToolbarItem tlbGoToRound = new ToolbarItem
+            {
+                Text = "View"
+            };
+
+            ToolbarItem tlbDeleteRound = new ToolbarItem()
             {
                 Text = "Delete"
             };
-            deleteToolbarItem.Clicked += DeleteRound;
-            ToolbarItems.Add(deleteToolbarItem);
+
+            tlbGoToRound.Clicked += ViewRound;
+            tlbDeleteRound.Clicked += DeleteRound;
+
+            ToolbarItems.Add(tlbDeleteRound);
+            ToolbarItems.Add(tlbGoToRound);
 
             if (round.ReloadStats)
                 ReloadRound(round);
@@ -76,7 +89,7 @@ namespace GolfingStats.Pages
             if (UpdateRoundCheck)
                 ReloadRound((RoundModel)this.BindingContext, true);
         }
-        
+
         /// <summary>
         /// New round is created and saved. Player is taken to page to add shots for each hole
         /// </summary>

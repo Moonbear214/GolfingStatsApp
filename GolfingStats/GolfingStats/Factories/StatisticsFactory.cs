@@ -225,9 +225,9 @@ namespace GolfingStats.Factories
                 {
                     if (((PuttModel)shot).InHole == false)
                     {
-                        if (((PuttModel)shot).PosToHoleVer == "Left")
+                        if (((PuttModel)shot).PosToHoleHorz == "Left")
                             puttsL++;
-                        else if (((PuttModel)shot).PosToHoleVer == "Right")
+                        else if (((PuttModel)shot).PosToHoleHorz == "Right")
                             puttsR++;
                         if (((PuttModel)shot).PosToHoleVer == "Short")
                             puttsS++;

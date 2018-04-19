@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.HomePage">
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Courses" Clicked="NavCoursesPage" Priority="-1"/>
         <ToolbarItem Text="New Round" Clicked="NavNewRoundPage" Priority="1"/>
@@ -37,70 +37,6 @@
                     VerticalOptions="Center"
                     Text="Create Full Round"
                     Clicked="OnCreateFullRoundButtonClicked" />
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-                <Button Text="Get All Rounds"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetRoundsButtonClicked" />
-                <Button Text="Get All Holes"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetHolesButtonClicked" />
-                <Button Text="Get All Drives"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetDriveButtonClicked" />
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-                <Button Text="Get All F"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetFairwayButtonClicked" />
-                <Button Text="Get All C"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetChipButtonClicked" />
-                <Button Text="Get All P"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetPuttButtonClicked" />
-                <Button Text="Get All S"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnGetAllShotsButtonClicked" />
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-                <Button Text="Add Round"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnAddRoundsButtonClicked" />
-                <Button Text="Add Hole"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnAddHolesButtonClicked" />
-                <Button Text="Add Drive"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnAddDriveButtonClicked" />
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-                <Button Text="Add Fairway"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnAddFairwayButtonClicked" />
-                <Button Text="Add Chip"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnAddChipButtonClicked" />
-                <Button Text="Add Putt"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Clicked="OnAddPuttButtonClicked" />
             </StackLayout>-->
 
         </StackLayout>

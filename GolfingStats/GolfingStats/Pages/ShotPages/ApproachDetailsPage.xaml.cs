@@ -19,7 +19,7 @@ namespace GolfingStats.Pages.ShotPages
 
         public ApproachDetailsPage(int roundId, int holeId, int shotNum, ShotModel PrevShotHit)
         {
-            ApproachModel fairwayModel = new ApproachModel()
+            ApproachModel approachModel = new ApproachModel()
             {
                 RoundId = roundId,
                 HoleId = holeId,
@@ -29,19 +29,22 @@ namespace GolfingStats.Pages.ShotPages
 
             if (PrevShotHit.GetType() == typeof(DriveModel))
             {
-                fairwayModel.BallLie = (((DriveModel)PrevShotHit).OnFairway == true) ? "Fairway" : "Ruff";
-                fairwayModel.BallPositionSide = ((DriveModel)PrevShotHit).PosOnFairwayHorz;
+                approachModel.BallLie = (((DriveModel)PrevShotHit).OnFairway == true) ? "Fairway" : "Ruff";
+                if (!string.IsNullOrEmpty(((DriveModel)PrevShotHit).PosOnFairwayHorz))
+                approachModel.BallPositionSide = ((DriveModel)PrevShotHit).PosOnFairwayHorz;
+                else
+                    approachModel.BallPositionSide = ((DriveModel)PrevShotHit).PosToFairwayHorz;
             }
 
-            this.BindingContext = fairwayModel;
+            this.BindingContext = approachModel;
 
             InitializeComponent();
             PageSetup();
         }
 
-        public ApproachDetailsPage(ApproachModel fairwayModel)
+        public ApproachDetailsPage(ApproachModel approachModel)
         {
-            this.BindingContext = fairwayModel;
+            this.BindingContext = approachModel;
 
             InitializeComponent();
             btnDeleteShot.IsVisible = true;

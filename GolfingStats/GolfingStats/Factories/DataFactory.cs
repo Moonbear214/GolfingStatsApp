@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace GolfingStats.Factories
             AddDummyRound();
             AddDummyHole();
             AddDummyShotDrive();
-            AddDummyShotFairway();
+            AddDummyShotApproach();
             AddDummyShotChip();
             AddDummyShotPutt();
         }
@@ -72,9 +73,9 @@ namespace GolfingStats.Factories
             await GolfstatsRepository.AddNewShot(DummData.OneShotDrive());
         }
 
-        public async void AddDummyShotFairway()
+        public async void AddDummyShotApproach()
         {
-            await GolfstatsRepository.AddNewShot(DummData.OneShotFairway());
+            await GolfstatsRepository.AddNewShot(DummData.OneShotApproach());
         }
 
         public async void AddDummyShotChip()
@@ -153,13 +154,13 @@ namespace GolfingStats.Factories
                 return await GolfstatsRepository.AddNewShot(drive);
         }
 
-        public async Task<ApproachModel> CreateShot(ApproachModel fairway)
+        public async Task<ApproachModel> CreateShot(ApproachModel approach)
         {
             //If the shot already has an ID, update the shot in local storage
-            if (fairway.Id != 0)
-                return await UpdateShot(fairway);
+            if (approach.Id != 0)
+                return await UpdateShot(approach);
             else
-                return await GolfstatsRepository.AddNewShot(fairway);
+                return await GolfstatsRepository.AddNewShot(approach);
         }
 
         public async Task<ChipModel> CreateShot(ChipModel chip)
@@ -371,9 +372,9 @@ namespace GolfingStats.Factories
             return await GolfstatsRepository.GetAllShotsDrive();
         }
 
-        public async Task<List<ApproachModel>> GetAllShotsFairway()
+        public async Task<List<ApproachModel>> GetAllShotsApproach()
         {
-            return await GolfstatsRepository.GetAllShotsFairway();
+            return await GolfstatsRepository.GetAllShotsApproach();
         }
 
         public async Task<List<ChipModel>> GetAllShotsChip()
@@ -425,9 +426,9 @@ namespace GolfingStats.Factories
                 shotModel.Add(allShots.DriveASModel[i]);
             }
 
-            for (int i = 0; i < allShots.FairwayASModel.Count; i++)
+            for (int i = 0; i < allShots.ApproachASModel.Count; i++)
             {
-                shotModel.Add(allShots.FairwayASModel[i]);
+                shotModel.Add(allShots.ApproachASModel[i]);
             }
 
             for (int i = 0; i < allShots.ChipASModel.Count; i++)

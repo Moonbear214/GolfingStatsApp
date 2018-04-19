@@ -118,7 +118,7 @@ namespace GolfingStats.Models.ShotModels
         /// 1 = Draw, 2 = Cut, 3 = Hook, 4 = Fade, 5 = Slice
         /// </summary>
         [MaxLength(1)]
-        public Int16 _BallFlight { get; set; } = 1;
+        public Int16 _BallFlight { get; set; } = 2;
 
         [Ignore]
         public String BallFlight

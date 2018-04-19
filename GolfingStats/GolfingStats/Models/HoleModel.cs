@@ -15,7 +15,6 @@ namespace GolfingStats.Models
 
         [Indexed]
         /// <summary>
-        /// <summary>
         /// Id of the round of golf this hole was played on
         /// </summary>
         public int RoundId { get; set; } = 0;

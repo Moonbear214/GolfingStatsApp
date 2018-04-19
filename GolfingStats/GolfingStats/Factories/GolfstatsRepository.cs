@@ -123,7 +123,7 @@ namespace GolfingStats
         }
         //================================
 
-        //Fairway
+        //Approach
         //================================
         public async Task<ApproachModel> AddNewShot(ApproachModel shot)
         {
@@ -281,7 +281,7 @@ namespace GolfingStats
         }
         //================================
 
-        //Fairway
+        //Approach
         //================================
         public async Task<ApproachModel> UpdateShot(ApproachModel shot)
         {
@@ -471,7 +471,7 @@ namespace GolfingStats
                 AllShotsModel allShots = new AllShotsModel
                 {
                     DriveASModel = await conn.Table<DriveModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
-                    FairwayASModel = await conn.Table<ApproachModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
+                    ApproachASModel = await conn.Table<ApproachModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
                     ChipASModel = await conn.Table<ChipModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
                     PuttASModel = await conn.Table<PuttModel>().Where(t => t.RoundId == RoundId).ToListAsync(),
                     DropASModel = await conn.Table<DropShotModel>().Where(t => t.RoundId == RoundId).ToListAsync()
@@ -496,7 +496,7 @@ namespace GolfingStats
                 AllShotsModel allShots = new AllShotsModel
                 {
                     DriveASModel = await conn.Table<DriveModel>().Where(t => t.HoleId == holeId).ToListAsync(),
-                    FairwayASModel = await conn.Table<ApproachModel>().Where(t => t.HoleId == holeId).ToListAsync(),
+                    ApproachASModel = await conn.Table<ApproachModel>().Where(t => t.HoleId == holeId).ToListAsync(),
                     ChipASModel = await conn.Table<ChipModel>().Where(t => t.HoleId == holeId).ToListAsync(),
                     PuttASModel = await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync(),
                     DropASModel = await conn.Table<DropShotModel>().Where(t => t.HoleId == holeId).ToListAsync()
@@ -522,7 +522,7 @@ namespace GolfingStats
                 foreach (int holeId in holeIds)
                 {
                     allShots.DriveASModel.AddRange(await conn.Table<DriveModel>().Where(t => t.HoleId == holeId).ToListAsync());
-                    allShots.FairwayASModel.AddRange(await conn.Table<ApproachModel>().Where(t => t.HoleId == holeId).ToListAsync());
+                    allShots.ApproachASModel.AddRange(await conn.Table<ApproachModel>().Where(t => t.HoleId == holeId).ToListAsync());
                     allShots.ChipASModel.AddRange(await conn.Table<ChipModel>().Where(t => t.HoleId == holeId).ToListAsync());
                     allShots.PuttASModel.AddRange(await conn.Table<PuttModel>().Where(t => t.HoleId == holeId).ToListAsync());
                     allShots.DropASModel.AddRange(await conn.Table<DropShotModel>().Where(t => t.HoleId == holeId).ToListAsync());
@@ -547,7 +547,7 @@ namespace GolfingStats
                 AllShotsModel allShots = new AllShotsModel
                 {
                     DriveASModel = await conn.Table<DriveModel>().ToListAsync(),
-                    FairwayASModel = await conn.Table<ApproachModel>().ToListAsync(),
+                    ApproachASModel = await conn.Table<ApproachModel>().ToListAsync(),
                     ChipASModel = await conn.Table<ChipModel>().ToListAsync(),
                     PuttASModel = await conn.Table<PuttModel>().ToListAsync(),
                     DropASModel = await conn.Table<DropShotModel>().ToListAsync()
@@ -579,9 +579,9 @@ namespace GolfingStats
         }
         //================================
 
-        //Fairway
+        //Approach
         //================================
-        public async Task<List<ApproachModel>> GetAllShotsFairway()
+        public async Task<List<ApproachModel>> GetAllShotsApproach()
         {
             try
             {
@@ -734,7 +734,7 @@ namespace GolfingStats
             try
             {
                 await conn.ExecuteAsync(string.Format("DELETE FROM DriveShot WHERE RoundId = {0}", roundId));
-                await conn.ExecuteAsync(string.Format("DELETE FROM FairwayShot WHERE RoundId = {0}", roundId));
+                await conn.ExecuteAsync(string.Format("DELETE FROM ApproachShot WHERE RoundId = {0}", roundId));
                 await conn.ExecuteAsync(string.Format("DELETE FROM ChipShot WHERE RoundId = {0}", roundId));
                 await conn.ExecuteAsync(string.Format("DELETE FROM PuttShot WHERE RoundId = {0}", roundId));
                 await conn.ExecuteAsync(string.Format("DELETE FROM DropShot WHERE RoundId = {0}", roundId));
@@ -755,7 +755,7 @@ namespace GolfingStats
             await conn.ExecuteAsync("DELETE FROM Rounds");
             await conn.ExecuteAsync("DELETE FROM Holes");
             await conn.ExecuteAsync("DELETE FROM DriveShot");
-            await conn.ExecuteAsync("DELETE FROM FairwayShot");
+            await conn.ExecuteAsync("DELETE FROM ApproachShot");
             await conn.ExecuteAsync("DELETE FROM ChipShot");
             await conn.ExecuteAsync("DELETE FROM PuttShot");
             await conn.ExecuteAsync("DELETE FROM DropShot");

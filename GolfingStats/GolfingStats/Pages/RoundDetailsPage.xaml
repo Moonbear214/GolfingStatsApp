@@ -3,10 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GolfingStats.Pages.RoundDetailsPage">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="tlbGoToHole" Text="Start Round" />
-    </ContentPage.ToolbarItems>
-
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -22,14 +18,37 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!--Course Picker-->
-                    <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GolfCourse" />
-                    <Picker x:Name="CoursePicker" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <!--Date-->
-                    <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Date Played" />
-                    <DatePicker x:Name="dpDatePlayed" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Course Picker-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="GolfCourse" />
+                        <Picker x:Name="CoursePicker" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Choose Course" SelectedIndexChanged="CourseSelected" />
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Date-->
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Date Played" />
+                        <DatePicker x:Name="dpDatePlayed" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Date="{Binding Date}" />
+                    </Grid>
                 </Grid>
+                
                 <StackLayout x:Name="scrRoundStats" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Padding="5">
                         <!--Date-->
@@ -244,7 +263,7 @@
 
                         <!--======================================================================-->
                         <StackLayout Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0,10,0,0">
-                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="End" Margin="30,0,0,0" TextColor="SeaGreen" FontSize="Medium" Text="Putts Stats" />
+                            <Label HorizontalOptions="StartAndExpand" VerticalOptions="End" Margin="30,0,0,0" TextColor="SeaGreen" FontSize="Medium" Text="Putting Stats" />
                             <BoxView BackgroundColor="LightGray" HeightRequest="1" Margin="10,-3,10,0" />
                         </StackLayout>
 

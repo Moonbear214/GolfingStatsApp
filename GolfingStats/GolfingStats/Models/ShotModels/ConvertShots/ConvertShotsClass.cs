@@ -1092,7 +1092,7 @@ namespace GolfingStats.Models.ShotModels
         /// Converts Water, Lost ball, Unplayable, out of bounds values to string or integer depending on what is needed:
         /// 1 = Water, 2 = Lost ball, 3 = Unplayable, 4 = Out of bounds
         /// </summary>
-        public string WaterLostUnplayableBounds(Int16 valueParam)
+        public string WaterHazardLostUnplayableBounds(Int16 valueParam)
         {
             String Value = null;
 
@@ -1105,12 +1105,15 @@ namespace GolfingStats.Models.ShotModels
                     Value = "Water";
                     break;
                 case 2:
-                    Value = "Lost ball";
+                    Value = "Hazard";
                     break;
                 case 3:
-                    Value = "Unplayable";
+                    Value = "Lost ball";
                     break;
                 case 4:
+                    Value = "Unplayable";
+                    break;
+                case 5:
                     Value = "Out of bounds";
                     break;
             }
@@ -1118,7 +1121,7 @@ namespace GolfingStats.Models.ShotModels
             return Value;
         }
 
-        public Int16 WaterLostUnplayableBounds(String valueParam)
+        public Int16 WaterHazardLostUnplayableBounds(String valueParam)
         {
             Int16 Value = 0;
 
@@ -1130,14 +1133,17 @@ namespace GolfingStats.Models.ShotModels
                 case "Water":
                     Value = 1;
                     break;
-                case "Lost ball":
+                case "Hazard":
                     Value = 2;
                     break;
-                case "Unplayable":
+                case "Lost ball":
                     Value = 3;
                     break;
-                case "Out of bounds":
+                case "Unplayable":
                     Value = 4;
+                    break;
+                case "Out of bounds":
+                    Value = 5;
                     break;
             }
 

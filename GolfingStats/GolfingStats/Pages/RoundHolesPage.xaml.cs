@@ -65,26 +65,12 @@ namespace GolfingStats.Pages
             {
                 List<HoleModel> holes = await App.dataFactory.GetHolesFromRoundId(round.Id);
 
-                List<int> holeIds = new List<int>();
                 foreach (HoleModel hole in holes)
                 {
-                    holeIds.Add(hole.Id);
+                    List<ShotModel> tempHoleShotList = await App.dataFactory.GetShotsFromHoleId(hole.Id);
+                    hole.ShotsPlayedList = new ObservableCollection<ShotModel>(tempHoleShotList.OrderBy(x => x.ShotNumber).ToList());
                 }
-
-                List<ShotModel> ShotsPlayed = await App.dataFactory.GetShotsFromHoleIdList(holeIds);
-
-                foreach (HoleModel hole in holes)
-                {
-                    foreach (ShotModel shot in ShotsPlayed)
-                    {
-                        if (shot.HoleId == hole.Id)
-                        {
-                            hole.ShotsPlayedList.Add(shot);
-                        }
-                    }
-                    hole.ShotsPlayedList.OrderBy(x => x.ShotNumber);
-                }
-
+                
                 this.ItemsSource = holes;
                 CurrentRound = round;
             }
@@ -261,13 +247,14 @@ namespace GolfingStats.Pages
 
             HoleModel HolePage = (HoleModel)this.SelectedItem;
             ShotModel shotReturned = (ShotModel)sender;
-
+            
             //Delete the shot from the listview
-            for (int i = 0; i < HolePage.ShotsPlayedList.Count; i++)
+            for (int i = 0; i < HolePage.ShotsPlayedList.Count(); i++)
             {
                 if (HolePage.ShotsPlayedList[i].Id == shotReturned.Id)
                 {
                     HolePage.ShotsPlayedList.RemoveAt(i);
+                    i--;
                 }
                 else if (HolePage.ShotsPlayedList[i].ShotNumber > shotReturned.ShotNumber)
                 {

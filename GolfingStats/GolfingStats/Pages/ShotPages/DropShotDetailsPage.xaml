@@ -28,11 +28,12 @@
                         <!--Shot Type Specific controls-->
                         <!--=============================================================-->
                         <!--DropReason-->
-                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reason for dropping" />
+                        <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Drop reason" />
                         <Picker Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding DropReason}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Water</x:String>
+                                    <x:String>Hazard</x:String>
                                     <x:String>Lost ball</x:String>
                                     <x:String>Unplayable</x:String>
                                     <x:String>Out of bounds</x:String>
@@ -41,7 +42,7 @@
                         </Picker>
 
                         <!--DropPosition-->
-                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Playing next shot from" />
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Drop spot" />
                         <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Title="Select Option" SelectedItem="{Binding DropPosition}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -53,7 +54,7 @@
                         </Picker>
                         
                         <!--DistanceLeftToHole-->
-                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance left to hole" />
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Distance to hole" />
                         <Entry x:Name="entDistanceLeft" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" MinimumWidthRequest="60" Keyboard="Numeric" Focused="EntryFocus" Unfocused="EntryUnfocus" Text="{Binding DistanceLeftToHole}" />
 
                     </Grid>

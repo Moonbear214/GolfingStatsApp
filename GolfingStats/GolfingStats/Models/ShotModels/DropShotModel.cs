@@ -22,7 +22,7 @@ namespace GolfingStats.Models.ShotModels
 
         /// <summary>
         /// Reason for dropping a ball
-        /// 1 = Water, 2 = Lost ball, 3 = Unplayable, 4 = Out of bounds
+        /// 1 = Water, 2 = Hazard, 3 = Lost ball, 4 = Unplayable, 5 = Out of bounds
         /// </summary>
         [MaxLength(1)]
         public Int16 _DropReason { get; set; } = 1;
@@ -32,11 +32,11 @@ namespace GolfingStats.Models.ShotModels
         {
             get
             {
-                return ConvertShotsClass.WaterLostUnplayableBounds(this._DropReason);
+                return ConvertShotsClass.WaterHazardLostUnplayableBounds(this._DropReason);
             }
             set
             {
-                this._DropReason = ConvertShotsClass.WaterLostUnplayableBounds(value);
+                this._DropReason = ConvertShotsClass.WaterHazardLostUnplayableBounds(value);
             }
         }
 

@@ -84,7 +84,7 @@ namespace GolfingStats
         }
 
         //Fairwway
-        public ApproachModel OneShotFairway()
+        public ApproachModel OneShotApproach()
         {
             return new ApproachModel();
         }
@@ -123,8 +123,8 @@ namespace GolfingStats
             return fourShots;
         }
 
-        //Returns 4 Fairway shots with no hole or round Id's assigned 
-        public List<ApproachModel> FourShotsFairway()
+        //Returns 4 Approach shots with no hole or round Id's assigned 
+        public List<ApproachModel> FourShotsApproach()
         {
             List<ApproachModel> fourShots = new List<ApproachModel>();
 
@@ -191,8 +191,8 @@ namespace GolfingStats
             return fourShots;
         }
 
-        //Returns 4 Fairway shots with hole or round Id's assigned 
-        public List<ApproachModel> FourShotsFairway(int roundId, int holeId)
+        //Returns 4 Approach shots with hole or round Id's assigned 
+        public List<ApproachModel> FourShotsApproach(int roundId, int holeId)
         {
             List<ApproachModel> fourShots = new List<ApproachModel>();
 
