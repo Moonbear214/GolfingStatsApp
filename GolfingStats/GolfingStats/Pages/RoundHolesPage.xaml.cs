@@ -93,6 +93,7 @@ namespace GolfingStats.Pages
         {
             if (((HoleModel)this.SelectedItem).ShotsPlayed == 0 || Reteeing)
             {
+                Reteeing = false;
                 AddShot("Tee shot", new EventArgs());
             }
             else
