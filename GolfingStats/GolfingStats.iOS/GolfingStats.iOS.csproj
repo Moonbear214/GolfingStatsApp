@@ -172,9 +172,6 @@
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small-40@2x.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small-40@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small.png">
       <Visible>false</Visible>
     </ImageAsset>
