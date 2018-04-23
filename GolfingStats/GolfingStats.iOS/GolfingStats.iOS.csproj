@@ -208,12 +208,12 @@
     <BundleResource Include="Resources\Icon-1024.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Icon-167.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Icon-20.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Icon-83.5%402x.png" />
   </ItemGroup>
 </Project>
