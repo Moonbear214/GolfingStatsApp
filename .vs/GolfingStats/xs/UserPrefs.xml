@@ -1,13 +1,15 @@
-﻿<Properties StartupConfiguration="{20062605-67D1-4593-84CF-7B0276F78377}|Default">
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupConfiguration="{EFE26ECF-7FE6-4045-9BF6-275BAA953279}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GolfingStats/GolfingStats/Pages/RoundDetailsPage.xaml">
+    <Files>
+      <File FileName="GolfingStats/GolfingStats/Pages/RoundDetailsPage.xaml" Line="362" Column="15" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.GolfingStats.iOS automaticSigning="True">
-    <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="V678PG62WK" TeamId="P6P6SFELAZ" />
-  </MonoDevelop.Ide.ItemProperties.GolfingStats.iOS>
+  <MonoDevelop.Ide.ItemProperties.GolfingStats.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.baa0d47c15ea6856d7234cac83b22e97b4a990bf" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.GolfingStats.Android PreferredExecutionTarget="Android.Android_Accelerated_Nougat" />
 </Properties>

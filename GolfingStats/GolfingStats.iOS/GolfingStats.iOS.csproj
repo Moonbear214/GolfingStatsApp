@@ -184,6 +184,12 @@
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-60%403x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-1024.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-1024.png" />
