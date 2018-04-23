@@ -20,12 +20,10 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>11.3</string>
-	<key>CFBundleDisplayName</key>
-	<string>Golfshot Statistics</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.GolfingStats</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -40,6 +38,6 @@
 	<key>XSAppIconAssets</key>
 	<string>Media.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 </dict>
 </plist>
