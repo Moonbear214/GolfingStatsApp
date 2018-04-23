@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{EFE26ECF-7FE6-4045-9BF6-275BAA953279}|Default">
   <MonoDevelop.Ide.Workbench />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="AppStore" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.GolfingStats.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.baa0d47c15ea6856d7234cac83b22e97b4a990bf" />
+  <MonoDevelop.Ide.ItemProperties.GolfingStats.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.baa0d47c15ea6856d7234cac83b22e97b4a990bf" automaticSigning="True">
+    <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="V678PG62WK" TeamId="P6P6SFELAZ" />
+  </MonoDevelop.Ide.ItemProperties.GolfingStats.iOS>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.GolfingStats.Android PreferredExecutionTarget="Android.Android_Accelerated_Nougat" AndroidDesignerPreferredTheme="Theme.DeviceDefault.NoActionBar.Fullscreen" />
 </Properties>
