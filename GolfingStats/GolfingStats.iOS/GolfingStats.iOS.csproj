@@ -113,10 +113,15 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\Icon-20%402x.png" />
+    <BundleResource Include="Resources\Icon-29.png" />
+    <BundleResource Include="Resources\Icon-40%402x.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-76.png" />
+    <BundleResource Include="Resources\Icon-76%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%403x.png" />
-    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
   </ItemGroup>
   <ItemGroup>
@@ -166,18 +171,6 @@
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-60.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small-40@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-Small@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
@@ -199,6 +192,10 @@
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-1024.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-20%402x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-29%402x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-40%402x.png" />
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Icon-29.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-1024.png" />
