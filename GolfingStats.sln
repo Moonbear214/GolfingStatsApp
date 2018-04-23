@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GolfingStats.iOS", "Golfing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GolfingStats.UWP", "GolfingStats\GolfingStats.UWP\GolfingStats.UWP.csproj", "{F21443B5-9802-4E2C-8290-BAE3F3CDA39D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GolfingStats", "GolfingStats\GolfingStats\GolfingStats.csproj", "{D6EE03E1-7681-4D38-8034-0ED248DF76AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GolfingStats", "GolfingStats\GolfingStats\GolfingStats.csproj", "{D6EE03E1-7681-4D38-8034-0ED248DF76AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,7 +76,6 @@ Global
 		{20062605-67D1-4593-84CF-7B0276F78377}.AppStore|x86.Build.0 = Release|Any CPU
 		{20062605-67D1-4593-84CF-7B0276F78377}.AppStore|x86.Deploy.0 = Release|Any CPU
 		{20062605-67D1-4593-84CF-7B0276F78377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20062605-67D1-4593-84CF-7B0276F78377}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20062605-67D1-4593-84CF-7B0276F78377}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{20062605-67D1-4593-84CF-7B0276F78377}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{20062605-67D1-4593-84CF-7B0276F78377}.Debug|ARM.Build.0 = Debug|Any CPU
@@ -143,6 +142,7 @@ Global
 		{EFE26ECF-7FE6-4045-9BF6-275BAA953279}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{EFE26ECF-7FE6-4045-9BF6-275BAA953279}.Release|x64.ActiveCfg = Release|iPhone
 		{EFE26ECF-7FE6-4045-9BF6-275BAA953279}.Release|x86.ActiveCfg = Release|iPhone
+		{EFE26ECF-7FE6-4045-9BF6-275BAA953279}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{F21443B5-9802-4E2C-8290-BAE3F3CDA39D}.Ad-Hoc|Any CPU.ActiveCfg = Release|x86
 		{F21443B5-9802-4E2C-8290-BAE3F3CDA39D}.Ad-Hoc|Any CPU.Build.0 = Release|x86
 		{F21443B5-9802-4E2C-8290-BAE3F3CDA39D}.Ad-Hoc|Any CPU.Deploy.0 = Release|x86

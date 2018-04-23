@@ -1,0 +1,13 @@
+﻿<Properties StartupConfiguration="{20062605-67D1-4593-84CF-7B0276F78377}|Default">
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.GolfingStats.iOS automaticSigning="True">
+    <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="V678PG62WK" TeamId="P6P6SFELAZ" />
+  </MonoDevelop.Ide.ItemProperties.GolfingStats.iOS>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.GolfingStats.Android PreferredExecutionTarget="Android.Android_Accelerated_Nougat" />
+</Properties>
