@@ -11,6 +11,13 @@ namespace GolfingStats.Factories
 {
     public class StatisticsFactory
     {
+        /// <summary>
+        /// If the 'updateStats' bool in the Round object is true, when the round is loaded it's statistics will first be calculated and saved before it is displayed.
+        /// </summary>
+        /// <param name="round"></param>
+        /// <param name="holes"></param>
+        /// <param name="shots"></param>
+        /// <returns></returns>
         public RoundModel CalculateRoundStats(RoundModel round, List<HoleModel> holes, List<ShotModel> shots)
         {
             (round.Eagles, round.Birdies, round.Pars, round.Bogeys, round.DoubleBogeys, round.TripleBogeysPlus) = CountDifferentScores(holes);
@@ -27,7 +34,15 @@ namespace GolfingStats.Factories
         }
 
         //==========================================================================================================================
+        
+        // All methods from here on are written with the entent to be reusable for any future statistics that would also have to be calculated.
         //=========================================================================
+
+        /// <summary>
+        /// Count how many eagles, birdies, pars, bogeys, double bogeys, triple bogeys+ were played in a round
+        /// </summary>
+        /// <param name="holes"></param>
+        /// <returns></returns>
         (int, int, int, int, int, int) CountDifferentScores(List<HoleModel> holes)
         {
             int Eagles = 0;
@@ -88,7 +103,13 @@ namespace GolfingStats.Factories
         }
         //=========================================================================
 
-        //=========================================================================
+        /// <summary>
+        /// Calculate how percentage of fairways that were hit in the round
+        /// and count up where all the misses were.
+        /// (Par 3's does not count as fairway hit, only par 4's and 5's)
+        /// </summary>
+        /// <param name="holes"></param>
+        /// <returns></returns>
         float FIRPercCalc(List<HoleModel> holes)
         {
             float FIRPerc = 0;
@@ -128,7 +149,12 @@ namespace GolfingStats.Factories
         }
         //=========================================================================
 
-        //=========================================================================
+        /// <summary>
+        /// Calculate the number of greens that were hit in regulation
+        /// and count up where all the misses were.
+        /// </summary>
+        /// <param name="holes"></param>
+        /// <returns></returns>
         float GIRPercCalc(List<HoleModel> holes)
         {
             float GIRPerc = 0;
@@ -168,7 +194,12 @@ namespace GolfingStats.Factories
         }
         //=========================================================================
 
-        //=========================================================================
+        /// <summary>
+        /// Creates a list of putts, check how many of them were played on the same hole
+        /// and returns the number of 1, 2 and 3+ putts.
+        /// </summary>
+        /// <param name="shots"></param>
+        /// <returns></returns>
         (int, int, int) CalculateTotalPuttsCountMisses(List<ShotModel> shots)
         {
             int Putts1 = 0;
@@ -184,6 +215,7 @@ namespace GolfingStats.Factories
             }
             Dictionary<int, int> PuttsPerHoleId = AllPuttsHoleIds.GroupBy(ptt => ptt).ToDictionary(group => group.Key, group => group.Count());
             Dictionary<int, int> HolePuttTotalsCount = new Dictionary<int, int>();
+
             //Iterate through the values, setting count to 1 or incrementing current count.
             foreach (int i in PuttsPerHoleId.Values)
             {
@@ -211,7 +243,11 @@ namespace GolfingStats.Factories
         }
         //=========================================================================
         
-        //=========================================================================
+        /// <summary>
+        /// Checks how many the putts played were missed left, right, short or past.
+        /// </summary>
+        /// <param name="shots"></param>
+        /// <returns></returns>
         (int, int, int, int) CalculateTotalPuttsSideMisses(List<ShotModel> shots)
         {
             int puttsL = 0;
@@ -240,7 +276,12 @@ namespace GolfingStats.Factories
         }
         //=========================================================================
 
-        //=========================================================================
+        /// <summary>
+        /// Checks if the player scrambled on the hole and returns the total of it.
+        /// (Scramble: Missed green in regulation and still saved par)
+        /// </summary>
+        /// <param name="holes"></param>
+        /// <returns></returns>
         float CalcScramblingPerc(List<HoleModel> holes)
         {
             int ScramblingTotal = 0;
